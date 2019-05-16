@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+import os
+
+print("Clearing existing files")
+os.system("rm types/*_hasgo*")
+print("Installing new Hasgo lib")
+os.system("go install")
+print("Generating source files...")
+os.system("go generate ./...")
+
+# todo: unit tests etc..
