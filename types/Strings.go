@@ -1,6 +1,6 @@
-package types
+package types 
 
-//go:generate hasgo
+//go:generate hasgo -T=Strings
 type Strings []string
 
 
