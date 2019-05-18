@@ -11,14 +11,25 @@ import (
 	"strings"
 )
 
+const (
+	ElementTypeSymbol = "ElementType"
+	SliceTypeSymbol   = "SliceType"
+)
+
 var (
-	Type = flag.String("T", "", "Type for which to generate data")
+	Type  = flag.String("T", "", "Type for which to generate data")
+	SType = flag.String("S", "", "Corresponding Slice Type for T")
 )
 
 func check(e error) {
 	if e != nil {
 		panic(e)
 	}
+}
+
+// the Type / SType for which we are generating data..
+type symbols struct {
+	T, ST string
 }
 
 type Generator struct {
@@ -36,7 +47,8 @@ type Generator struct {
 
 func main() {
 	flag.Parse()
-	fmt.Printf("type: %v\n", *Type)
+	fmt.Printf("type: %v - slice: %v\n", *Type, *SType)
+	sym := symbols{*Type, *SType}
 	g := Generator{}
 	g.parsePackage(os.Args, nil)
 	// stringer prints everything in one file. This might be bad.
@@ -45,18 +57,25 @@ func main() {
 	g.Printf("\n")
 	// todo: unhardcode
 	g.Printf("package types\n")
-	g.generate(*Type)
+	g.generate(sym)
 	ioutil.WriteFile(fmt.Sprintf("%v_hasgo.go", *Type), g.format(), 0644)
 }
 
 // write the data for the generator
-func (g *Generator) generate(T string) {
+func (g *Generator) generate(s symbols) {
 	for function, template := range hasgoTemplates {
-		g.Printf("//===============%v=============", function)
-		g.Printf("//%v\n", function)
-		g.Printf(template)
-		g.Printf("//===============")
+		g.Printf("//===============%v=============\n", function)
+		g.Printf(generify(template, s))
+		g.Printf("//===============\n")
 	}
+}
+
+// replace the placeholders by the correct symbols
+func generify(template string, sym symbols) (out string) {
+	out = template
+	out = strings.Replace(out, ElementTypeSymbol, sym.T, -1)
+	out = strings.Replace(out, SliceTypeSymbol, sym.ST, -1)
+	return
 }
 
 func (g *Generator) Printf(format string, args ...interface{}) {
