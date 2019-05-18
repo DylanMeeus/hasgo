@@ -6,27 +6,27 @@ import (
 
 // unit testing the Ints
 var (
-	intsSumTests = []struct {
-		input  Ints
-		output int64
+	stringsSumTests = []struct {
+		input  Strings 
+		output string
 	}{
 		{
 			nil,
-			0,
+			"",
 		},
 		{
-			Ints([]int64{}),
-			0,
+			Strings([]string{}),
+			"",
 		},
 		{
-			Ints([]int64{1, 2, 3}),
-			6,
+			Strings([]string{"a", "b", "c"}),
+			"abc",
 		},
 	}
 )
 
-func Test_IntsSum(t *testing.T) {
-	for _, test := range intsSumTests {
+func Test_StringsSum(t *testing.T) {
+	for _, test := range stringsSumTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Sum(); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
