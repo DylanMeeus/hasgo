@@ -3,8 +3,8 @@ package types
 
 //===============Sum.go=============
 
-func (s) Sum() Strings {
-	var sum Strings
+func (s Ints) Sum() int64 {
+	var sum int64
 	for _, v := range s {
 		sum += v
 	}
