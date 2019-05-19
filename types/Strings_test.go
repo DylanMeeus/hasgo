@@ -7,7 +7,7 @@ import (
 // unit testing the Ints
 var (
 	stringsSumTests = []struct {
-		input  Strings 
+		input  Strings
 		output string
 	}{
 		{

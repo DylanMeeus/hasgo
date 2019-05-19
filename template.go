@@ -12,3 +12,12 @@ func (s SliceType) Sum() ElementType {
 }
 `,
 }
+
+const (
+	ForNumbers = "ForNumbers"
+	ForStrings = "ForStrings"
+)
+
+var funcDomains = map[string][]string{
+	"Sum.go": []string{ForNumbers, ForStrings},
+}
