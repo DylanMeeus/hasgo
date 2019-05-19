@@ -20,6 +20,7 @@ var (
 	templates = map[string][]string{
 		"Sum.go":    []string{ForNumbers, ForStrings},
 		"Filter.go": []string{ForNumbers, ForStrings},
+		"Init.go":   []string{ForNumbers, ForStrings},
 	}
 )
 

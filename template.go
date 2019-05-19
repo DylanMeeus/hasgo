@@ -12,6 +12,13 @@ func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	return
 }
 `,
+	"Init.go": `
+// Take n-1 elements from a slice, where n = len(list)
+func (s SliceType) Init() (out SliceType) {
+	slicecopy := append([]ElementType(nil), s...)
+	return slicecopy[:len(s)-1]
+}
+`,
 	"Sum.go": `
 func (s SliceType) Sum() ElementType {
 	var sum ElementType
@@ -30,5 +37,6 @@ const (
 
 var funcDomains = map[string][]string{
 	"Filter.go": []string{ForNumbers, ForStrings},
+	"Init.go":   []string{ForNumbers, ForStrings},
 	"Sum.go":    []string{ForNumbers, ForStrings},
 }

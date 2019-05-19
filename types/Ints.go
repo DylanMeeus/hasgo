@@ -4,7 +4,6 @@ package types
 type Int int64
 type Ints []int64
 
-
 // Create a range like you would with list comprehension in Haskell
 // Ranges in Haskell are _inclusive_ on both bounds.
 // IntRange(0,10) == [0..10] == []int{0,1,2,3,4,5,6,7,8,9,10}

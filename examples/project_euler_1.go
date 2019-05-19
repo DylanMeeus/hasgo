@@ -12,7 +12,7 @@ func main() {
 
 // The hasgo way of solving this problem
 func hasgoFlavour() {
-	result := hasgo.IntRange(0,1000).Filter(func(i int64) bool {
+	result := hasgo.IntRange(0, 1000).Filter(func(i int64) bool {
 		return i%3 == 0 || i%5 == 0
 	}).Sum()
 	fmt.Printf("%v\n", result)
@@ -22,11 +22,9 @@ func hasgoFlavour() {
 func vanillaGo() {
 	var sum int
 	for i := 0; i < 1000; i++ {
-		if i % 3 == 0 || i % 5 == 0 {
+		if i%3 == 0 || i%5 == 0 {
 			sum += i
 		}
 	}
 	fmt.Printf("%v\n", sum)
 }
-
-
