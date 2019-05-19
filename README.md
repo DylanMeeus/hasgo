@@ -8,6 +8,11 @@ We want to focus on being:
 * Typed (no `interface{}`)
 * Nil-safe
 
+## Pie
+
+The inspiration for Hasgo, as well as some ideas around implementation come from the lovely [Pie
+library](https://github.com/elliotchance/pie), made by [Elliot Chance](https://github.com/elliotchance).
+
 ## Installation
 
 ```bash
@@ -23,9 +28,10 @@ go get -u github.com/DylanMeeus/hasgo`
 These are the function currently available with Hasgo.
 It shows you which type of data they operate on as well as the Haskell type definition.
 
-| Function | Signature          | String | Number | Struct | Maps | Description |
-|----------| -----------------  | :----: | :----: | :----: | :--: | ----------- |
-| `Sum`    | `[a] -> a`         |   ✓    |   ✓    |        |      | The sum of elements in the slice|
+| Function | Signature                   | String | Number | Struct | Maps | Description |
+|----------| --------------------------  | :----: | :----: | :----: | :--: | ----------- |
+| `Filter` | `[a] -> (a -> bool) -> [a]` |   ✓    |   ✓    |        |      | filter the slice based on a predicate|
+| `Sum`    | `[a] -> a`                  |   ✓    |   ✓    |        |      | The sum of elements in the slice|
 
 ## Contributing
 

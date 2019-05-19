@@ -23,12 +23,63 @@ var (
 			6,
 		},
 	}
+
+	intsFilterTests = []struct {
+		input  Ints
+		filter func(int64) bool
+		output Ints
+	}{
+		{
+			nil,
+			nil,
+			Ints{},
+		},
+		{
+			Ints{},
+			nil,
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4},
+			func(i int64) bool { return i%2 == 0 },
+			Ints{2, 4},
+		},
+	}
+
+	intsRangeTests = []struct{
+		start int64
+		stop int64
+		output Ints
+	}{
+		{0,10,Ints{0,1,2,3,4,5,6,7,8,9}},
+		{-10,1,Ints{-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0}},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
 	for _, test := range intsSumTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Sum(); res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsFilter(t *testing.T) {
+	for _, test := range intsFilterTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Filter(test.filter); !res.Equals(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsRange(t *testing.T) {
+	for _, test := range intsRangeTests {
+		t.Run("", func(t *testing.T) {
+			if res := IntRange(test.start, test.stop); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

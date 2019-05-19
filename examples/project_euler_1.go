@@ -11,8 +11,8 @@ func main() {
 	for i = 0; i < 1000; i++ {
 		numbers = append(numbers, i)
 	}
-	result := numbers.Filter(func(i int64)bool{
-		return i % 3 == 0 || i % 5 == 0
+	result := numbers.Filter(func(i int64) bool {
+		return i%3 == 0 || i%5 == 0
 	}).Sum()
 	fmt.Printf("%v\n", result)
 
