@@ -12,3 +12,15 @@ func (s Ints) Sum() int64 {
 }
 
 //===============
+//===============Filter.go=============
+
+func (s Ints) Filter(f func(int64) bool) (out Ints) {
+	for _, v := range s {
+		if f(v) {
+			out = append(out, v)
+		}
+	}
+	return
+}
+
+//===============

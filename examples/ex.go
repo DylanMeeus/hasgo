@@ -6,6 +6,14 @@ import (
 )
 
 func main() {
-	numbers := hasgo.Ints([]int64{1, 2, 3, 4})
-	fmt.Printf("%v\n", numbers.Sum())
+	numbers := hasgo.Ints{}
+	var i int64
+	for i = 0; i < 1000; i++ {
+		numbers = append(nums, i)
+	}
+	result := numbers.Filter(func(int64)bool{
+		return i % 3 == 0 || i % 5 == 0
+	}).Sum()
+	fmt.Printf("%v\n", result)
+
 }

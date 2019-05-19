@@ -58,7 +58,7 @@ func main() {
 	// todo: unhardcode
 	g.Printf("package types\n")
 	g.generate(sym)
-	ioutil.WriteFile(fmt.Sprintf("%v_hasgo.go", *Type), g.format(), 0644)
+	ioutil.WriteFile(fmt.Sprintf("%v_hasgo.go", *SType), g.format(), 0644)
 }
 
 // write the data for the generator

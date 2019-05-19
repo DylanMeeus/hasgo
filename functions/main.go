@@ -18,7 +18,8 @@ type Template string
 
 var (
 	templates = map[string][]string{
-		"Sum.go": []string{ForNumbers, ForStrings},
+		"Sum.go":    []string{ForNumbers, ForStrings},
+		"Filter.go": []string{ForNumbers, ForStrings},
 	}
 )
 

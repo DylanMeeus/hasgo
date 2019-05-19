@@ -2,6 +2,16 @@
 package main
 
 var hasgoTemplates = map[string]string{
+	"Filter.go": `
+func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
+	for _, v := range s {
+		if f(v) {
+			out = append(out, v)
+		}
+	}
+	return
+}
+`,
 	"Sum.go": `
 func (s SliceType) Sum() ElementType {
 	var sum ElementType
@@ -19,5 +29,6 @@ const (
 )
 
 var funcDomains = map[string][]string{
-	"Sum.go": []string{ForNumbers, ForStrings},
+	"Filter.go": []string{ForNumbers, ForStrings},
+	"Sum.go":    []string{ForNumbers, ForStrings},
 }
