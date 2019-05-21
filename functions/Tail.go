@@ -1,6 +1,11 @@
 package functions
 
+// Take [1 -> n] elements from a slice, where n = len(list)
+// Returns an empty slice if there are less than 2 elements in slice
 func (s SliceType) Tail() (out SliceType) {
-	return s
-
+	if len(s) <= 1 {
+		return
+	}
+	slicecopy := append([]ElementType(nil), s...)
+	return slicecopy[1:]
 }

@@ -112,3 +112,33 @@ func Test_IntsInit(t *testing.T) {
 		})
 	}
 }
+
+func Test_IntsTail(t *testing.T) {
+	for _, test := range intsTakeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Tail(); !res.Equals(test.tail) {
+				t.Errorf("expected %v but got %v", test.tail, res)
+			}
+		})
+	}
+}
+
+func Test_IntsHead(t *testing.T) {
+	for _, test := range intsTakeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Last(); res != test.last {
+				t.Errorf("expected %v but got %v", test.last, res)
+			}
+		})
+	}
+}
+
+func Test_IntsLast(t *testing.T) {
+	for _, test := range intsTakeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Head(); res != test.head {
+				t.Errorf("expected %v but got %v", test.head, res)
+			}
+		})
+	}
+}
