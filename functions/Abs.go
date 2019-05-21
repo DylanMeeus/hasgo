@@ -1,6 +1,8 @@
 package functions
 
-import "math"
+import (
+	"math"
+)
 
 func (s SliceType) Abs() (out SliceType) {
 	for _, v := range s {

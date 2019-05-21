@@ -105,7 +105,6 @@ func (g *Generator) generate(s symbols) {
 		}
 		template, imports := extractImports(template)
 		g.AddImports(imports)
-		fmt.Println(imports)
 		g.Printf("//===============%v=============\n", function)
 		g.Printf(generify(template, s))
 		g.NewLine()
@@ -125,6 +124,16 @@ func extractImports(template string) (outtemp string, imports []string) {
 			// determine if it's a single import or multiple..
 			if strings.Contains(line, "(") {
 				// implement
+				i++
+				line := lines[i]
+				// check end condition
+				for !strings.Contains(line, ")") {
+					imports = append(imports, line)
+					i++
+					line = lines[i]
+				}
+				i++
+				continue
 			} else {
 				line = strings.TrimSpace(line)[len("import"):]
 				imports = append(imports, line)
@@ -196,7 +205,7 @@ func (g *Generator) format() []byte {
 
 	if len(g.imports) > 0 {
 		code += "import (\n"
-		code += strings.Join(g.imports, "\n") + ")\n"
+		code += strings.Join(g.imports, "\n") + "\n)\n"
 	}
 	// add our generated functions
 	src := append([]byte(code), g.buf.Bytes()...)
