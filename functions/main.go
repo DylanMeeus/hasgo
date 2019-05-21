@@ -18,13 +18,13 @@ type Template string
 
 var (
 	templates = map[string][]string{
-		"Abs.go":    []string{ForNumbers},
-		"Filter.go": []string{ForNumbers, ForStrings},
-		"Head.go":   []string{ForNumbers, ForStrings},
-		"Init.go":   []string{ForNumbers, ForStrings},
-		"Last.go":   []string{ForNumbers, ForStrings},
-		"Sum.go":    []string{ForNumbers, ForStrings},
-		"Tail.go":   []string{ForNumbers, ForStrings},
+		"Abs.go": []string{ForNumbers},
+		//		"Filter.go": []string{ForNumbers, ForStrings},
+		//		"Head.go":   []string{ForNumbers, ForStrings},
+		//		"Init.go":   []string{ForNumbers, ForStrings},
+		//		"Last.go":   []string{ForNumbers, ForStrings},
+		//		"Sum.go":    []string{ForNumbers, ForStrings},
+		//		"Tail.go":   []string{ForNumbers, ForStrings},
 	}
 )
 
