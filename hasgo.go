@@ -47,9 +47,9 @@ type symbols struct {
 }
 
 type Generator struct {
-	buf     bytes.Buffer      // accumulate the output
-	funpkg  *packages.Package // package where the functions are
-	imports []string          // the imports that the generator needs to add
+	buf     bytes.Buffer        // accumulate the output
+	funpkg  *packages.Package   // package where the functions are
+	imports map[string]struct{} // the imports that the generator needs to add
 }
 
 // currently hasgo works like this:
@@ -64,7 +64,9 @@ func main() {
 	flag.Parse()
 	fmt.Printf("type: %v - slice: %v\n", *Type, *SType)
 	sym := symbols{*Type, *SType}
-	g := Generator{}
+	g := Generator{
+		imports: map[string]struct{}{},
+	}
 	g.parsePackage(os.Args, nil)
 	// stringer prints everything in one file. This might be bad.
 	// but let's roll with it for now :-)
@@ -105,7 +107,7 @@ func (g *Generator) generate(s symbols) {
 		}
 		template, imports := extractImports(template)
 		g.AddImports(imports)
-		g.Printf("//===============%v=============\n", function)
+		g.Printf("// =============== %v =================\n", function)
 		g.Printf(generify(template, s))
 		g.NewLine()
 	}
@@ -168,7 +170,7 @@ func (g *Generator) AddImports(imports []string) {
 	for _, imp := range imports {
 		// sanitize:
 		sane := strings.TrimSpace(imp)
-		g.imports = append(g.imports, sane)
+		g.imports[sane] = struct{}{}
 	}
 }
 
@@ -196,6 +198,14 @@ func (g *Generator) addPackage(pkg *packages.Package) {
 	}
 }
 
+// return all unique imports
+func (g *Generator) Imports() (out []string) {
+	for k, _ := range g.imports {
+		out = append(out, k)
+	}
+	return
+}
+
 // print the formatted source code
 // adds the package declaration + imports
 func (g *Generator) format() []byte {
@@ -203,9 +213,9 @@ func (g *Generator) format() []byte {
 		"\n" +
 		"package types\n"
 
-	if len(g.imports) > 0 {
+	if imports := g.Imports(); len(imports) > 0 {
 		code += "import (\n"
-		code += strings.Join(g.imports, "\n") + "\n)\n"
+		code += strings.Join(imports, "\n") + "\n)\n"
 	}
 	// add our generated functions
 	src := append([]byte(code), g.buf.Bytes()...)
