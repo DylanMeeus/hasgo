@@ -17,8 +17,22 @@ const (
 )
 
 var (
-	Type  = flag.String("T", "", "Type for which to generate data")
-	SType = flag.String("S", "", "Corresponding Slice Type for T")
+	Type        = flag.String("T", "", "Type for which to generate data")
+	SType       = flag.String("S", "", "Corresponding Slice Type for T")
+	numberTypes = map[string]struct{}{
+		"int":     struct{}{},
+		"int32":   struct{}{},
+		"int64":   struct{}{},
+		"uint":    struct{}{},
+		"uint32":  struct{}{},
+		"uint64":  struct{}{},
+		"float":   struct{}{},
+		"float32": struct{}{},
+		"float64": struct{}{},
+	}
+	stringTypes = map[string]struct{}{
+		"string": struct{}{},
+	}
 )
 
 func check(e error) {
@@ -61,9 +75,37 @@ func main() {
 	ioutil.WriteFile(fmt.Sprintf("%v_hasgo.go", *SType), g.format(), 0644)
 }
 
+// is the function valid for the type?
+func validFunction(function, T string) bool {
+	domains, ok := funcDomains[function]
+	if !ok {
+		return false
+	}
+	// todo: figure out how to determine if it's a struct!
+	for _, d := range domains {
+		switch d {
+		case ForNumbers:
+			if _, ok := numberTypes[T]; ok {
+				return true
+			}
+			break
+		case ForStrings:
+			if _, ok := stringTypes[T]; ok {
+				return true
+			}
+			break
+
+		}
+	}
+	return false
+}
+
 // write the data for the generator
 func (g *Generator) generate(s symbols) {
 	for function, template := range hasgoTemplates {
+		if !validFunction(function, s.T) {
+			continue
+		}
 		g.Printf("//===============%v=============\n", function)
 		g.Printf(generify(template, s))
 		g.NewLine()

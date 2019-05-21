@@ -2,6 +2,16 @@
 package main
 
 var hasgoTemplates = map[string]string{
+	"Abs.go": `
+import "math"
+
+func (s SliceType) Abs() (out SliceType) {
+	for _, v := range s {
+		out = append(out, ElementType(math.Abs(float64(v))))
+	}
+	return
+}
+`,
 	"Filter.go": `
 func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	for _, v := range s {
@@ -67,6 +77,7 @@ const (
 )
 
 var funcDomains = map[string][]string{
+	"Abs.go":    []string{ForNumbers},
 	"Filter.go": []string{ForNumbers, ForStrings},
 	"Head.go":   []string{ForNumbers, ForStrings},
 	"Init.go":   []string{ForNumbers, ForStrings},

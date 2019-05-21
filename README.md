@@ -30,6 +30,7 @@ It shows you which type of data they operate on as well as the Haskell type defi
 
 | Function | Signature                   | String | Number | Struct | Maps | Description |
 |----------| --------------------------  | :----: | :----: | :----: | :--: | ----------- |
+| `Abs`    | `[a] -> [a]                 |        |   ✓    |        |      | Return a slice containing the absolute values|
 | `Filter` | `[a] -> (a -> bool) -> [a]` |   ✓    |   ✓    |        |      | Filter the slice based on a predicate|
 | `Head`   | `[a] -> a`                  |   ✓    |   ✓    |        |      | Return the first element|
 | `Init`   | `[a] -> [a]`                |   ✓    |   ✓    |        |      | Returns all elements minus the last|
