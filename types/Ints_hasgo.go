@@ -5,6 +5,14 @@ import (
 	"math"
 )
 
+// =============== Init.go =================
+
+// Take n-1 elements from a slice, where n = len(list)
+func (s Ints) Init() (out Ints) {
+	slicecopy := append([]int64(nil), s...)
+	return slicecopy[:len(s)-1]
+}
+
 // =============== Last.go =================
 
 // Returns the last element in the slice
@@ -67,12 +75,4 @@ func (s Ints) Head() (out int64) {
 		out = s[0]
 	}
 	return
-}
-
-// =============== Init.go =================
-
-// Take n-1 elements from a slice, where n = len(list)
-func (s Ints) Init() (out Ints) {
-	slicecopy := append([]int64(nil), s...)
-	return slicecopy[:len(s)-1]
 }

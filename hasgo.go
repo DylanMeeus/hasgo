@@ -93,6 +93,14 @@ func validFunction(function, T string) bool {
 				return true
 			}
 			break
+		case ForStructs:
+			// everything that is not a string or number we will consider a struct!
+			if _, ok := numberTypes[T]; !ok {
+				if _, ok := stringTypes[T]; !ok {
+					return true
+				}
+			}
+			break
 
 		}
 	}

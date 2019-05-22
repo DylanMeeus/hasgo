@@ -22,7 +22,8 @@ var packageTemplate = template.Must(template.New("").
 
 var domainTemplate = template.Must(template.New("").
 	Parse("\n" +
-		"const (\n ForNumbers = \"ForNumbers\"\nForStrings = \"ForStrings\")\n" +
+		"const (\n ForNumbers = \"ForNumbers\"\nForStrings = \"ForStrings\"\n" +
+		"ForStructs = \"ForStructs\"\n)\n" +
 		"var funcDomains = map[string][]string{\n" +
 		"{{ range $fn, $arr := . }}" +
 		"\t\"{{ $fn }}\": []string{ {{ range $index, $dom := $arr }}" +

@@ -76,14 +76,15 @@ func (s SliceType) Tail() (out SliceType) {
 const (
 	ForNumbers = "ForNumbers"
 	ForStrings = "ForStrings"
+	ForStructs = "ForStructs"
 )
 
 var funcDomains = map[string][]string{
 	"Abs.go":    []string{ForNumbers},
-	"Filter.go": []string{ForNumbers, ForStrings},
-	"Head.go":   []string{ForNumbers, ForStrings},
-	"Init.go":   []string{ForNumbers, ForStrings},
-	"Last.go":   []string{ForNumbers, ForStrings},
+	"Filter.go": []string{ForNumbers, ForStrings, ForStructs},
+	"Head.go":   []string{ForNumbers, ForStrings, ForStructs},
+	"Init.go":   []string{ForNumbers, ForStrings, ForStructs},
+	"Last.go":   []string{ForNumbers, ForStrings, ForStructs},
 	"Sum.go":    []string{ForNumbers, ForStrings},
-	"Tail.go":   []string{ForNumbers, ForStrings},
+	"Tail.go":   []string{ForNumbers, ForStrings, ForStructs},
 }
