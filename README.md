@@ -16,6 +16,22 @@ It's safe to say that Hasgo would not exist without Pie. However, the way Pie an
 the same and neither is the focus of the project. If you don't find a function in Hasgo, check out
 Pie! :smiley:
 
+## Example
+
+```go
+func EpicFunction() {
+	// create a range of -10 -> 10. Take the absolute values, keep only even numbers, and sum them.
+	result := IntRange(-10,10).
+		Abs().
+		Filter(func(i int64) bool {
+			return i % 2 == 0
+		}).
+		Sum()
+	// result = 60 
+}
+
+You can find more [examples here](https://github.com/DylanMeeus/hasgo/tree/master/examples). 
+
 ## Installation
 
 ```bash
