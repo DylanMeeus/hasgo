@@ -62,15 +62,15 @@ var (
 		},
 	}
 
-	stringsUnconsTests = []struct{
+	stringsUnconsTests = []struct {
 		input Strings
-		head string
-		tail Strings
+		head  string
+		tail  Strings
 	}{
 		{
-			Strings{"a","b","c"},
+			Strings{"a", "b", "c"},
 			"a",
-			Strings{"b","c"},
+			Strings{"b", "c"},
 		},
 	}
 )

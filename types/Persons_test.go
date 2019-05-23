@@ -48,15 +48,15 @@ var (
 		},
 	}
 
-	structUnconsTests = []struct{
+	structUnconsTests = []struct {
 		input persons
-		head person
-		tail persons
+		head  person
+		tail  persons
 	}{
 		{
-			persons{dylan,ana,sean,tom},
+			persons{dylan, ana, sean, tom},
 			dylan,
-			persons{ana,sean,tom},
+			persons{ana, sean, tom},
 		},
 	}
 )

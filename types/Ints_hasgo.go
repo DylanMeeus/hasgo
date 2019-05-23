@@ -24,6 +24,29 @@ func (s Ints) Init() (out Ints) {
 	return slicecopy[:len(s)-1]
 }
 
+// =============== Last.go =================
+
+// Returns the last element in the slice
+// If no element is found, returns the zero-value of the type
+func (s Ints) Last() (out int64) {
+	if len(s) > 0 {
+		out = s[len(s)-1]
+	}
+	return
+}
+
+// =============== Tail.go =================
+
+// Take [1 -> n] elements from a slice, where n = len(list)
+// Returns an empty slice if there are less than 2 elements in slice
+func (s Ints) Tail() (out Ints) {
+	if len(s) <= 1 {
+		return
+	}
+	slicecopy := append([]int64(nil), s...)
+	return slicecopy[1:]
+}
+
 // =============== Uncons.go =================
 
 func (s Ints) Uncons() (head int64, tail Ints) {
@@ -50,15 +73,33 @@ func (s Ints) Head() (out int64) {
 	return
 }
 
-// =============== Last.go =================
+// =============== Maximum.go =================
 
-// Returns the last element in the slice
-// If no element is found, returns the zero-value of the type
-func (s Ints) Last() (out int64) {
-	if len(s) > 0 {
-		out = s[len(s)-1]
+func (s Ints) Maximum() (out int64) {
+	if len(s) == 0 {
+		return
+	}
+	for _, i := range s {
+		if i > out {
+			out = i
+		}
 	}
 	return
+}
+
+// =============== Minimum.go =================
+
+func (s Ints) Minimum() int64 {
+	if len(s) == 0 {
+		return 0 // bit strange?
+	}
+	min := s[0]
+	for _, i := range s {
+		if i < min {
+			min = i
+		}
+	}
+	return min
 }
 
 // =============== Reverse.go =================
@@ -79,16 +120,4 @@ func (s Ints) Sum() int64 {
 		sum += v
 	}
 	return sum
-}
-
-// =============== Tail.go =================
-
-// Take [1 -> n] elements from a slice, where n = len(list)
-// Returns an empty slice if there are less than 2 elements in slice
-func (s Ints) Tail() (out Ints) {
-	if len(s) <= 1 {
-		return
-	}
-	slicecopy := append([]int64(nil), s...)
-	return slicecopy[1:]
 }

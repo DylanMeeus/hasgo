@@ -51,6 +51,33 @@ func (s SliceType) Last() (out ElementType) {
 	return
 }
 `,
+	"Maximum.go": `
+func (s SliceType) Maximum() (out ElementType) {
+	if len(s) == 0 {
+		return
+	}
+	for _, i := range s {
+		if i > out {
+			out = i
+		}
+	}
+	return
+}
+`,
+	"Minimum.go": `
+func (s SliceType) Minimum() ElementType {
+	if len(s) == 0 {
+		return 0 // bit strange?
+	}
+	min := s[0]
+	for _, i := range s {
+		if i < min {
+			min = i
+		}
+	}
+	return min
+}
+`,
 	"Reverse.go": `
 // Returns the reversed slice
 func (s SliceType) Reverse() (out SliceType) {
@@ -99,6 +126,8 @@ var funcDomains = map[string][]string{
 	"Head.go":    []string{ForNumbers, ForStrings, ForStructs},
 	"Init.go":    []string{ForNumbers, ForStrings, ForStructs},
 	"Last.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"Maximum.go": []string{ForNumbers},
+	"Minimum.go": []string{ForNumbers},
 	"Reverse.go": []string{ForNumbers, ForStrings, ForStructs},
 	"Sum.go":     []string{ForNumbers, ForStrings},
 	"Tail.go":    []string{ForNumbers, ForStrings, ForStructs},

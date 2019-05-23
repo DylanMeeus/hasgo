@@ -82,15 +82,15 @@ var (
 		},
 	}
 
-	intsUnconsTests = []struct{
+	intsUnconsTests = []struct {
 		input Ints
-		head int64
-		tail Ints
+		head  int64
+		tail  Ints
 	}{
 		{
-			Ints{1,2,3,4},
+			Ints{1, 2, 3, 4},
 			1,
-			Ints{2,3,4},
+			Ints{2, 3, 4},
 		},
 		{
 			Ints{},
@@ -103,6 +103,19 @@ var (
 			Ints{},
 		},
 	}
+
+	intsMinMaxTests = []struct{
+		input Ints
+		min int64
+		max int64
+	}{
+		{
+			Ints{-1,5,3,-100},
+			-100,
+			5,
+		},
+	}
+	
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -190,6 +203,26 @@ func Test_IntsUncons(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if head, tail := test.input.Uncons(); head != test.head || !tail.EqualsOrdered(test.tail) {
 				t.Errorf("expected (%v,%v) but got (%v,%v)", test.head, test.tail, head, tail)
+			}
+		})
+	}
+}
+
+func Test_IntsMaximum(t *testing.T) {
+	for _, test := range intsMinMaxTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Maximum(); res != test.max {
+				t.Errorf("expected %v but got %v", test.max, res)
+			}
+		})
+	}
+}
+
+func Test_IntsMinimum(t *testing.T) {
+	for _, test := range intsMinMaxTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Minimum(); res != test.min {
+				t.Errorf("expected %v but got %v", test.min, res)
 			}
 		})
 	}
