@@ -9,6 +9,18 @@ type person struct {
 	age       int
 }
 
+func (is persons) EqualsOrdered(other persons) bool {
+	if len(is) != len(other) {
+		return false
+	}
+	for i := range is {
+		if is[i] != other[i] {
+			return false
+		}
+	}
+	return true
+}
+
 func (is persons) Equals(other persons) bool {
 	if len(is) != len(other) {
 		return false

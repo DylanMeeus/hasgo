@@ -24,6 +24,16 @@ func (s Ints) Last() (out int64) {
 	return
 }
 
+// =============== Reverse.go =================
+
+// Returns the reversed slice
+func (s Ints) Reverse() (out Ints) {
+	for i := len(s) - 1; i >= 0; i-- {
+		out = append(out, s[i])
+	}
+	return
+}
+
 // =============== Sum.go =================
 
 func (s Ints) Sum() int64 {

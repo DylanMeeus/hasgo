@@ -21,6 +21,19 @@ func IntRange(start, stop int64) Ints {
 	return out
 }
 
+// are the elements in the slices equal (same position)
+func (is Ints) EqualsOrdered(other Ints) bool {
+	if len(is) != len(other) {
+		return false
+	}
+	for i := range is {
+		if is[i] != other[i] {
+			return false
+		}
+	}
+	return true
+}
+
 func (is Ints) Equals(other Ints) bool {
 	if len(is) != len(other) {
 		return false

@@ -71,6 +71,16 @@ var (
 			10,
 		},
 	}
+
+	intsReverseTests = []struct {
+		input  Ints
+		output Ints
+	}{
+		{
+			Ints{1, 2, 3},
+			Ints{3, 2, 1},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -96,7 +106,7 @@ func Test_IntsFilter(t *testing.T) {
 func Test_IntsRange(t *testing.T) {
 	for _, test := range intsRangeTests {
 		t.Run("", func(t *testing.T) {
-			if res := IntRange(test.start, test.stop); !res.Equals(test.output) {
+			if res := IntRange(test.start, test.stop); !res.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
@@ -106,7 +116,7 @@ func Test_IntsRange(t *testing.T) {
 func Test_IntsInit(t *testing.T) {
 	for _, test := range intsTakeTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Init(); !res.Equals(test.init) {
+			if res := test.input.Init(); !res.EqualsOrdered(test.init) {
 				t.Errorf("expected %v but got %v", test.init, res)
 			}
 		})
@@ -116,7 +126,7 @@ func Test_IntsInit(t *testing.T) {
 func Test_IntsTail(t *testing.T) {
 	for _, test := range intsTakeTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Tail(); !res.Equals(test.tail) {
+			if res := test.input.Tail(); !res.EqualsOrdered(test.tail) {
 				t.Errorf("expected %v but got %v", test.tail, res)
 			}
 		})
@@ -138,6 +148,16 @@ func Test_IntsLast(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Head(); res != test.head {
 				t.Errorf("expected %v but got %v", test.head, res)
+			}
+		})
+	}
+}
+
+func Test_IntsReverse(t *testing.T) {
+	for _, test := range intsReverseTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Reverse(); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

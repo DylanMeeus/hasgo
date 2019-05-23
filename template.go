@@ -51,6 +51,15 @@ func (s SliceType) Last() (out ElementType) {
 	return
 }
 `,
+	"Reverse.go": `
+// Returns the reversed slice
+func (s SliceType) Reverse() (out SliceType) {
+	for i := len(s) - 1; i >= 0; i-- {
+		out = append(out, s[i])
+	}
+	return
+}
+`,
 	"Sum.go": `
 func (s SliceType) Sum() ElementType {
 	var sum ElementType
@@ -80,11 +89,12 @@ const (
 )
 
 var funcDomains = map[string][]string{
-	"Abs.go":    []string{ForNumbers},
-	"Filter.go": []string{ForNumbers, ForStrings, ForStructs},
-	"Head.go":   []string{ForNumbers, ForStrings, ForStructs},
-	"Init.go":   []string{ForNumbers, ForStrings, ForStructs},
-	"Last.go":   []string{ForNumbers, ForStrings, ForStructs},
-	"Sum.go":    []string{ForNumbers, ForStrings},
-	"Tail.go":   []string{ForNumbers, ForStrings, ForStructs},
+	"Abs.go":     []string{ForNumbers},
+	"Filter.go":  []string{ForNumbers, ForStrings, ForStructs},
+	"Head.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"Init.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"Last.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"Reverse.go": []string{ForNumbers, ForStrings, ForStructs},
+	"Sum.go":     []string{ForNumbers, ForStrings},
+	"Tail.go":    []string{ForNumbers, ForStrings, ForStructs},
 }
