@@ -59,6 +59,18 @@ var (
 			persons{ana, sean, tom},
 		},
 	}
+
+	structMapTests = []struct{
+		input persons
+		mapfunc func(person)person
+		output persons
+	}{
+		{
+			persons{dylan,ana,sean},
+			func(p person) person { return dylan },
+			persons{dylan, dylan, dylan},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -126,6 +138,17 @@ func Test_StructUncons(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if head, tail := test.input.Uncons(); head != test.head || !tail.EqualsOrdered(test.tail) {
 				t.Errorf("expected (%v,%v) but got (%v,%v)", test.head, test.tail, head, tail)
+			}
+		})
+	}
+}
+
+
+func Test_StructMap(t *testing.T) {
+	for _, test := range structMapTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Map(test.mapfunc); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

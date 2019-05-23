@@ -104,18 +104,34 @@ var (
 		},
 	}
 
-	intsMinMaxTests = []struct{
+	intsMinMaxTests = []struct {
 		input Ints
-		min int64
-		max int64
+		min   int64
+		max   int64
 	}{
 		{
-			Ints{-1,5,3,-100},
+			Ints{-1, 5, 3, -100},
 			-100,
 			5,
 		},
 	}
-	
+
+	intsMapTests = []struct {
+		input   Ints
+		mapfunc func(int64) int64
+		output  Ints
+	}{
+		{
+			Ints{1, 2, 3},
+			func(i int64) int64 { return i * i },
+			Ints{1, 4, 9},
+		},
+		{
+			Ints{1, 2, 3},
+			nil,
+			Ints{1, 2, 3},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -223,6 +239,16 @@ func Test_IntsMinimum(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Minimum(); res != test.min {
 				t.Errorf("expected %v but got %v", test.min, res)
+			}
+		})
+	}
+}
+
+func Test_IntsMap(t *testing.T) {
+	for _, test := range intsMapTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Map(test.mapfunc); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

@@ -11,15 +11,10 @@ func (s persons) Reverse() (out persons) {
 	return
 }
 
-// =============== Filter.go =================
+// =============== Uncons.go =================
 
-func (s persons) Filter(f func(person) bool) (out persons) {
-	for _, v := range s {
-		if f(v) {
-			out = append(out, v)
-		}
-	}
-	return
+func (s persons) Uncons() (head person, tail persons) {
+	return s.Head(), s.Tail()
 }
 
 // =============== Head.go =================
@@ -64,8 +59,26 @@ func (s persons) Tail() (out persons) {
 	return slicecopy[1:]
 }
 
-// =============== Uncons.go =================
+// =============== Filter.go =================
 
-func (s persons) Uncons() (head person, tail persons) {
-	return s.Head(), s.Tail()
+func (s persons) Filter(f func(person) bool) (out persons) {
+	for _, v := range s {
+		if f(v) {
+			out = append(out, v)
+		}
+	}
+	return
+}
+
+// =============== Map.go =================
+
+// Return a new slice with the map operation applied to each element.
+func (s persons) Map(f func(person) person) (out persons) {
+	if f == nil {
+		return s
+	}
+	for _, v := range s {
+		out = append(out, f(v))
+	}
+	return
 }

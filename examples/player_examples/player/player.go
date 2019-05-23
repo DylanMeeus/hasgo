@@ -5,5 +5,5 @@ type Player struct {
 	Score int
 }
 
-//go:generate hasgo -T=Player -S=Players
+// go:generate hasgo -T=Player -S=Players
 type Players []Player

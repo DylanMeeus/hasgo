@@ -1,6 +1,7 @@
 package types
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -71,6 +72,18 @@ var (
 			Strings{"a", "b", "c"},
 			"a",
 			Strings{"b", "c"},
+		},
+	}
+
+	stringsMapTests = []struct{
+		input Strings
+		mapfunc func(string) string
+		output Strings
+	}{
+		{
+			Strings{"a","b","c"},
+			func(s string) string { return strings.ToUpper(s) },
+			Strings{"A","B","C"},
 		},
 	}
 )
@@ -150,6 +163,26 @@ func Test_StringsUncons(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if head, tail := test.input.Uncons(); head != test.head || !tail.EqualsOrdered(test.tail) {
 				t.Errorf("expected (%v,%v) but got (%v,%v)", test.head, test.tail, head, tail)
+			}
+		})
+	}
+}
+
+func Test_StringsMap(t *testing.T) {
+	for _, test := range stringsMapTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Map(test.mapfunc); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsMapOriginalUnchanged(t *testing.T) {
+	for _, test := range stringsMapTests {
+		t.Run("", func(t *testing.T) {
+			if test.input.Map(test.mapfunc); test.input.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.input, test.output)
 			}
 		})
 	}

@@ -5,13 +5,61 @@ import (
 	"math"
 )
 
-// =============== Filter.go =================
+// =============== Map.go =================
 
-func (s Ints) Filter(f func(int64) bool) (out Ints) {
+// Return a new slice with the map operation applied to each element.
+func (s Ints) Map(f func(int64) int64) (out Ints) {
+	if f == nil {
+		return s
+	}
 	for _, v := range s {
-		if f(v) {
-			out = append(out, v)
+		out = append(out, f(v))
+	}
+	return
+}
+
+// =============== Maximum.go =================
+
+func (s Ints) Maximum() (out int64) {
+	if len(s) == 0 {
+		return
+	}
+	for _, i := range s {
+		if i > out {
+			out = i
 		}
+	}
+	return
+}
+
+// =============== Tail.go =================
+
+// Take [1 -> n] elements from a slice, where n = len(list)
+// Returns an empty slice if there are less than 2 elements in slice
+func (s Ints) Tail() (out Ints) {
+	if len(s) <= 1 {
+		return
+	}
+	slicecopy := append([]int64(nil), s...)
+	return slicecopy[1:]
+}
+
+// =============== Abs.go =================
+
+func (s Ints) Abs() (out Ints) {
+	for _, v := range s {
+		out = append(out, int64(math.Abs(float64(v))))
+	}
+	return
+}
+
+// =============== Head.go =================
+
+// Returns the first element in the slice
+// If no element is found, returns the zero-value of the type
+func (s Ints) Head() (out int64) {
+	if len(s) > 0 {
+		out = s[0]
 	}
 	return
 }
@@ -35,53 +83,18 @@ func (s Ints) Last() (out int64) {
 	return
 }
 
-// =============== Tail.go =================
-
-// Take [1 -> n] elements from a slice, where n = len(list)
-// Returns an empty slice if there are less than 2 elements in slice
-func (s Ints) Tail() (out Ints) {
-	if len(s) <= 1 {
-		return
-	}
-	slicecopy := append([]int64(nil), s...)
-	return slicecopy[1:]
-}
-
 // =============== Uncons.go =================
 
 func (s Ints) Uncons() (head int64, tail Ints) {
 	return s.Head(), s.Tail()
 }
 
-// =============== Abs.go =================
+// =============== Filter.go =================
 
-func (s Ints) Abs() (out Ints) {
+func (s Ints) Filter(f func(int64) bool) (out Ints) {
 	for _, v := range s {
-		out = append(out, int64(math.Abs(float64(v))))
-	}
-	return
-}
-
-// =============== Head.go =================
-
-// Returns the first element in the slice
-// If no element is found, returns the zero-value of the type
-func (s Ints) Head() (out int64) {
-	if len(s) > 0 {
-		out = s[0]
-	}
-	return
-}
-
-// =============== Maximum.go =================
-
-func (s Ints) Maximum() (out int64) {
-	if len(s) == 0 {
-		return
-	}
-	for _, i := range s {
-		if i > out {
-			out = i
+		if f(v) {
+			out = append(out, v)
 		}
 	}
 	return
