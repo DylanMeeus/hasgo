@@ -37,17 +37,28 @@ var (
 			tom,
 		},
 	}
-	
-	structReverseTests = []struct{
-		input persons
+
+	structReverseTests = []struct {
+		input  persons
 		output persons
 	}{
 		{
-			persons{dylan,ana,sean,tom},
-			persons{tom,sean,ana,dylan},
+			persons{dylan, ana, sean, tom},
+			persons{tom, sean, ana, dylan},
 		},
 	}
 
+	structUnconsTests = []struct{
+		input persons
+		head person
+		tail persons
+	}{
+		{
+			persons{dylan,ana,sean,tom},
+			dylan,
+			persons{ana,sean,tom},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -105,6 +116,16 @@ func Test_StructReverse(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Reverse(); !res.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StructUncons(t *testing.T) {
+	for _, test := range structUnconsTests {
+		t.Run("", func(t *testing.T) {
+			if head, tail := test.input.Uncons(); head != test.head || !tail.EqualsOrdered(test.tail) {
+				t.Errorf("expected (%v,%v) but got (%v,%v)", test.head, test.tail, head, tail)
 			}
 		})
 	}

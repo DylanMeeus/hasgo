@@ -27,6 +27,7 @@ var (
 		"Reverse.go": []string{ForNumbers, ForStrings, ForStructs},
 		"Sum.go":     []string{ForNumbers, ForStrings},
 		"Tail.go":    []string{ForNumbers, ForStrings, ForStructs},
+		"Uncons.go":  []string{ForNumbers, ForStrings, ForStructs},
 	}
 )
 

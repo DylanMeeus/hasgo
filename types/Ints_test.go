@@ -81,6 +81,28 @@ var (
 			Ints{3, 2, 1},
 		},
 	}
+
+	intsUnconsTests = []struct{
+		input Ints
+		head int64
+		tail Ints
+	}{
+		{
+			Ints{1,2,3,4},
+			1,
+			Ints{2,3,4},
+		},
+		{
+			Ints{},
+			0,
+			Ints{},
+		},
+		{
+			nil,
+			0,
+			Ints{},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -158,6 +180,16 @@ func Test_IntsReverse(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Reverse(); !res.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsUncons(t *testing.T) {
+	for _, test := range intsUnconsTests {
+		t.Run("", func(t *testing.T) {
+			if head, tail := test.input.Uncons(); head != test.head || !tail.EqualsOrdered(test.tail) {
+				t.Errorf("expected (%v,%v) but got (%v,%v)", test.head, test.tail, head, tail)
 			}
 		})
 	}

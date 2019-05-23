@@ -52,13 +52,25 @@ var (
 		},
 	}
 
-	stringsReverseTests = []struct{
-		input Strings
+	stringsReverseTests = []struct {
+		input  Strings
 		output Strings
 	}{
 		{
+			Strings{"a", "b", "c"},
+			Strings{"c", "b", "a"},
+		},
+	}
+
+	stringsUnconsTests = []struct{
+		input Strings
+		head string
+		tail Strings
+	}{
+		{
 			Strings{"a","b","c"},
-			Strings{"c","b","a"},
+			"a",
+			Strings{"b","c"},
 		},
 	}
 )
@@ -128,6 +140,16 @@ func Test_StringsReverse(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Reverse(); !res.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsUncons(t *testing.T) {
+	for _, test := range stringsUnconsTests {
+		t.Run("", func(t *testing.T) {
+			if head, tail := test.input.Uncons(); head != test.head || !tail.EqualsOrdered(test.tail) {
+				t.Errorf("expected (%v,%v) but got (%v,%v)", test.head, test.tail, head, tail)
 			}
 		})
 	}

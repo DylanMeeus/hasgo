@@ -5,12 +5,49 @@ import (
 	"math"
 )
 
+// =============== Filter.go =================
+
+func (s Ints) Filter(f func(int64) bool) (out Ints) {
+	for _, v := range s {
+		if f(v) {
+			out = append(out, v)
+		}
+	}
+	return
+}
+
 // =============== Init.go =================
 
 // Take n-1 elements from a slice, where n = len(list)
 func (s Ints) Init() (out Ints) {
 	slicecopy := append([]int64(nil), s...)
 	return slicecopy[:len(s)-1]
+}
+
+// =============== Uncons.go =================
+
+func (s Ints) Uncons() (head int64, tail Ints) {
+	return s.Head(), s.Tail()
+}
+
+// =============== Abs.go =================
+
+func (s Ints) Abs() (out Ints) {
+	for _, v := range s {
+		out = append(out, int64(math.Abs(float64(v))))
+	}
+	return
+}
+
+// =============== Head.go =================
+
+// Returns the first element in the slice
+// If no element is found, returns the zero-value of the type
+func (s Ints) Head() (out int64) {
+	if len(s) > 0 {
+		out = s[0]
+	}
+	return
 }
 
 // =============== Last.go =================
@@ -54,35 +91,4 @@ func (s Ints) Tail() (out Ints) {
 	}
 	slicecopy := append([]int64(nil), s...)
 	return slicecopy[1:]
-}
-
-// =============== Abs.go =================
-
-func (s Ints) Abs() (out Ints) {
-	for _, v := range s {
-		out = append(out, int64(math.Abs(float64(v))))
-	}
-	return
-}
-
-// =============== Filter.go =================
-
-func (s Ints) Filter(f func(int64) bool) (out Ints) {
-	for _, v := range s {
-		if f(v) {
-			out = append(out, v)
-		}
-	}
-	return
-}
-
-// =============== Head.go =================
-
-// Returns the first element in the slice
-// If no element is found, returns the zero-value of the type
-func (s Ints) Head() (out int64) {
-	if len(s) > 0 {
-		out = s[0]
-	}
-	return
 }

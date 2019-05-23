@@ -80,6 +80,11 @@ func (s SliceType) Tail() (out SliceType) {
 	return slicecopy[1:]
 }
 `,
+	"Uncons.go": `
+func (s SliceType) Uncons() (head ElementType, tail SliceType) {
+	return s.Head(), s.Tail()
+}
+`,
 }
 
 const (
@@ -97,4 +102,5 @@ var funcDomains = map[string][]string{
 	"Reverse.go": []string{ForNumbers, ForStrings, ForStructs},
 	"Sum.go":     []string{ForNumbers, ForStrings},
 	"Tail.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"Uncons.go":  []string{ForNumbers, ForStrings, ForStructs},
 }

@@ -31,6 +31,12 @@ func (s persons) Init() (out persons) {
 	return slicecopy[:len(s)-1]
 }
 
+// =============== Uncons.go =================
+
+func (s persons) Uncons() (head person, tail persons) {
+	return s.Head(), s.Tail()
+}
+
 // =============== Last.go =================
 
 // Returns the last element in the slice
