@@ -39,8 +39,8 @@ The first symbol of the signature is actually the method receiver in Go terms.
 | `Head`   | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Return the first element|
 | `Init`   | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|
 | `Last`   | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the last element|
-| `Maximum`| `[a] -> a`                  |   ✓    |        |        | Returns the largest element|
-| `Minimum`| `[a] -> a`                  |   ✓    |        |        | Returns the lowest element|
+| `Maximum`| `[a] -> a`                  |        |   ✓    |        | Returns the largest element|
+| `Minimum`| `[a] -> a`                  |        |   ✓    |        | Returns the lowest element|
 | `Reverse`| `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns a slice with the elements reversed|
 | `Sum`    | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
 | `Tail`   | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
