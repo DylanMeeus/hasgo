@@ -29,6 +29,7 @@ func EpicFunction() {
 		Sum()
 	// result = 60 
 }
+```
 
 You can find more [examples here](https://github.com/DylanMeeus/hasgo/tree/master/examples). 
 
