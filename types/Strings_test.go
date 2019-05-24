@@ -75,15 +75,15 @@ var (
 		},
 	}
 
-	stringsMapTests = []struct{
-		input Strings
+	stringsMapTests = []struct {
+		input   Strings
 		mapfunc func(string) string
-		output Strings
+		output  Strings
 	}{
 		{
-			Strings{"a","b","c"},
+			Strings{"a", "b", "c"},
 			func(s string) string { return strings.ToUpper(s) },
-			Strings{"A","B","C"},
+			Strings{"A", "B", "C"},
 		},
 	}
 )

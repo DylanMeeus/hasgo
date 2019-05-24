@@ -60,13 +60,13 @@ var (
 		},
 	}
 
-	structMapTests = []struct{
-		input persons
-		mapfunc func(person)person
-		output persons
+	structMapTests = []struct {
+		input   persons
+		mapfunc func(person) person
+		output  persons
 	}{
 		{
-			persons{dylan,ana,sean},
+			persons{dylan, ana, sean},
 			func(p person) person { return dylan },
 			persons{dylan, dylan, dylan},
 		},
@@ -142,7 +142,6 @@ func Test_StructUncons(t *testing.T) {
 		})
 	}
 }
-
 
 func Test_StructMap(t *testing.T) {
 	for _, test := range structMapTests {
