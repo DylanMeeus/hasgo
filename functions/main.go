@@ -28,6 +28,7 @@ var (
 		"Maximum.go": []string{ForNumbers},
 		"Minimum.go": []string{ForNumbers},
 		"Reverse.go": []string{ForNumbers, ForStrings, ForStructs},
+		"Sort.go":    []string{ForNumbers, ForStrings},
 		"Sum.go":     []string{ForNumbers, ForStrings},
 		"Tail.go":    []string{ForNumbers, ForStrings, ForStructs},
 		"Uncons.go":  []string{ForNumbers, ForStrings, ForStructs},

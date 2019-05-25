@@ -132,6 +132,16 @@ var (
 			Ints{1, 2, 3},
 		},
 	}
+
+	intsSortTests = []struct {
+		input  Ints
+		output Ints
+	}{
+		{
+			Ints{3, 2, 2, 1},
+			Ints{1, 2, 2, 3},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -248,6 +258,16 @@ func Test_IntsMap(t *testing.T) {
 	for _, test := range intsMapTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Map(test.mapfunc); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsSort(t *testing.T) {
+	for _, test := range intsSortTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Sort(); !res.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

@@ -86,6 +86,17 @@ var (
 			Strings{"A", "B", "C"},
 		},
 	}
+
+	stringsSortTests = []struct {
+		input Strings
+		output Strings
+	}{
+		{
+			Strings{"d","a","b","b"},
+			Strings{"a","b","b","d"},
+		},
+	}
+
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -182,6 +193,16 @@ func Test_StringsMapOriginalUnchanged(t *testing.T) {
 	for _, test := range stringsMapTests {
 		t.Run("", func(t *testing.T) {
 			if test.input.Map(test.mapfunc); test.input.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.input, test.output)
+			}
+		})
+	}
+}
+
+func Test_StringsSort(t *testing.T) {
+	for _, test := range stringsSortTests {
+		t.Run("", func(t *testing.T) {
+			if test.input.Sort(); test.input.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.input, test.output)
 			}
 		})

@@ -99,6 +99,21 @@ func (s SliceType) Reverse() (out SliceType) {
 	return
 }
 `,
+	"Sort.go": `
+import (
+	"sort"
+)
+
+// wrapper around go sort functions
+func (s SliceType) Sort() SliceType {
+	out := make(SliceType, len(s))
+	copy(out, s)
+	sort.Slice(out, func(i, j int) bool {
+		return out[i] < out[j]
+	})
+	return out
+}
+`,
 	"Sum.go": `
 func (s SliceType) Sum() ElementType {
 	var sum ElementType
@@ -142,6 +157,7 @@ var funcDomains = map[string][]string{
 	"Maximum.go": []string{ForNumbers},
 	"Minimum.go": []string{ForNumbers},
 	"Reverse.go": []string{ForNumbers, ForStrings, ForStructs},
+	"Sort.go":    []string{ForNumbers, ForStrings},
 	"Sum.go":     []string{ForNumbers, ForStrings},
 	"Tail.go":    []string{ForNumbers, ForStrings, ForStructs},
 	"Uncons.go":  []string{ForNumbers, ForStrings, ForStructs},
