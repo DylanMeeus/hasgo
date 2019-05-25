@@ -2,7 +2,7 @@
 package main
 
 var hasgoTemplates = map[string]string{
-	"Abs.go": `
+	"abs.go": `
 import (
 	"math"
 )
@@ -14,7 +14,7 @@ func (s SliceType) Abs() (out SliceType) {
 	return
 }
 `,
-	"Filter.go": `
+	"filter.go": `
 func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	for _, v := range s {
 		if f(v) {
@@ -24,7 +24,7 @@ func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	return
 }
 `,
-	"Head.go": `
+	"head.go": `
 // Returns the first element in the slice
 // If no element is found, returns the zero-value of the type
 func (s SliceType) Head() (out ElementType) {
@@ -34,14 +34,14 @@ func (s SliceType) Head() (out ElementType) {
 	return
 }
 `,
-	"Init.go": `
+	"init.go": `
 // Take n-1 elements from a slice, where n = len(list)
 func (s SliceType) Init() (out SliceType) {
 	slicecopy := append([]ElementType(nil), s...)
 	return slicecopy[:len(s)-1]
 }
 `,
-	"Last.go": `
+	"last.go": `
 // Returns the last element in the slice
 // If no element is found, returns the zero-value of the type
 func (s SliceType) Last() (out ElementType) {
@@ -51,7 +51,7 @@ func (s SliceType) Last() (out ElementType) {
 	return
 }
 `,
-	"Map.go": `
+	"map.go": `
 // Return a new slice with the map operation applied to each element.
 func (s SliceType) Map(f func(ElementType) ElementType) (out SliceType) {
 	if f == nil {
@@ -63,7 +63,7 @@ func (s SliceType) Map(f func(ElementType) ElementType) (out SliceType) {
 	return
 }
 `,
-	"Maximum.go": `
+	"maximum.go": `
 func (s SliceType) Maximum() (out ElementType) {
 	if len(s) == 0 {
 		return
@@ -76,7 +76,7 @@ func (s SliceType) Maximum() (out ElementType) {
 	return
 }
 `,
-	"Minimum.go": `
+	"minimum.go": `
 func (s SliceType) Minimum() ElementType {
 	if len(s) == 0 {
 		return 0 // bit strange?
@@ -90,7 +90,7 @@ func (s SliceType) Minimum() ElementType {
 	return min
 }
 `,
-	"Reverse.go": `
+	"reverse.go": `
 // Returns the reversed slice
 func (s SliceType) Reverse() (out SliceType) {
 	for i := len(s) - 1; i >= 0; i-- {
@@ -99,7 +99,7 @@ func (s SliceType) Reverse() (out SliceType) {
 	return
 }
 `,
-	"Sort.go": `
+	"sort.go": `
 import (
 	"sort"
 )
@@ -114,7 +114,7 @@ func (s SliceType) Sort() SliceType {
 	return out
 }
 `,
-	"Sum.go": `
+	"sum.go": `
 func (s SliceType) Sum() ElementType {
 	var sum ElementType
 	for _, v := range s {
@@ -123,7 +123,7 @@ func (s SliceType) Sum() ElementType {
 	return sum
 }
 `,
-	"Tail.go": `
+	"tail.go": `
 // Take [1 -> n] elements from a slice, where n = len(list)
 // Returns an empty slice if there are less than 2 elements in slice
 func (s SliceType) Tail() (out SliceType) {
@@ -134,7 +134,7 @@ func (s SliceType) Tail() (out SliceType) {
 	return slicecopy[1:]
 }
 `,
-	"Uncons.go": `
+	"uncons.go": `
 func (s SliceType) Uncons() (head ElementType, tail SliceType) {
 	return s.Head(), s.Tail()
 }
@@ -148,17 +148,17 @@ const (
 )
 
 var funcDomains = map[string][]string{
-	"Abs.go":     []string{ForNumbers},
-	"Filter.go":  []string{ForNumbers, ForStrings, ForStructs},
-	"Head.go":    []string{ForNumbers, ForStrings, ForStructs},
-	"Init.go":    []string{ForNumbers, ForStrings, ForStructs},
-	"Last.go":    []string{ForNumbers, ForStrings, ForStructs},
-	"Map.go":     []string{ForNumbers, ForStrings, ForStructs},
-	"Maximum.go": []string{ForNumbers},
-	"Minimum.go": []string{ForNumbers},
-	"Reverse.go": []string{ForNumbers, ForStrings, ForStructs},
-	"Sort.go":    []string{ForNumbers, ForStrings},
-	"Sum.go":     []string{ForNumbers, ForStrings},
-	"Tail.go":    []string{ForNumbers, ForStrings, ForStructs},
-	"Uncons.go":  []string{ForNumbers, ForStrings, ForStructs},
+	"abs.go":     []string{ForNumbers},
+	"filter.go":  []string{ForNumbers, ForStrings, ForStructs},
+	"head.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"init.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"last.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"map.go":     []string{ForNumbers, ForStrings, ForStructs},
+	"maximum.go": []string{ForNumbers},
+	"minimum.go": []string{ForNumbers},
+	"reverse.go": []string{ForNumbers, ForStrings, ForStructs},
+	"sort.go":    []string{ForNumbers, ForStrings},
+	"sum.go":     []string{ForNumbers, ForStrings},
+	"tail.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"uncons.go":  []string{ForNumbers, ForStrings, ForStructs},
 }

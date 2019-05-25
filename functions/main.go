@@ -19,19 +19,19 @@ type Template string
 
 var (
 	templates = map[string][]string{
-		"Abs.go":     []string{ForNumbers},
-		"Filter.go":  []string{ForNumbers, ForStrings, ForStructs},
-		"Head.go":    []string{ForNumbers, ForStrings, ForStructs},
-		"Init.go":    []string{ForNumbers, ForStrings, ForStructs},
-		"Last.go":    []string{ForNumbers, ForStrings, ForStructs},
-		"Map.go":     []string{ForNumbers, ForStrings, ForStructs},
-		"Maximum.go": []string{ForNumbers},
-		"Minimum.go": []string{ForNumbers},
-		"Reverse.go": []string{ForNumbers, ForStrings, ForStructs},
-		"Sort.go":    []string{ForNumbers, ForStrings},
-		"Sum.go":     []string{ForNumbers, ForStrings},
-		"Tail.go":    []string{ForNumbers, ForStrings, ForStructs},
-		"Uncons.go":  []string{ForNumbers, ForStrings, ForStructs},
+		"abs.go":     []string{ForNumbers},
+		"filter.go":  []string{ForNumbers, ForStrings, ForStructs},
+		"head.go":    []string{ForNumbers, ForStrings, ForStructs},
+		"init.go":    []string{ForNumbers, ForStrings, ForStructs},
+		"last.go":    []string{ForNumbers, ForStrings, ForStructs},
+		"map.go":     []string{ForNumbers, ForStrings, ForStructs},
+		"maximum.go": []string{ForNumbers},
+		"minimum.go": []string{ForNumbers},
+		"reverse.go": []string{ForNumbers, ForStrings, ForStructs},
+		"sort.go":    []string{ForNumbers, ForStrings},
+		"sum.go":     []string{ForNumbers, ForStrings},
+		"tail.go":    []string{ForNumbers, ForStrings, ForStructs},
+		"uncons.go":  []string{ForNumbers, ForStrings, ForStructs},
 	}
 )
 

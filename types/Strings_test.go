@@ -88,15 +88,14 @@ var (
 	}
 
 	stringsSortTests = []struct {
-		input Strings
+		input  Strings
 		output Strings
 	}{
 		{
-			Strings{"d","a","b","b"},
-			Strings{"a","b","b","d"},
+			Strings{"d", "a", "b", "b"},
+			Strings{"a", "b", "b", "d"},
 		},
 	}
-
 )
 
 func Test_StringsSum(t *testing.T) {
