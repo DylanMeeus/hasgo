@@ -24,6 +24,7 @@ var (
 		"head.go":    []string{ForNumbers, ForStrings, ForStructs},
 		"init.go":    []string{ForNumbers, ForStrings, ForStructs},
 		"last.go":    []string{ForNumbers, ForStrings, ForStructs},
+		"length.go":  []string{ForNumbers, ForStrings, ForStructs},
 		"map.go":     []string{ForNumbers, ForStrings, ForStructs},
 		"maximum.go": []string{ForNumbers},
 		"minimum.go": []string{ForNumbers},

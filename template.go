@@ -51,6 +51,11 @@ func (s SliceType) Last() (out ElementType) {
 	return
 }
 `,
+	"length.go": `
+func (s SliceType) Length() int {
+	return len(s)
+}
+`,
 	"map.go": `
 // Return a new slice with the map operation applied to each element.
 func (s SliceType) Map(f func(ElementType) ElementType) (out SliceType) {
@@ -153,6 +158,7 @@ var funcDomains = map[string][]string{
 	"head.go":    []string{ForNumbers, ForStrings, ForStructs},
 	"init.go":    []string{ForNumbers, ForStrings, ForStructs},
 	"last.go":    []string{ForNumbers, ForStrings, ForStructs},
+	"length.go":  []string{ForNumbers, ForStrings, ForStructs},
 	"map.go":     []string{ForNumbers, ForStrings, ForStructs},
 	"maximum.go": []string{ForNumbers},
 	"minimum.go": []string{ForNumbers},

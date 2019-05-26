@@ -5,6 +5,79 @@ import (
 	"sort"
 )
 
+// =============== map.go =================
+
+// Return a new slice with the map operation applied to each element.
+func (s Strings) Map(f func(string) string) (out Strings) {
+	if f == nil {
+		return s
+	}
+	for _, v := range s {
+		out = append(out, f(v))
+	}
+	return
+}
+
+// =============== reverse.go =================
+
+// Returns the reversed slice
+func (s Strings) Reverse() (out Strings) {
+	for i := len(s) - 1; i >= 0; i-- {
+		out = append(out, s[i])
+	}
+	return
+}
+
+// =============== filter.go =================
+
+func (s Strings) Filter(f func(string) bool) (out Strings) {
+	for _, v := range s {
+		if f(v) {
+			out = append(out, v)
+		}
+	}
+	return
+}
+
+// =============== last.go =================
+
+// Returns the last element in the slice
+// If no element is found, returns the zero-value of the type
+func (s Strings) Last() (out string) {
+	if len(s) > 0 {
+		out = s[len(s)-1]
+	}
+	return
+}
+
+// =============== length.go =================
+
+func (s Strings) Length() int {
+	return len(s)
+}
+
+// =============== sort.go =================
+
+// wrapper around go sort functions
+func (s Strings) Sort() Strings {
+	out := make(Strings, len(s))
+	copy(out, s)
+	sort.Slice(out, func(i, j int) bool {
+		return out[i] < out[j]
+	})
+	return out
+}
+
+// =============== sum.go =================
+
+func (s Strings) Sum() string {
+	var sum string
+	for _, v := range s {
+		sum += v
+	}
+	return sum
+}
+
 // =============== tail.go =================
 
 // Take [1 -> n] elements from a slice, where n = len(list)
@@ -17,15 +90,10 @@ func (s Strings) Tail() (out Strings) {
 	return slicecopy[1:]
 }
 
-// =============== filter.go =================
+// =============== uncons.go =================
 
-func (s Strings) Filter(f func(string) bool) (out Strings) {
-	for _, v := range s {
-		if f(v) {
-			out = append(out, v)
-		}
-	}
-	return
+func (s Strings) Uncons() (head string, tail Strings) {
+	return s.Head(), s.Tail()
 }
 
 // =============== head.go =================
@@ -45,66 +113,4 @@ func (s Strings) Head() (out string) {
 func (s Strings) Init() (out Strings) {
 	slicecopy := append([]string(nil), s...)
 	return slicecopy[:len(s)-1]
-}
-
-// =============== map.go =================
-
-// Return a new slice with the map operation applied to each element.
-func (s Strings) Map(f func(string) string) (out Strings) {
-	if f == nil {
-		return s
-	}
-	for _, v := range s {
-		out = append(out, f(v))
-	}
-	return
-}
-
-// =============== sort.go =================
-
-// wrapper around go sort functions
-func (s Strings) Sort() Strings {
-	out := make(Strings, len(s))
-	copy(out, s)
-	sort.Slice(out, func(i, j int) bool {
-		return out[i] < out[j]
-	})
-	return out
-}
-
-// =============== uncons.go =================
-
-func (s Strings) Uncons() (head string, tail Strings) {
-	return s.Head(), s.Tail()
-}
-
-// =============== last.go =================
-
-// Returns the last element in the slice
-// If no element is found, returns the zero-value of the type
-func (s Strings) Last() (out string) {
-	if len(s) > 0 {
-		out = s[len(s)-1]
-	}
-	return
-}
-
-// =============== reverse.go =================
-
-// Returns the reversed slice
-func (s Strings) Reverse() (out Strings) {
-	for i := len(s) - 1; i >= 0; i-- {
-		out = append(out, s[i])
-	}
-	return
-}
-
-// =============== sum.go =================
-
-func (s Strings) Sum() string {
-	var sum string
-	for _, v := range s {
-		sum += v
-	}
-	return sum
 }

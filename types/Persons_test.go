@@ -71,6 +71,24 @@ var (
 			persons{dylan, dylan, dylan},
 		},
 	}
+
+	structLengthTests = []struct {
+		input persons
+		output int
+	}{
+		{
+			persons{dylan,ana,sean},
+			3,
+		},
+		{
+			persons{},
+			0,
+		},
+		{
+			nil,
+			0,
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -147,6 +165,16 @@ func Test_StructMap(t *testing.T) {
 	for _, test := range structMapTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Map(test.mapfunc); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StructLength(t *testing.T) {
+	for _, test := range structLengthTests {
+		t.Run("", func(t *testing.T) {
+				if res := test.input.Length(); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

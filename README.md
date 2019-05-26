@@ -56,6 +56,7 @@ The first symbol of the signature is actually the method receiver in Go terms.
 | `Head`   | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Return the first element|
 | `Init`   | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|
 | `Last`   | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the last element|
+| `Length` | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
 | `Map`    | `[a] -> (a -> a) -> [a]`    |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
 | `Maximum`| `[a] -> a`                  |        |   ✓    |        | Returns the largest element|
 | `Minimum`| `[a] -> a`                  |        |   ✓    |        | Returns the lowest element|

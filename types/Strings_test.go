@@ -96,6 +96,24 @@ var (
 			Strings{"a", "b", "b", "d"},
 		},
 	}
+
+	stringsLengthTests = []struct {
+		input Strings
+		output int 
+	}{
+		{
+			Strings{"a","b","c"},
+			3,
+		},
+		{
+			Strings{},
+			0,
+		},
+		{
+			nil,
+			0,
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -203,6 +221,16 @@ func Test_StringsSort(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if test.input.Sort(); test.input.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.input, test.output)
+			}
+		})
+	}
+}
+
+func Test_StringsLength(t *testing.T) {
+	for _, test := range stringsLengthTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Length(); res != test.output  {
+				t.Errorf("expected %v but got %v", res, test.output)
 			}
 		})
 	}

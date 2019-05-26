@@ -142,6 +142,24 @@ var (
 			Ints{1, 2, 2, 3},
 		},
 	}
+
+	intsLengthTests = []struct {
+		input Ints
+		output int
+	}{
+		{
+			Ints{1,2,3},
+			3,
+		},
+		{
+			nil,
+			0,
+		},
+		{
+			Ints{},
+			0,
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -273,3 +291,15 @@ func Test_IntsSort(t *testing.T) {
 		})
 	}
 }
+
+
+func Test_IntsLength(t *testing.T) {
+	for _, test := range intsLengthTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Length(); res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
