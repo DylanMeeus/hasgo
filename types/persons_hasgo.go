@@ -61,6 +61,13 @@ func (s persons) Map(f func(person) person) (out persons) {
 	return
 }
 
+// =============== null.go =================
+
+// tests if the slice is empty
+func (s persons) Null() bool {
+	return len(s) == 0
+}
+
 // =============== reverse.go =================
 
 // Returns the reversed slice

@@ -65,6 +65,13 @@ func (s Strings) Map(f func(string) string) (out Strings) {
 	return
 }
 
+// =============== null.go =================
+
+// tests if the slice is empty
+func (s Strings) Null() bool {
+	return len(s) == 0
+}
+
 // =============== reverse.go =================
 
 // Returns the reversed slice

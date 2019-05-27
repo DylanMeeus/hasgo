@@ -28,6 +28,7 @@ var (
 		"map.go":     []string{ForNumbers, ForStrings, ForStructs},
 		"maximum.go": []string{ForNumbers},
 		"minimum.go": []string{ForNumbers},
+		"null.go":    []string{ForNumbers, ForStrings, ForStructs},
 		"reverse.go": []string{ForNumbers, ForStrings, ForStructs},
 		"sort.go":    []string{ForNumbers, ForStrings},
 		"sum.go":     []string{ForNumbers, ForStrings},

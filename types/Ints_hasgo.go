@@ -104,6 +104,13 @@ func (s Ints) Minimum() int64 {
 	return min
 }
 
+// =============== null.go =================
+
+// tests if the slice is empty
+func (s Ints) Null() bool {
+	return len(s) == 0
+}
+
 // =============== reverse.go =================
 
 // Returns the reversed slice

@@ -95,6 +95,12 @@ func (s SliceType) Minimum() ElementType {
 	return min
 }
 `,
+	"null.go": `
+// tests if the slice is empty
+func (s SliceType) Null() bool {
+	return len(s) == 0
+}
+`,
 	"reverse.go": `
 // Returns the reversed slice
 func (s SliceType) Reverse() (out SliceType) {
@@ -162,6 +168,7 @@ var funcDomains = map[string][]string{
 	"map.go":     []string{ForNumbers, ForStrings, ForStructs},
 	"maximum.go": []string{ForNumbers},
 	"minimum.go": []string{ForNumbers},
+	"null.go":    []string{ForNumbers, ForStrings, ForStructs},
 	"reverse.go": []string{ForNumbers, ForStrings, ForStructs},
 	"sort.go":    []string{ForNumbers, ForStrings},
 	"sum.go":     []string{ForNumbers, ForStrings},
