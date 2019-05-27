@@ -144,11 +144,11 @@ var (
 	}
 
 	intsLengthTests = []struct {
-		input Ints
+		input  Ints
 		output int
 	}{
 		{
-			Ints{1,2,3},
+			Ints{1, 2, 3},
 			3,
 		},
 		{
@@ -292,7 +292,6 @@ func Test_IntsSort(t *testing.T) {
 	}
 }
 
-
 func Test_IntsLength(t *testing.T) {
 	for _, test := range intsLengthTests {
 		t.Run("", func(t *testing.T) {
@@ -302,4 +301,3 @@ func Test_IntsLength(t *testing.T) {
 		})
 	}
 }
-

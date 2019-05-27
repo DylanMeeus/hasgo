@@ -8,6 +8,7 @@ import (
 	"golang.org/x/tools/go/packages"
 	"io/ioutil"
 	"os"
+	"sort"
 	"strings"
 )
 
@@ -111,7 +112,13 @@ func validFunction(function, T string) bool {
 
 // write the data for the generator
 func (g *Generator) generate(s symbols) {
-	for function, template := range hasgoTemplates {
+	funcs := []string{}
+	for function, _ := range hasgoTemplates {
+		funcs = append(funcs, function)
+	}
+	sort.Strings(funcs)
+	for _, function := range funcs {
+		template := hasgoTemplates[function]
 		if !validFunction(function, s.T) {
 			continue
 		}

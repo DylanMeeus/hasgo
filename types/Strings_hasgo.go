@@ -5,6 +5,53 @@ import (
 	"sort"
 )
 
+// =============== filter.go =================
+
+func (s Strings) Filter(f func(string) bool) (out Strings) {
+	for _, v := range s {
+		if f(v) {
+			out = append(out, v)
+		}
+	}
+	return
+}
+
+// =============== head.go =================
+
+// Returns the first element in the slice
+// If no element is found, returns the zero-value of the type
+func (s Strings) Head() (out string) {
+	if len(s) > 0 {
+		out = s[0]
+	}
+	return
+}
+
+// =============== init.go =================
+
+// Take n-1 elements from a slice, where n = len(list)
+func (s Strings) Init() (out Strings) {
+	slicecopy := append([]string(nil), s...)
+	return slicecopy[:len(s)-1]
+}
+
+// =============== last.go =================
+
+// Returns the last element in the slice
+// If no element is found, returns the zero-value of the type
+func (s Strings) Last() (out string) {
+	if len(s) > 0 {
+		out = s[len(s)-1]
+	}
+	return
+}
+
+// =============== length.go =================
+
+func (s Strings) Length() int {
+	return len(s)
+}
+
 // =============== map.go =================
 
 // Return a new slice with the map operation applied to each element.
@@ -26,34 +73,6 @@ func (s Strings) Reverse() (out Strings) {
 		out = append(out, s[i])
 	}
 	return
-}
-
-// =============== filter.go =================
-
-func (s Strings) Filter(f func(string) bool) (out Strings) {
-	for _, v := range s {
-		if f(v) {
-			out = append(out, v)
-		}
-	}
-	return
-}
-
-// =============== last.go =================
-
-// Returns the last element in the slice
-// If no element is found, returns the zero-value of the type
-func (s Strings) Last() (out string) {
-	if len(s) > 0 {
-		out = s[len(s)-1]
-	}
-	return
-}
-
-// =============== length.go =================
-
-func (s Strings) Length() int {
-	return len(s)
 }
 
 // =============== sort.go =================
@@ -94,23 +113,4 @@ func (s Strings) Tail() (out Strings) {
 
 func (s Strings) Uncons() (head string, tail Strings) {
 	return s.Head(), s.Tail()
-}
-
-// =============== head.go =================
-
-// Returns the first element in the slice
-// If no element is found, returns the zero-value of the type
-func (s Strings) Head() (out string) {
-	if len(s) > 0 {
-		out = s[0]
-	}
-	return
-}
-
-// =============== init.go =================
-
-// Take n-1 elements from a slice, where n = len(list)
-func (s Strings) Init() (out Strings) {
-	slicecopy := append([]string(nil), s...)
-	return slicecopy[:len(s)-1]
 }

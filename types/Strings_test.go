@@ -98,11 +98,11 @@ var (
 	}
 
 	stringsLengthTests = []struct {
-		input Strings
-		output int 
+		input  Strings
+		output int
 	}{
 		{
-			Strings{"a","b","c"},
+			Strings{"a", "b", "c"},
 			3,
 		},
 		{
@@ -229,7 +229,7 @@ func Test_StringsSort(t *testing.T) {
 func Test_StringsLength(t *testing.T) {
 	for _, test := range stringsLengthTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Length(); res != test.output  {
+			if res := test.input.Length(); res != test.output {
 				t.Errorf("expected %v but got %v", res, test.output)
 			}
 		})

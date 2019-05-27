@@ -73,11 +73,11 @@ var (
 	}
 
 	structLengthTests = []struct {
-		input persons
+		input  persons
 		output int
 	}{
 		{
-			persons{dylan,ana,sean},
+			persons{dylan, ana, sean},
 			3,
 		},
 		{
@@ -174,7 +174,7 @@ func Test_StructMap(t *testing.T) {
 func Test_StructLength(t *testing.T) {
 	for _, test := range structLengthTests {
 		t.Run("", func(t *testing.T) {
-				if res := test.input.Length(); res != test.output {
+			if res := test.input.Length(); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
