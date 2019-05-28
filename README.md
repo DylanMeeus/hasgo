@@ -49,23 +49,24 @@ These are the function currently available with Hasgo.
 It shows you which type of data they operate on as well as the Haskell type definition. 
 The first symbol of the signature is actually the method receiver in Go terms. 
 
-| Function | Signature                   | String | Number | Struct | Description |
-|----------| --------------------------  | :----: | :----: | :----: | ----------- |
-| `Abs`    | `[a] -> [a]`                |        |   ✓    |        | Return a slice containing the absolute values|
-| `Filter` | `[a] -> (a -> bool) -> [a]` |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
-| `Head`   | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Return the first element|
-| `Init`   | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|
-| `Last`   | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the last element|
-| `Length` | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
-| `Map`    | `[a] -> (a -> a) -> [a]`    |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
-| `Maximum`| `[a] -> a`                  |        |   ✓    |        | Returns the largest element|
-| `Minimum`| `[a] -> a`                  |        |   ✓    |        | Returns the lowest element|
-| `Null`   | `[a] -> bool`               |   ✓    |   ✓    |    ✓   | Returns true if the slice is empty, false otherwise|
-| `Reverse`| `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns a slice with the elements reversed|
-| `Sort`   | `[a] -> [a]`                |   ✓    |   ✓    |        | Returns a sorted slice (original remains unsorted)|
-| `Sum`    | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
-| `Tail`   | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
-| `Uncons` | `[a] -> (a, [a])`           |   ✓    |   ✓    |    ✓   | Returns a tuple of the head and tail of the slice|
+| Function     | Signature                   | String | Number | Struct | Description |
+|------------  | --------------------------  | :----: | :----: | :----: | ----------- |
+| `Abs`        | `[a] -> [a]`                |        |   ✓    |        | Return a slice containing the absolute values|
+| `Filter`     | `[a] -> (a -> bool) -> [a]` |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
+| `Head`       | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Return the first element|
+| `init`       | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | returns all elements minus the last|
+| `intercalate`| `[a] -> [[a]] -> [a]`       |   ✓    |   ✓    |    ✓   | intersperses the slice inbetween the provided 2d-slice |
+| `Last`       | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the last element|
+| `Length`     | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
+| `Map`        | `[a] -> (a -> a) -> [a]`    |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
+| `Maximum`    | `[a] -> a`                  |        |   ✓    |        | Returns the largest element|
+| `Minimum`    | `[a] -> a`                  |        |   ✓    |        | Returns the lowest element|
+| `Null`       | `[a] -> bool`               |   ✓    |   ✓    |    ✓   | Returns true if the slice is empty, false otherwise|
+| `Reverse`    | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns a slice with the elements reversed|
+| `Sort`       | `[a] -> [a]`                |   ✓    |   ✓    |        | Returns a sorted slice (original remains unsorted)|
+| `Sum`        | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
+| `Tail`       | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
+| `Uncons`     | `[a] -> (a, [a])`           |   ✓    |   ✓    |    ✓   | Returns a tuple of the head and tail of the slice|
 
 
 ## Contributing

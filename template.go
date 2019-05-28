@@ -41,6 +41,23 @@ func (s SliceType) Init() (out SliceType) {
 	return slicecopy[:len(s)-1]
 }
 `,
+	"intercalate.go": `
+// inserts the method receiver slice into the function slice at each step
+func (s SliceType) Intercalate(ss SliceSliceType) (out SliceType) {
+	for i, slice := range ss {
+		for _, el := range slice {
+			out = append(out, el)
+		}
+		if i == len(ss)-1 {
+			break
+		}
+		for _, el := range s {
+			out = append(out, el)
+		}
+	}
+	return out
+}
+`,
 	"last.go": `
 // Returns the last element in the slice
 // If no element is found, returns the zero-value of the type
@@ -159,19 +176,20 @@ const (
 )
 
 var funcDomains = map[string][]string{
-	"abs.go":     []string{ForNumbers},
-	"filter.go":  []string{ForNumbers, ForStrings, ForStructs},
-	"head.go":    []string{ForNumbers, ForStrings, ForStructs},
-	"init.go":    []string{ForNumbers, ForStrings, ForStructs},
-	"last.go":    []string{ForNumbers, ForStrings, ForStructs},
-	"length.go":  []string{ForNumbers, ForStrings, ForStructs},
-	"map.go":     []string{ForNumbers, ForStrings, ForStructs},
-	"maximum.go": []string{ForNumbers},
-	"minimum.go": []string{ForNumbers},
-	"null.go":    []string{ForNumbers, ForStrings, ForStructs},
-	"reverse.go": []string{ForNumbers, ForStrings, ForStructs},
-	"sort.go":    []string{ForNumbers, ForStrings},
-	"sum.go":     []string{ForNumbers, ForStrings},
-	"tail.go":    []string{ForNumbers, ForStrings, ForStructs},
-	"uncons.go":  []string{ForNumbers, ForStrings, ForStructs},
+	"abs.go":         []string{ForNumbers},
+	"filter.go":      []string{ForNumbers, ForStrings, ForStructs},
+	"head.go":        []string{ForNumbers, ForStrings, ForStructs},
+	"init.go":        []string{ForNumbers, ForStrings, ForStructs},
+	"intercalate.go": []string{ForNumbers, ForStrings, ForStructs},
+	"last.go":        []string{ForNumbers, ForStrings, ForStructs},
+	"length.go":      []string{ForNumbers, ForStrings, ForStructs},
+	"map.go":         []string{ForNumbers, ForStrings, ForStructs},
+	"maximum.go":     []string{ForNumbers},
+	"minimum.go":     []string{ForNumbers},
+	"null.go":        []string{ForNumbers, ForStrings, ForStructs},
+	"reverse.go":     []string{ForNumbers, ForStrings, ForStructs},
+	"sort.go":        []string{ForNumbers, ForStrings},
+	"sum.go":         []string{ForNumbers, ForStrings},
+	"tail.go":        []string{ForNumbers, ForStrings, ForStructs},
+	"uncons.go":      []string{ForNumbers, ForStrings, ForStructs},
 }

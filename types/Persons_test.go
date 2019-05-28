@@ -92,7 +92,7 @@ var (
 
 	structBoolTests = []struct {
 		input persons
-		null bool
+		null  bool
 	}{
 		{
 			persons{dylan},
@@ -105,6 +105,21 @@ var (
 		{
 			nil,
 			true,
+		},
+	}
+
+	structIntercalateTests = []struct {
+		input persons
+		intercalate [][]person
+		output persons
+	}{
+		{
+			persons{dylan},
+			[][]person{
+				{ana, sean},
+				{tom},
+			},
+			persons {ana, sean, dylan, tom},
 		},
 	}
 )
@@ -179,7 +194,6 @@ func Test_StructUncons(t *testing.T) {
 	}
 }
 
-
 func Test_StructLength(t *testing.T) {
 	for _, test := range structLengthTests {
 		t.Run("", func(t *testing.T) {
@@ -208,3 +222,15 @@ func Test_StructNull(t *testing.T) {
 		})
 	}
 }
+
+
+func Test_StructIntercalate(t *testing.T) {
+	for _, test := range structIntercalateTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Intercalate(test.intercalate); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+

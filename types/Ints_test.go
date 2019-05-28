@@ -164,10 +164,10 @@ var (
 	// tests that result in boolean
 	intsBoolTests = []struct {
 		input Ints
-		null bool
+		null  bool
 	}{
 		{
-			Ints{1,2,3},
+			Ints{1, 2, 3},
 			false,
 		},
 		{
@@ -180,6 +180,20 @@ var (
 		},
 	}
 
+	intsIntercalateTests = []struct {
+		input       Ints
+		intercalate [][]int64
+		output      Ints
+	}{
+		{
+			Ints{1, 2},
+			[][]int64{
+				{4, 4},
+				{5, 5},
+			},
+			Ints{4, 4, 1, 2, 5, 5},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -327,6 +341,16 @@ func Test_IntsNull(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Null(); res != test.null {
 				t.Errorf("expected %v but got %v", test.null, res)
+			}
+		})
+	}
+}
+
+func Test_IntsIntercalate(t *testing.T) {
+	for _, test := range intsIntercalateTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Intercalate(test.intercalate); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

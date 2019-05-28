@@ -117,7 +117,7 @@ var (
 
 	stringsBoolTests = []struct {
 		input Strings
-		null bool
+		null  bool
 	}{
 		{
 			Strings{"a"},
@@ -130,6 +130,21 @@ var (
 		{
 			nil,
 			true,
+		},
+	}
+
+	stringsIntercalateTests = []struct {
+		input Strings
+		intercalate [][]string
+		output Strings
+	}{
+		{
+			Strings{", "},
+			[][]string{
+				{"dylan", "meeus"},
+				{"ana", "esparza"},
+			},
+			Strings{"dylan", "meeus", ", ", "ana", "esparza"},
 		},
 	}
 )
@@ -259,6 +274,16 @@ func Test_StringsNull(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Null(); res != test.null {
 				t.Errorf("expected %v but got %v", test.null, res)
+			}
+		})
+	}
+}
+
+func Test_StringsIntercalate(t *testing.T) {
+	for _, test := range stringsIntercalateTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Intercalate(test.intercalate); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

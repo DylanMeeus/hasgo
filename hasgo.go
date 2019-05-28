@@ -13,8 +13,9 @@ import (
 )
 
 const (
-	ElementTypeSymbol = "ElementType"
-	SliceTypeSymbol   = "SliceType"
+	ElementTypeSymbol    = "ElementType"
+	SliceTypeSymbol      = "SliceType"
+	SliceSliceTypeSymbol = "SliceSliceType" // todo: generalize for N slices
 )
 
 var (
@@ -171,6 +172,7 @@ func extractImports(template string) (outtemp string, imports []string) {
 func generify(template string, sym symbols) (out string) {
 	out = template
 	out = strings.Replace(out, ElementTypeSymbol, sym.T, -1)
+	out = strings.Replace(out, SliceSliceTypeSymbol, "[][]"+sym.T, -1)
 	out = strings.Replace(out, SliceTypeSymbol, sym.ST, -1)
 	return
 }
