@@ -134,9 +134,9 @@ var (
 	}
 
 	stringsIntercalateTests = []struct {
-		input Strings
+		input       Strings
 		intercalate [][]string
-		output Strings
+		output      Strings
 	}{
 		{
 			Strings{", "},
@@ -145,6 +145,15 @@ var (
 				{"ana", "esparza"},
 			},
 			Strings{"dylan", "meeus", ", ", "ana", "esparza"},
+		},
+		{
+			Strings{", "},
+			[][]string{
+				{"dylan", "meeus"},
+				{"ana", "esparza"},
+				{"chris", "evans"},
+			},
+			Strings{"dylan", "meeus", ", ", "ana", "esparza", ", ", "chris", "evans"},
 		},
 	}
 )

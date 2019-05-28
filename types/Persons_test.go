@@ -9,6 +9,7 @@ var (
 	ana   = person{"Ana", "Esparza", 30}
 	sean  = person{"Sean", "West", 25}
 	tom   = person{"Tom", "Devrolijke", 26}
+	chris = person{"Chris", "Evans", 27}
 
 	structFilterTests = []struct {
 		input  persons
@@ -109,9 +110,9 @@ var (
 	}
 
 	structIntercalateTests = []struct {
-		input persons
+		input       persons
 		intercalate [][]person
-		output persons
+		output      persons
 	}{
 		{
 			persons{dylan},
@@ -119,7 +120,16 @@ var (
 				{ana, sean},
 				{tom},
 			},
-			persons {ana, sean, dylan, tom},
+			persons{ana, sean, dylan, tom},
+		},
+		{
+			persons{chris},
+			[][]person{
+				{ana, dylan},
+				{sean},
+				{tom},
+			},
+			persons{ana, dylan, chris, sean, chris, tom},
 		},
 	}
 )
@@ -223,7 +233,6 @@ func Test_StructNull(t *testing.T) {
 	}
 }
 
-
 func Test_StructIntercalate(t *testing.T) {
 	for _, test := range structIntercalateTests {
 		t.Run("", func(t *testing.T) {
@@ -233,4 +242,3 @@ func Test_StructIntercalate(t *testing.T) {
 		})
 	}
 }
-
