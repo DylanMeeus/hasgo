@@ -92,3 +92,5 @@ The inspiration mainly shows in the naming of functions. If the functions were n
 lambdas, it'd be called "Jago". Sorry if you expected more Haskell goodness (I'm open to suggestions
 of how more haskell in Hasgo!)
 
+
+# TEST
