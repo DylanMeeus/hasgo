@@ -89,6 +89,24 @@ var (
 			0,
 		},
 	}
+
+	structBoolTests = []struct {
+		input persons
+		null bool
+	}{
+		{
+			persons{dylan},
+			false,
+		},
+		{
+			persons{},
+			true,
+		},
+		{
+			nil,
+			true,
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -161,6 +179,16 @@ func Test_StructUncons(t *testing.T) {
 	}
 }
 
+
+func Test_StructLength(t *testing.T) {
+	for _, test := range structLengthTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Length(); res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
 func Test_StructMap(t *testing.T) {
 	for _, test := range structMapTests {
 		t.Run("", func(t *testing.T) {
@@ -171,11 +199,11 @@ func Test_StructMap(t *testing.T) {
 	}
 }
 
-func Test_StructLength(t *testing.T) {
-	for _, test := range structLengthTests {
+func Test_StructNull(t *testing.T) {
+	for _, test := range structBoolTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Length(); res != test.output {
-				t.Errorf("expected %v but got %v", test.output, res)
+			if res := test.input.Null(); res != test.null {
+				t.Errorf("expected %v but got %v", test.null, res)
 			}
 		})
 	}

@@ -60,7 +60,7 @@ The first symbol of the signature is actually the method receiver in Go terms.
 | `Map`    | `[a] -> (a -> a) -> [a]`    |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
 | `Maximum`| `[a] -> a`                  |        |   ✓    |        | Returns the largest element|
 | `Minimum`| `[a] -> a`                  |        |   ✓    |        | Returns the lowest element|
-| `Null`   | `[a] -> bool                |    ✓   |  ✓     |   ✓    | Returns true if the slice is empty, false otherwise|
+| `Null`   | `[a] -> bool`               |   ✓    |   ✓    |    ✓   | Returns true if the slice is empty, false otherwise|
 | `Reverse`| `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns a slice with the elements reversed|
 | `Sort`   | `[a] -> [a]`                |   ✓    |   ✓    |        | Returns a sorted slice (original remains unsorted)|
 | `Sum`    | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|

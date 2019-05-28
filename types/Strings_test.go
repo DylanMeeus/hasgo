@@ -114,6 +114,24 @@ var (
 			0,
 		},
 	}
+
+	stringsBoolTests = []struct {
+		input Strings
+		null bool
+	}{
+		{
+			Strings{"a"},
+			false,
+		},
+		{
+			Strings{},
+			true,
+		},
+		{
+			nil,
+			true,
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -230,7 +248,17 @@ func Test_StringsLength(t *testing.T) {
 	for _, test := range stringsLengthTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Length(); res != test.output {
-				t.Errorf("expected %v but got %v", res, test.output)
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsNull(t *testing.T) {
+	for _, test := range stringsBoolTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Null(); res != test.null {
+				t.Errorf("expected %v but got %v", test.null, res)
 			}
 		})
 	}

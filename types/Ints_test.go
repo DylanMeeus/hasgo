@@ -160,6 +160,26 @@ var (
 			0,
 		},
 	}
+
+	// tests that result in boolean
+	intsBoolTests = []struct {
+		input Ints
+		null bool
+	}{
+		{
+			Ints{1,2,3},
+			false,
+		},
+		{
+			Ints{},
+			true,
+		},
+		{
+			nil,
+			true,
+		},
+	}
+
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -297,6 +317,16 @@ func Test_IntsLength(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Length(); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsNull(t *testing.T) {
+	for _, test := range intsBoolTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Null(); res != test.null {
+				t.Errorf("expected %v but got %v", test.null, res)
 			}
 		})
 	}
