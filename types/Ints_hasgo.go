@@ -129,6 +129,16 @@ func (s Ints) Null() bool {
 	return len(s) == 0
 }
 
+// =============== product.go =================
+
+func (s Ints) Product() int64 {
+	var prod int64
+	for _, v := range s {
+		prod += v
+	}
+	return prod
+}
+
 // =============== reverse.go =================
 
 // Returns the reversed slice

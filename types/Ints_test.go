@@ -6,20 +6,24 @@ import (
 
 // unit testing the Ints
 var (
-	intsSumTests = []struct {
+	intsMathTests = []struct {
 		input  Ints
-		output int64
+		sum int64
+		product int64
 	}{
 		{
 			nil,
+			0,
 			0,
 		},
 		{
 			Ints([]int64{}),
 			0,
+			0,
 		},
 		{
 			Ints([]int64{1, 2, 3}),
+			6,
 			6,
 		},
 	}
@@ -206,10 +210,20 @@ var (
 )
 
 func Test_IntsSum(t *testing.T) {
-	for _, test := range intsSumTests {
+	for _, test := range intsMathTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Sum(); res != test.output {
-				t.Errorf("expected %v but got %v", test.output, res)
+			if res := test.input.Sum(); res != test.sum {
+				t.Errorf("expected %v but got %v", test.sum, res)
+			}
+		})
+	}
+}
+
+func Test_IntsProduct(t *testing.T) {
+	for _, test := range intsMathTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Product(); res != test.product {
+				t.Errorf("expected %v but got %v", test.product, res)
 			}
 		})
 	}

@@ -118,6 +118,15 @@ func (s SliceType) Null() bool {
 	return len(s) == 0
 }
 `,
+	"product.go": `
+func (s SliceType) Product() ElementType {
+	var prod ElementType
+	for _, v := range s {
+		prod += v
+	}
+	return prod 
+}
+`,
 	"reverse.go": `
 // Returns the reversed slice
 func (s SliceType) Reverse() (out SliceType) {
@@ -187,6 +196,7 @@ var funcDomains = map[string][]string{
 	"maximum.go":     []string{ForNumbers},
 	"minimum.go":     []string{ForNumbers},
 	"null.go":        []string{ForNumbers, ForStrings, ForStructs},
+	"product.go":     []string{ForNumbers},
 	"reverse.go":     []string{ForNumbers, ForStrings, ForStructs},
 	"sort.go":        []string{ForNumbers, ForStrings},
 	"sum.go":         []string{ForNumbers, ForStrings},
