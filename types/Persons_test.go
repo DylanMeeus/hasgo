@@ -24,14 +24,18 @@ var (
 	}
 
 	structTakeTests = []struct {
-		input persons
-		init  persons
-		tail  persons
-		head  person
-		last  person
+		input      persons
+		takeAmount uint64
+		take       persons
+		init       persons
+		tail       persons
+		head       person
+		last       person
 	}{
 		{
 			persons{dylan, ana, sean, tom},
+			2,
+			persons{dylan, ana},
 			persons{dylan, ana, sean},
 			persons{ana, sean, tom},
 			dylan,
@@ -139,6 +143,16 @@ func Test_StructFilter(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Filter(test.filter); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StructTake(t *testing.T) {
+	for _, test := range structTakeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Take(test.takeAmount); !res.EqualsOrdered(test.take) {
+				t.Errorf("expected %v but got %v", test.take, res)
 			}
 		})
 	}

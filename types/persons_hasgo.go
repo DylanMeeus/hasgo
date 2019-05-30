@@ -108,6 +108,14 @@ func (s persons) Tail() (out persons) {
 	return slicecopy[1:]
 }
 
+// =============== take.go =================
+
+func (s persons) Take(n uint64) (out persons) {
+	out = make(persons, len(s))
+	copy(out, s)
+	return out[:n]
+}
+
 // =============== uncons.go =================
 
 func (s persons) Uncons() (head person, tail persons) {

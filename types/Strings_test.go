@@ -38,14 +38,18 @@ var (
 	}
 
 	stringsTakeTests = []struct {
-		input Strings
-		init  Strings
-		tail  Strings
-		head  string
-		last  string
+		input      Strings
+		takeAmount uint64
+		take       Strings
+		init       Strings
+		tail       Strings
+		head       string
+		last       string
 	}{
 		{
 			Strings{"a", "b", "c"},
+			2,
+			Strings{"a", "b"},
 			Strings{"a", "b"},
 			Strings{"b", "c"},
 			"a",
@@ -173,6 +177,16 @@ func Test_StringsFilter(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Filter(test.filter); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsTake(t *testing.T) {
+	for _, test := range stringsTakeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Take(test.takeAmount); !res.EqualsOrdered(test.take) {
+				t.Errorf("expected %v but got %v", test.take, res)
 			}
 		})
 	}

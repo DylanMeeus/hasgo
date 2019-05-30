@@ -7,8 +7,8 @@ import (
 // unit testing the Ints
 var (
 	intsMathTests = []struct {
-		input  Ints
-		sum int64
+		input   Ints
+		sum     int64
 		product int64
 	}{
 		{
@@ -61,13 +61,26 @@ var (
 
 	// tests that take a subset of the slice
 	intsTakeTests = []struct {
-		input Ints
-		init  Ints
-		tail  Ints
-		head  int64
-		last  int64
+		input      Ints
+		takeAmount uint64
+		take       Ints
+		init       Ints
+		tail       Ints
+		head       int64
+		last       int64
 	}{
 		{
+			IntRange(0, 10),
+			3,
+			Ints{0, 1, 2},
+			IntRange(0, 9),
+			IntRange(1, 10),
+			0,
+			10,
+		},
+		{
+			IntRange(0, 10),
+			11,
 			IntRange(0, 10),
 			IntRange(0, 9),
 			IntRange(1, 10),
@@ -244,6 +257,16 @@ func Test_IntsRange(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := IntRange(test.start, test.stop); !res.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsTake(t *testing.T) {
+	for _, test := range intsTakeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Take(test.takeAmount); !res.EqualsOrdered(test.take) {
+				t.Errorf("expected %v but got %v", test.take, res)
 			}
 		})
 	}

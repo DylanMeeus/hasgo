@@ -124,7 +124,7 @@ func (s SliceType) Product() ElementType {
 	for _, v := range s {
 		prod += v
 	}
-	return prod 
+	return prod
 }
 `,
 	"reverse.go": `
@@ -171,6 +171,13 @@ func (s SliceType) Tail() (out SliceType) {
 	return slicecopy[1:]
 }
 `,
+	"take.go": `
+func (s SliceType) Take(n uint64) (out SliceType) {
+	out = make(SliceType, len(s))
+	copy(out, s)
+	return out[:n]
+}
+`,
 	"uncons.go": `
 func (s SliceType) Uncons() (head ElementType, tail SliceType) {
 	return s.Head(), s.Tail()
@@ -201,5 +208,6 @@ var funcDomains = map[string][]string{
 	"sort.go":        []string{ForNumbers, ForStrings},
 	"sum.go":         []string{ForNumbers, ForStrings},
 	"tail.go":        []string{ForNumbers, ForStrings, ForStructs},
+	"take.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"uncons.go":      []string{ForNumbers, ForStrings, ForStructs},
 }
