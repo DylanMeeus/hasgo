@@ -75,7 +75,10 @@ func main() {
 	// stringer prints everything in one file. This might be bad.
 	// but let's roll with it for now :-)
 	g.generate(sym)
-	ioutil.WriteFile(fmt.Sprintf("%v_hasgo.go", *SType), g.format(), 0644)
+	err := ioutil.WriteFile(fmt.Sprintf("%v_hasgo.go", *SType), g.format(), 0644)
+	if err != nil {
+		panic(err)
+	}
 }
 
 // is the function valid for the type?
