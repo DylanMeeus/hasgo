@@ -61,7 +61,6 @@ type Generator struct {
 // all the functions get  stored here
 // I write out _once_, collecting all data
 // Importantly, hasgo should trigger only once.. I should figure out how to do so
-// todo: figure out how to run hasgo for user files. but should I even do so?
 
 func main() {
 	flag.Parse()
@@ -87,7 +86,6 @@ func validFunction(function, T string) bool {
 	if !ok {
 		return false
 	}
-	// todo: figure out how to determine if it's a struct!
 	for _, d := range domains {
 		switch d {
 		case ForNumbers:
