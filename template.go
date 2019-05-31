@@ -14,6 +14,19 @@ func (s SliceType) Abs() (out SliceType) {
 	return
 }
 `,
+	"all.go": `
+func (s SliceType) All(f func(ElementType) bool) bool {
+	if f == nil {
+		return false
+	}
+	for _, v := range s {
+		if !f(v) {
+			return false
+		}
+	}
+	return true
+}
+`,
 	"filter.go": `
 func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	for _, v := range s {
@@ -124,7 +137,7 @@ func (s SliceType) Product() ElementType {
 	for _, v := range s {
 		prod += v
 	}
-	return prod 
+	return prod
 }
 `,
 	"reverse.go": `
@@ -186,6 +199,7 @@ const (
 
 var funcDomains = map[string][]string{
 	"abs.go":         []string{ForNumbers},
+	"all.go":         []string{ForNumbers, ForStrings, ForStructs},
 	"filter.go":      []string{ForNumbers, ForStrings, ForStructs},
 	"head.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"init.go":        []string{ForNumbers, ForStrings, ForStructs},

@@ -5,6 +5,20 @@ import (
 	"sort"
 )
 
+// =============== all.go =================
+
+func (s Strings) All(f func(string) bool) bool {
+	if f == nil {
+		return false
+	}
+	for _, v := range s {
+		if !f(v) {
+			return false
+		}
+	}
+	return true
+}
+
 // =============== filter.go =================
 
 func (s Strings) Filter(f func(string) bool) (out Strings) {

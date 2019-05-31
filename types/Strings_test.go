@@ -37,6 +37,23 @@ var (
 		},
 	}
 
+	stringsAllTests = []struct {
+		input  Strings
+		all    func(s string) bool
+		output bool
+	}{
+		{
+			Strings{"a", "b", "c"},
+			func(s string) bool { return s == "b" },
+			false,
+		},
+		{
+			Strings{"b", "b", "b"},
+			func(s string) bool { return s == "b" },
+			true,
+		},
+	}
+
 	stringsTakeTests = []struct {
 		input Strings
 		init  Strings

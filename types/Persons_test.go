@@ -23,6 +23,23 @@ var (
 		},
 	}
 
+	structAllTests = []struct {
+		input  persons
+		all    func(person) bool
+		output bool
+	}{
+		{
+			persons{dylan, chris},
+			func(p person) bool { return p.age == 26 },
+			false,
+		},
+		{
+			persons{dylan, tom},
+			func(p person) bool { return p.age == 26 },
+			true,
+		},
+	}
+
 	structTakeTests = []struct {
 		input persons
 		init  persons
@@ -138,6 +155,16 @@ func Test_StructFilter(t *testing.T) {
 	for _, test := range structFilterTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Filter(test.filter); !res.Equals(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StructAll(t *testing.T) {
+	for _, test := range structAllTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.All(test.all); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

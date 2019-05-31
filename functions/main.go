@@ -1,7 +1,5 @@
 package functions
 
-import ()
-
 type Symbol interface {
 	Symbol() // representation in source code
 }
@@ -21,6 +19,7 @@ type Template string
 var (
 	templates = map[string][]string{
 		"abs.go":         []string{ForNumbers},
+		"all.go":         []string{ForNumbers, ForStrings, ForStructs},
 		"filter.go":      []string{ForNumbers, ForStrings, ForStructs},
 		"head.go":        []string{ForNumbers, ForStrings, ForStructs},
 		"init.go":        []string{ForNumbers, ForStrings, ForStructs},
