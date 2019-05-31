@@ -148,6 +148,14 @@ func (s Strings) Tail() (out Strings) {
 	return slicecopy[1:]
 }
 
+// =============== take.go =================
+
+func (s Strings) Take(n uint64) (out Strings) {
+	out = make(Strings, len(s))
+	copy(out, s)
+	return out[:n]
+}
+
 // =============== uncons.go =================
 
 func (s Strings) Uncons() (head string, tail Strings) {
