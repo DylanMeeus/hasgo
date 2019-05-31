@@ -15,6 +15,20 @@ func (s Ints) Abs() (out Ints) {
 	return
 }
 
+// =============== all.go =================
+
+func (s Ints) All(f func(int64) bool) bool {
+	if f == nil {
+		return false
+	}
+	for _, v := range s {
+		if !f(v) {
+			return false
+		}
+	}
+	return true
+}
+
 // =============== filter.go =================
 
 func (s Ints) Filter(f func(int64) bool) (out Ints) {

@@ -50,6 +50,33 @@ var (
 		},
 	}
 
+	intsAllTests = []struct {
+		input  Ints
+		all    func(int64) bool
+		output bool
+	}{
+		{
+			nil,
+			nil,
+			false,
+		},
+		{
+			Ints{},
+			nil,
+			false,
+		},
+		{
+			Ints{1, 2, 3, 4},
+			func(i int64) bool { return i%2 == 0 },
+			false,
+		},
+		{
+			Ints{2, 4, 6, 8},
+			func(i int64) bool { return i%2 == 0 },
+			true,
+		},
+	}
+
 	intsRangeTests = []struct {
 		start  int64
 		stop   int64
@@ -246,6 +273,16 @@ func Test_IntsFilter(t *testing.T) {
 	for _, test := range intsFilterTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Filter(test.filter); !res.Equals(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsAll(t *testing.T) {
+	for _, test := range intsAllTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.All(test.all); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

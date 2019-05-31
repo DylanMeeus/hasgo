@@ -52,6 +52,7 @@ The first symbol of the signature is actually the method receiver in Go terms.
 | Function     | Signature                   | String | Number | Struct | Description |
 |------------  | --------------------------  | :----: | :----: | :----: | ----------- |
 | `Abs`        | `[a] -> [a]`                |        |   ✓    |        | Return a slice containing the absolute values|
+| `All`        | `[a] -> (a -> bool) -> bool`|   ✓    |   ✓    |    ✓   | Returns true if the predicate applies to all elements in the slice|
 | `Filter`     | `[a] -> (a -> bool) -> [a]` |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
 | `Head`       | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Return the first element|
 | `init`       | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | returns all elements minus the last|
