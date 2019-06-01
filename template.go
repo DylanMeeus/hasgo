@@ -38,7 +38,7 @@ func (s SliceType) Any(f func(ElementType) bool) bool {
 			return true
 		}
 	}
-	return false 
+	return false
 }
 `,
 	"filter.go": `
