@@ -23,20 +23,29 @@ var (
 		},
 	}
 
-	structAllTests = []struct {
+	structPredicateTests = []struct {
 		input  persons
-		all    func(person) bool
-		output bool
+		predicate func(person) bool
+		any bool
+		all bool
 	}{
 		{
 			persons{dylan, chris},
 			func(p person) bool { return p.age == 26 },
+			true,
 			false,
 		},
 		{
 			persons{dylan, tom},
 			func(p person) bool { return p.age == 26 },
 			true,
+			true,
+		},
+		{
+			persons{dylan, tom},
+			func(p person) bool { return p.age == 30 },
+			false,
+			false,
 		},
 	}
 
@@ -165,11 +174,22 @@ func Test_StructFilter(t *testing.T) {
 	}
 }
 
-func Test_StructAll(t *testing.T) {
-	for _, test := range structAllTests {
+
+func Test_StructAny(t *testing.T) {
+	for _, test := range structPredicateTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.All(test.all); res != test.output {
-				t.Errorf("expected %v but got %v", test.output, res)
+			if res := test.input.Any(test.predicate); res != test.any {
+				t.Errorf("expected %v but got %v", test.any, res)
+			}
+		})
+	}
+}
+
+func Test_StructAll(t *testing.T) {
+	for _, test := range structPredicateTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.All(test.predicate); res != test.all {
+				t.Errorf("expected %v but got %v", test.all, res)
 			}
 		})
 	}

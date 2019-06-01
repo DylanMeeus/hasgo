@@ -27,6 +27,20 @@ func (s SliceType) All(f func(ElementType) bool) bool {
 	return true
 }
 `,
+	"any.go": `
+// Returns true if any of the elements satisfy the predicate
+func (s SliceType) Any(f func(ElementType) bool) bool {
+	if f == nil {
+		return false
+	}
+	for _, v := range s {
+		if f(v) {
+			return true
+		}
+	}
+	return false 
+}
+`,
 	"filter.go": `
 func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	for _, v := range s {
@@ -207,6 +221,7 @@ const (
 var funcDomains = map[string][]string{
 	"abs.go":         []string{ForNumbers},
 	"all.go":         []string{ForNumbers, ForStrings, ForStructs},
+	"any.go":         []string{ForNumbers, ForStrings, ForStructs},
 	"filter.go":      []string{ForNumbers, ForStrings, ForStructs},
 	"head.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"init.go":        []string{ForNumbers, ForStrings, ForStructs},

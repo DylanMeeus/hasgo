@@ -15,6 +15,21 @@ func (s persons) All(f func(person) bool) bool {
 	return true
 }
 
+// =============== any.go =================
+
+// Returns true if any of the elements satisfy the predicate
+func (s persons) Any(f func(person) bool) bool {
+	if f == nil {
+		return false
+	}
+	for _, v := range s {
+		if f(v) {
+			return true
+		}
+	}
+	return false
+}
+
 // =============== filter.go =================
 
 func (s persons) Filter(f func(person) bool) (out persons) {

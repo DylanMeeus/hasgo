@@ -50,30 +50,41 @@ var (
 		},
 	}
 
-	intsAllTests = []struct {
-		input  Ints
-		all    func(int64) bool
-		output bool
+	intsPredicateTests = []struct {
+		input     Ints
+		predicate func(int64) bool
+		any       bool
+		all       bool
 	}{
 		{
 			nil,
 			nil,
+			false,
 			false,
 		},
 		{
 			Ints{},
 			nil,
 			false,
+			false,
 		},
 		{
 			Ints{1, 2, 3, 4},
 			func(i int64) bool { return i%2 == 0 },
+			true,
 			false,
 		},
 		{
 			Ints{2, 4, 6, 8},
 			func(i int64) bool { return i%2 == 0 },
 			true,
+			true,
+		},
+		{
+			Ints{1, 3, 5, 7},
+			func(i int64) bool { return i%2 == 0 },
+			false,
+			false,
 		},
 	}
 
@@ -280,10 +291,20 @@ func Test_IntsFilter(t *testing.T) {
 }
 
 func Test_IntsAll(t *testing.T) {
-	for _, test := range intsAllTests {
+	for _, test := range intsPredicateTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.All(test.all); res != test.output {
-				t.Errorf("expected %v but got %v", test.output, res)
+			if res := test.input.All(test.predicate); res != test.all {
+				t.Errorf("expected %v but got %v", test.all, res)
+			}
+		})
+	}
+}
+
+func Test_IntsAny(t *testing.T) {
+	for _, test := range intsPredicateTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Any(test.predicate); res != test.any {
+				t.Errorf("expected %v but got %v", test.any, res)
 			}
 		})
 	}

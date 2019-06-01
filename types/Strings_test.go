@@ -37,20 +37,29 @@ var (
 		},
 	}
 
-	stringsAllTests = []struct {
+	stringsPredicateTests = []struct {
 		input  Strings
-		all    func(s string) bool
-		output bool
+		predicate func(s string) bool
+		any bool
+		all bool
 	}{
 		{
 			Strings{"a", "b", "c"},
 			func(s string) bool { return s == "b" },
+			true,
 			false,
 		},
 		{
 			Strings{"b", "b", "b"},
 			func(s string) bool { return s == "b" },
 			true,
+			true,
+		},
+		{
+			Strings{"b", "b", "b"},
+			func(s string) bool { return s == "c" },
+			false,
+			false,
 		},
 	}
 
@@ -304,6 +313,28 @@ func Test_StringsLength(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Length(); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+
+
+func Test_StringsAll(t *testing.T) {
+	for _, test := range stringsPredicateTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.All(test.predicate); res != test.all {
+				t.Errorf("expected %v but got %v", test.all, res)
+			}
+		})
+	}
+}
+
+func Test_StringsAny(t *testing.T) {
+	for _, test := range stringsPredicateTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Any(test.predicate); res != test.any {
+				t.Errorf("expected %v but got %v", test.any, res)
 			}
 		})
 	}

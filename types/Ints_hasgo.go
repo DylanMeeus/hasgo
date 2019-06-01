@@ -29,6 +29,21 @@ func (s Ints) All(f func(int64) bool) bool {
 	return true
 }
 
+// =============== any.go =================
+
+// Returns true if any of the elements satisfy the predicate
+func (s Ints) Any(f func(int64) bool) bool {
+	if f == nil {
+		return false
+	}
+	for _, v := range s {
+		if f(v) {
+			return true
+		}
+	}
+	return false
+}
+
 // =============== filter.go =================
 
 func (s Ints) Filter(f func(int64) bool) (out Ints) {
