@@ -24,10 +24,10 @@ var (
 	}
 
 	structPredicateTests = []struct {
-		input  persons
+		input     persons
 		predicate func(person) bool
-		any bool
-		all bool
+		any       bool
+		all       bool
 	}{
 		{
 			persons{dylan, chris},
@@ -173,7 +173,6 @@ func Test_StructFilter(t *testing.T) {
 		})
 	}
 }
-
 
 func Test_StructAny(t *testing.T) {
 	for _, test := range structPredicateTests {

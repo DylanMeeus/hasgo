@@ -97,6 +97,14 @@ var (
 		{-10, 1, Ints{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1}},
 	}
 
+	intsReplicateTests = []struct {
+		count  uint64
+		value  int64
+		output Ints
+	}{
+		{5, 1337, Ints{1337, 1337, 1337, 1337, 1337}},
+	}
+
 	// tests that take a subset of the slice
 	intsTakeTests = []struct {
 		input      Ints
@@ -314,6 +322,16 @@ func Test_IntsRange(t *testing.T) {
 	for _, test := range intsRangeTests {
 		t.Run("", func(t *testing.T) {
 			if res := IntRange(test.start, test.stop); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsReplicate(t *testing.T) {
+	for _, test := range intsReplicateTests {
+		t.Run("", func(t *testing.T) {
+			if res := IntReplicate(test.count, test.value); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

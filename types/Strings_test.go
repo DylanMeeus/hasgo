@@ -38,10 +38,10 @@ var (
 	}
 
 	stringsPredicateTests = []struct {
-		input  Strings
+		input     Strings
 		predicate func(s string) bool
-		any bool
-		all bool
+		any       bool
+		all       bool
 	}{
 		{
 			Strings{"a", "b", "c"},
@@ -91,6 +91,14 @@ var (
 			Strings{"a", "b", "c"},
 			Strings{"c", "b", "a"},
 		},
+	}
+
+	stringsReplicateTests = []struct {
+		count  uint64
+		value  string
+		output Strings
+	}{
+		{5, "leet", Strings{"leet", "leet", "leet", "leet", "leet"}},
 	}
 
 	stringsUnconsTests = []struct {
@@ -268,6 +276,16 @@ func Test_StringsReverse(t *testing.T) {
 	}
 }
 
+func Test_StringsReplicate(t *testing.T) {
+	for _, test := range stringsReplicateTests {
+		t.Run("", func(t *testing.T) {
+			if res := StringReplicate(test.count, test.value); !res.Equals(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
 func Test_StringsUncons(t *testing.T) {
 	for _, test := range stringsUnconsTests {
 		t.Run("", func(t *testing.T) {
@@ -317,8 +335,6 @@ func Test_StringsLength(t *testing.T) {
 		})
 	}
 }
-
-
 
 func Test_StringsAll(t *testing.T) {
 	for _, test := range stringsPredicateTests {
