@@ -41,6 +41,17 @@ func (s SliceType) Any(f func(ElementType) bool) bool {
 	return false
 }
 `,
+	"average.go": `
+func (s SliceType) Average() (out float64) {
+	if len(s) == 0 {
+		return
+	}
+	for _, i := range s {
+		out += float64(i)
+	}
+	return out / float64(len(s))
+}
+`,
 	"filter.go": `
 func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	for _, v := range s {
@@ -222,6 +233,7 @@ var funcDomains = map[string][]string{
 	"abs.go":         []string{ForNumbers},
 	"all.go":         []string{ForNumbers, ForStrings, ForStructs},
 	"any.go":         []string{ForNumbers, ForStrings, ForStructs},
+	"average.go":     []string{ForNumbers},
 	"filter.go":      []string{ForNumbers, ForStrings, ForStructs},
 	"head.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"init.go":        []string{ForNumbers, ForStrings, ForStructs},
