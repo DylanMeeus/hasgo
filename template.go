@@ -76,6 +76,9 @@ func (s SliceType) Head() (out ElementType) {
 	"init.go": `
 // Take n-1 elements from a slice, where n = len(list)
 func (s SliceType) Init() (out SliceType) {
+	if len(s) == 0 {
+		return
+	}
 	slicecopy := append([]ElementType(nil), s...)
 	return slicecopy[:len(s)-1]
 }
@@ -239,9 +242,15 @@ func (s SliceType) Tail() (out SliceType) {
 `,
 	"take.go": `
 func (s SliceType) Take(n uint64) (out SliceType) {
+	if len(s) == 0 {
+		return
+	}
 	out = make(SliceType, len(s))
 	copy(out, s)
-	return out[:n]
+	if n < uint64(len(s)) {
+		return out[:n]
+	}
+	return
 }
 `,
 	"uncons.go": `

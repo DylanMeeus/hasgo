@@ -120,6 +120,24 @@ var (
 		last       int64
 	}{
 		{
+			nil,
+			3,
+			Ints{},
+			Ints{},
+			Ints{},
+			0,
+			0,
+		},
+		{
+			Ints{},
+			3,
+			Ints{},
+			Ints{},
+			Ints{},
+			0,
+			0,
+		},
+		{
 			IntRange(0, 10),
 			3,
 			Ints{0, 1, 2},
@@ -143,6 +161,14 @@ var (
 		input  Ints
 		output Ints
 	}{
+		{
+			Ints{},
+			Ints{},
+		},
+		{
+			nil,
+			Ints{},
+		},
 		{
 			Ints{1, 2, 3},
 			Ints{3, 2, 1},
@@ -177,6 +203,16 @@ var (
 		max   int64
 	}{
 		{
+			nil,
+			0,
+			0,
+		},
+		{
+			Ints{},
+			0,
+			0,
+		},
+		{
 			Ints{-1, 5, 3, -100},
 			-100,
 			5,
@@ -188,6 +224,16 @@ var (
 		mapfunc func(int64) int64
 		output  Ints
 	}{
+		{
+			nil,
+			func(i int64) int64 { return i * i },
+			Ints{},
+		},
+		{
+			Ints{},
+			func(i int64) int64 { return i * i },
+			Ints{},
+		},
 		{
 			Ints{1, 2, 3},
 			func(i int64) int64 { return i * i },
@@ -204,6 +250,14 @@ var (
 		input  Ints
 		output Ints
 	}{
+		{
+			nil,
+			Ints{},
+		},
+		{
+			Ints{},
+			Ints{},
+		},
 		{
 			Ints{3, 2, 2, 1},
 			Ints{1, 2, 2, 3},
@@ -234,16 +288,16 @@ var (
 		null  bool
 	}{
 		{
-			Ints{1, 2, 3},
-			false,
+			nil,
+			true,
 		},
 		{
 			Ints{},
 			true,
 		},
 		{
-			nil,
-			true,
+			Ints{1, 2, 3},
+			false,
 		},
 	}
 
@@ -252,6 +306,22 @@ var (
 		intercalate [][]int64
 		output      Ints
 	}{
+		{
+			nil,
+			[][]int64{
+				{4, 4},
+				{5, 5},
+			},
+			Ints{4, 4, 5, 5},
+		},
+		{
+			Ints{},
+			[][]int64{
+				{4, 4},
+				{5, 5},
+			},
+			Ints{4, 4, 5, 5},
+		},
 		{
 			Ints{1, 2},
 			[][]int64{
@@ -275,6 +345,10 @@ var (
 		input  Ints
 		output Ints
 	}{
+		{
+			nil,
+			Ints{},
+		},
 		{
 			Ints{},
 			Ints{},

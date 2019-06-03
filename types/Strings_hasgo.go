@@ -60,6 +60,9 @@ func (s Strings) Head() (out string) {
 
 // Take n-1 elements from a slice, where n = len(list)
 func (s Strings) Init() (out Strings) {
+	if len(s) == 0 {
+		return
+	}
 	slicecopy := append([]string(nil), s...)
 	return slicecopy[:len(s)-1]
 }
@@ -194,9 +197,15 @@ func (s Strings) Tail() (out Strings) {
 // =============== take.go =================
 
 func (s Strings) Take(n uint64) (out Strings) {
+	if len(s) == 0 {
+		return
+	}
 	out = make(Strings, len(s))
 	copy(out, s)
-	return out[:n]
+	if n < uint64(len(s)) {
+		return out[:n]
+	}
+	return
 }
 
 // =============== uncons.go =================
