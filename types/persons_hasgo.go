@@ -108,6 +108,34 @@ func (s persons) Map(f func(person) person) (out persons) {
 	return
 }
 
+// =============== modes.go =================
+
+func (s persons) Modes() (out persons) {
+	if len(s) == 0 {
+		return
+	}
+
+	counts := make(map[person]int)
+	for _, v := range s {
+		counts[v] += 1
+	}
+
+	var max int
+	for _, v := range counts {
+		if v > max {
+			max = v
+		}
+	}
+
+	for k, v := range counts {
+		if v == max {
+			out = append(out, k)
+		}
+	}
+
+	return
+}
+
 // =============== null.go =================
 
 // tests if the slice is empty

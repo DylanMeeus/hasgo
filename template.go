@@ -151,6 +151,33 @@ func (s SliceType) Minimum() ElementType {
 	return min
 }
 `,
+	"modes.go": `
+func (s SliceType) Modes() (out SliceType) {
+	if len(s) == 0 {
+		return
+	}
+
+	counts := make(map[ElementType]int)
+	for _, v := range s {
+		counts[v] += 1
+	}
+
+	var max int
+	for _, v := range counts {
+		if v > max {
+			max = v
+		}
+	}
+
+	for k, v := range counts {
+		if v == max {
+			out = append(out, k)
+		}
+	}
+
+	return
+}
+`,
 	"null.go": `
 // tests if the slice is empty
 func (s SliceType) Null() bool {
@@ -244,6 +271,7 @@ var funcDomains = map[string][]string{
 	"map.go":         []string{ForNumbers, ForStrings, ForStructs},
 	"maximum.go":     []string{ForNumbers},
 	"minimum.go":     []string{ForNumbers},
+	"modes.go":       []string{ForNumbers, ForStrings, ForStructs},
 	"null.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"product.go":     []string{ForNumbers},
 	"reverse.go":     []string{ForNumbers, ForStrings, ForStructs},

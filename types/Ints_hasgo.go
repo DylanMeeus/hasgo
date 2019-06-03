@@ -164,6 +164,34 @@ func (s Ints) Minimum() int64 {
 	return min
 }
 
+// =============== modes.go =================
+
+func (s Ints) Modes() (out Ints) {
+	if len(s) == 0 {
+		return
+	}
+
+	counts := make(map[int64]int)
+	for _, v := range s {
+		counts[v] += 1
+	}
+
+	var max int
+	for _, v := range counts {
+		if v > max {
+			max = v
+		}
+	}
+
+	for k, v := range counts {
+		if v == max {
+			out = append(out, k)
+		}
+	}
+
+	return
+}
+
 // =============== null.go =================
 
 // tests if the slice is empty

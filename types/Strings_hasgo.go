@@ -112,6 +112,34 @@ func (s Strings) Map(f func(string) string) (out Strings) {
 	return
 }
 
+// =============== modes.go =================
+
+func (s Strings) Modes() (out Strings) {
+	if len(s) == 0 {
+		return
+	}
+
+	counts := make(map[string]int)
+	for _, v := range s {
+		counts[v] += 1
+	}
+
+	var max int
+	for _, v := range counts {
+		if v > max {
+			max = v
+		}
+	}
+
+	for k, v := range counts {
+		if v == max {
+			out = append(out, k)
+		}
+	}
+
+	return
+}
+
 // =============== null.go =================
 
 // tests if the slice is empty

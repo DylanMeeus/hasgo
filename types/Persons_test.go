@@ -162,6 +162,28 @@ var (
 			persons{ana, dylan, chris, sean, chris, tom},
 		},
 	}
+
+	structModeTests = []struct {
+		input  persons
+		output persons
+	}{
+		{
+			persons{},
+			persons{},
+		},
+		{
+			persons{ana, dylan},
+			persons{ana, dylan},
+		},
+		{
+			persons{ana, ana, dylan, dylan},
+			persons{ana, dylan},
+		},
+		{
+			persons{ana, dylan, dylan},
+			persons{dylan},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -297,6 +319,16 @@ func Test_StructIntercalate(t *testing.T) {
 	for _, test := range structIntercalateTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Intercalate(test.intercalate); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StructMode(t *testing.T) {
+	for _, test := range structModeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Modes(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
