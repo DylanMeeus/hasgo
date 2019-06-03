@@ -1,0 +1,11 @@
+language: go
+
+go:
+        - "1.9"
+        - "1.10"
+        - "1.11"
+        - "1.12"
+
+script:
+        - go get golang.org/x/tools/go/packages
+        - cd types && go test ./...
