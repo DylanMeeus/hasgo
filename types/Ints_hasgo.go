@@ -44,6 +44,19 @@ func (s Ints) Any(f func(int64) bool) bool {
 	return false
 }
 
+// =============== average.go =================
+
+func (s Ints) Average() float64 {
+	var sum int64
+	if len(s) == 0 {
+		return float64(0)
+	}
+	for _, i := range s {
+		sum += i
+	}
+	return float64(sum) / float64(len(s))
+}
+
 // =============== filter.go =================
 
 func (s Ints) Filter(f func(int64) bool) (out Ints) {

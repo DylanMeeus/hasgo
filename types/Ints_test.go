@@ -10,9 +10,11 @@ var (
 		input   Ints
 		sum     int64
 		product int64
+		average float64
 	}{
 		{
 			nil,
+			0,
 			0,
 			0,
 		},
@@ -20,11 +22,13 @@ var (
 			Ints([]int64{}),
 			0,
 			0,
+			0,
 		},
 		{
 			Ints([]int64{1, 2, 3}),
 			6,
 			6,
+			2,
 		},
 	}
 
@@ -282,6 +286,16 @@ func Test_IntsProduct(t *testing.T) {
 	for _, test := range intsMathTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Product(); res != test.product {
+				t.Errorf("expected %v but got %v", test.product, res)
+			}
+		})
+	}
+}
+
+func Test_IntsAverage(t *testing.T) {
+	for _, test := range intsMathTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Average(); res != test.average {
 				t.Errorf("expected %v but got %v", test.product, res)
 			}
 		})
