@@ -8,5 +8,4 @@ go:
         - "1.12"
 
 script:
-        - go generate ./... && go install && go generate ./...
-        - go test ./...
+        - "./build"
