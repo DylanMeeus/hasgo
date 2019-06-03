@@ -54,7 +54,7 @@ func (s Ints) Average() float64 {
 	for _, i := range s {
 		sum += i
 	}
-	return float64(sum / int64(len(s)))
+	return float64(sum) / float64(len(s))
 }
 
 // =============== filter.go =================

@@ -50,7 +50,7 @@ func (s SliceType) Average() float64 {
 	for _, i := range s {
 		sum += i
 	}
-	return float64(sum / ElementType(len(s)))
+	return float64(sum) / float64(len(s))
 }
 `,
 	"filter.go": `
