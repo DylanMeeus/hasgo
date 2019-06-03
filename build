@@ -11,5 +11,5 @@ print("Generating source files...")
 os.system("go generate ./...")
 print("Formatting files..")
 os.system("gofmt -w .")
-print("Running Unit Tests")
-os.system("cd types && go test")
+
+# todo: unit tests etc..
