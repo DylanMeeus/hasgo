@@ -42,14 +42,15 @@ func (s SliceType) Any(f func(ElementType) bool) bool {
 }
 `,
 	"average.go": `
-func (s SliceType) Average() (out float64) {
+func (s SliceType) Average() float64 {
+	var sum ElementType
 	if len(s) == 0 {
-		return
+		return float64(0)
 	}
 	for _, i := range s {
-		out += float64(i)
+		sum += i
 	}
-	return out / float64(len(s))
+	return float64(sum / ElementType(len(s)))
 }
 `,
 	"filter.go": `
