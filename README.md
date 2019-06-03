@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/DylanMeeus/hasgo.svg?branch=master)](https://travis-ci.com/DylanMeeus/hasgo)
 # Hasgo
 
 Hasgo is a code generator influenced by Haskell. 
