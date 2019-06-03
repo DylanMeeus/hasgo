@@ -266,6 +266,32 @@ var (
 			Ints{4, 4, 1, 2, 5, 5, 1, 2, 6, 6},
 		},
 	}
+
+	intsModeTests = []struct {
+		input  Ints
+		output Ints
+	}{
+		{
+			Ints{},
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3},
+			Ints{1, 2, 3},
+		},
+		{
+			Ints{1, 1, 2, 2, 3, 3},
+			Ints{1, 2, 3},
+		},
+		{
+			Ints{1, 2, 2, 3},
+			Ints{2},
+		},
+		{
+			Ints{1, 2, 2, 3, 3},
+			Ints{2, 3},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -472,6 +498,16 @@ func Test_IntsIntercalate(t *testing.T) {
 	for _, test := range intsIntercalateTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Intercalate(test.intercalate); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsMode(t *testing.T) {
+	for _, test := range intsModeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Modes(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

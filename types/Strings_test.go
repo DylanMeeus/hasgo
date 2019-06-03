@@ -194,6 +194,28 @@ var (
 			Strings{"dylan", "meeus", ", ", "ana", "esparza", ", ", "chris", "evans"},
 		},
 	}
+
+	stringsModeTests = []struct {
+		input  Strings
+		output Strings
+	}{
+		{
+			Strings{},
+			Strings{},
+		},
+		{
+			Strings{"dylan", "ana"},
+			Strings{"dylan", "ana"},
+		},
+		{
+			Strings{"dylan", "dylan", "ana", "ana"},
+			Strings{"dylan", "ana"},
+		},
+		{
+			Strings{"dylan", "dylan", "ana"},
+			Strings{"dylan"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -370,6 +392,16 @@ func Test_StringsIntercalate(t *testing.T) {
 	for _, test := range stringsIntercalateTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Intercalate(test.intercalate); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsMode(t *testing.T) {
+	for _, test := range stringsModeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Modes(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
