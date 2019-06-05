@@ -150,15 +150,13 @@ func (s Strings) Nub() (out Strings) {
 		return
 	}
 
-	singles := make(map[string]int)
+	contains := make(map[string]struct{})
 	for _, v := range s {
-		singles[v] = 1
+		if _, ok := contains[v]; !ok {
+			contains[v] = struct{}{}
+			out = append(out, v)
+		}
 	}
-
-	for k := range singles {
-		out = append(out, k)
-	}
-
 	return
 }
 

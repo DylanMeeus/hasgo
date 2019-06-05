@@ -5,14 +5,12 @@ func (s SliceType) Nub() (out SliceType) {
 		return
 	}
 
-	singles := make(map[ElementType]int)
+	contains := make(map[ElementType]struct{})
 	for _, v := range s {
-		singles[v] = 1
+		if _, ok := contains[v]; !ok {
+			contains[v] = struct{}{}
+			out = append(out, v)
+		}
 	}
-
-	for k := range singles {
-		out = append(out, k)
-	}
-
 	return
 }

@@ -146,15 +146,13 @@ func (s persons) Nub() (out persons) {
 		return
 	}
 
-	singles := make(map[person]int)
+	contains := make(map[person]struct{})
 	for _, v := range s {
-		singles[v] = 1
+		if _, ok := contains[v]; !ok {
+			contains[v] = struct{}{}
+			out = append(out, v)
+		}
 	}
-
-	for k := range singles {
-		out = append(out, k)
-	}
-
 	return
 }
 

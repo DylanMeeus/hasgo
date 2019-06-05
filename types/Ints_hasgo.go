@@ -202,15 +202,13 @@ func (s Ints) Nub() (out Ints) {
 		return
 	}
 
-	singles := make(map[int64]int)
+	contains := make(map[int64]struct{})
 	for _, v := range s {
-		singles[v] = 1
+		if _, ok := contains[v]; !ok {
+			contains[v] = struct{}{}
+			out = append(out, v)
+		}
 	}
-
-	for k := range singles {
-		out = append(out, k)
-	}
-
 	return
 }
 
