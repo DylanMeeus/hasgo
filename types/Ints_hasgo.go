@@ -195,6 +195,25 @@ func (s Ints) Modes() (out Ints) {
 	return
 }
 
+// =============== nub.go =================
+
+func (s Ints) Nub() (out Ints) {
+	if len(s) == 0 {
+		return
+	}
+
+	singles := make(map[int64]int)
+	for _, v := range s {
+		singles[v] = 1
+	}
+
+	for k := range singles {
+		out = append(out, k)
+	}
+
+	return
+}
+
 // =============== null.go =================
 
 // tests if the slice is empty

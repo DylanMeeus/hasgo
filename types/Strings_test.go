@@ -216,6 +216,36 @@ var (
 			Strings{"dylan"},
 		},
 	}
+
+	stringsNubTests = []struct {
+		input  Strings
+		output Strings
+	}{
+		{
+			nil,
+			Strings{},
+		},
+		{
+			Strings{},
+			Strings{},
+		},
+		{
+			Strings{""},
+			Strings{""},
+		},
+		{
+			Strings{"dylan", "ana"},
+			Strings{"dylan", "ana"},
+		},
+		{
+			Strings{"dylan", "ana", "ana", "dylan"},
+			Strings{"dylan", "ana"},
+		},
+		{
+			Strings{"dylan", "dylan", "dylan"},
+			Strings{"dylan"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -402,6 +432,16 @@ func Test_StringsMode(t *testing.T) {
 	for _, test := range stringsModeTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Modes(); !res.Equals(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsNub(t *testing.T) {
+	for _, test := range stringsNubTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Nub(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

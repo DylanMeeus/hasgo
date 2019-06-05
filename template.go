@@ -181,6 +181,24 @@ func (s SliceType) Modes() (out SliceType) {
 	return
 }
 `,
+	"nub.go": `
+func (s SliceType) Nub() (out SliceType) {
+	if len(s) == 0 {
+		return
+	}
+
+	singles := make(map[ElementType]int)
+	for _, v := range s {
+		singles[v] = 1
+	}
+
+	for k := range singles {
+		out = append(out, k)
+	}
+
+	return
+}
+`,
 	"null.go": `
 // tests if the slice is empty
 func (s SliceType) Null() bool {
@@ -281,6 +299,7 @@ var funcDomains = map[string][]string{
 	"maximum.go":     []string{ForNumbers},
 	"minimum.go":     []string{ForNumbers},
 	"modes.go":       []string{ForNumbers, ForStrings, ForStructs},
+	"nub.go":         []string{ForNumbers, ForStrings, ForStructs},
 	"null.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"product.go":     []string{ForNumbers},
 	"reverse.go":     []string{ForNumbers, ForStrings, ForStructs},

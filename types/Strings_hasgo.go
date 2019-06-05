@@ -143,6 +143,25 @@ func (s Strings) Modes() (out Strings) {
 	return
 }
 
+// =============== nub.go =================
+
+func (s Strings) Nub() (out Strings) {
+	if len(s) == 0 {
+		return
+	}
+
+	singles := make(map[string]int)
+	for _, v := range s {
+		singles[v] = 1
+	}
+
+	for k := range singles {
+		out = append(out, k)
+	}
+
+	return
+}
+
 // =============== null.go =================
 
 // tests if the slice is empty

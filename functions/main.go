@@ -32,6 +32,7 @@ var (
 		"maximum.go":     []string{ForNumbers},
 		"minimum.go":     []string{ForNumbers},
 		"modes.go":       []string{ForNumbers, ForStrings, ForStructs},
+		"nub.go":         []string{ForNumbers, ForStrings, ForStructs},
 		"null.go":        []string{ForNumbers, ForStrings, ForStructs},
 		"product.go":     []string{ForNumbers},
 		"reverse.go":     []string{ForNumbers, ForStrings, ForStructs},
