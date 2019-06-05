@@ -195,6 +195,23 @@ func (s Ints) Modes() (out Ints) {
 	return
 }
 
+// =============== nub.go =================
+
+func (s Ints) Nub() (out Ints) {
+	if len(s) == 0 {
+		return
+	}
+
+	contains := make(map[int64]struct{})
+	for _, v := range s {
+		if _, ok := contains[v]; !ok {
+			contains[v] = struct{}{}
+			out = append(out, v)
+		}
+	}
+	return
+}
+
 // =============== null.go =================
 
 // tests if the slice is empty

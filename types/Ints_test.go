@@ -370,6 +370,36 @@ var (
 			Ints{2, 3},
 		},
 	}
+
+	intsNubTests = []struct {
+		input  Ints
+		output Ints
+	}{
+		{
+			nil,
+			Ints{},
+		},
+		{
+			Ints{},
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3},
+			Ints{1, 2, 3},
+		},
+		{
+			Ints{1, 2, 3, 2, 1},
+			Ints{1, 2, 3},
+		},
+		{
+			Ints{3, 3, 3, 3, 2, 1, 2, 3},
+			Ints{3, 2, 1},
+		},
+		{
+			Ints{1, 1, 1, 1, 1},
+			Ints{1},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -596,6 +626,16 @@ func Test_IntsModes(t *testing.T) {
 	for _, test := range intsModesTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Modes(); !res.Equals(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsNub(t *testing.T) {
+	for _, test := range intsNubTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Nub(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

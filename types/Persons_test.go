@@ -184,6 +184,32 @@ var (
 			persons{dylan},
 		},
 	}
+
+	structNubTests = []struct {
+		input  persons
+		output persons
+	}{
+		{
+			nil,
+			persons{},
+		},
+		{
+			persons{},
+			persons{},
+		},
+		{
+			persons{ana, dylan},
+			persons{ana, dylan},
+		},
+		{
+			persons{ana, dylan, chris, dylan, ana},
+			persons{ana, dylan, chris},
+		},
+		{
+			persons{ana, ana, ana},
+			persons{ana},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -329,6 +355,16 @@ func Test_StructModes(t *testing.T) {
 	for _, test := range structModesTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Modes(); !res.Equals(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StructNub(t *testing.T) {
+	for _, test := range intsNubTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Nub(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

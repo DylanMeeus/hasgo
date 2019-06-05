@@ -181,6 +181,22 @@ func (s SliceType) Modes() (out SliceType) {
 	return
 }
 `,
+	"nub.go": `
+func (s SliceType) Nub() (out SliceType) {
+	if len(s) == 0 {
+		return
+	}
+
+	contains := make(map[ElementType]struct{})
+	for _, v := range s {
+		if _, ok := contains[v]; !ok {
+			contains[v] = struct{}{}
+			out = append(out, v)
+		}
+	}
+	return
+}
+`,
 	"null.go": `
 // tests if the slice is empty
 func (s SliceType) Null() bool {
@@ -281,6 +297,7 @@ var funcDomains = map[string][]string{
 	"maximum.go":     []string{ForNumbers},
 	"minimum.go":     []string{ForNumbers},
 	"modes.go":       []string{ForNumbers, ForStrings, ForStructs},
+	"nub.go":         []string{ForNumbers, ForStrings, ForStructs},
 	"null.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"product.go":     []string{ForNumbers},
 	"reverse.go":     []string{ForNumbers, ForStrings, ForStructs},

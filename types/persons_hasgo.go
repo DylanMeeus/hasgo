@@ -139,6 +139,23 @@ func (s persons) Modes() (out persons) {
 	return
 }
 
+// =============== nub.go =================
+
+func (s persons) Nub() (out persons) {
+	if len(s) == 0 {
+		return
+	}
+
+	contains := make(map[person]struct{})
+	for _, v := range s {
+		if _, ok := contains[v]; !ok {
+			contains[v] = struct{}{}
+			out = append(out, v)
+		}
+	}
+	return
+}
+
 // =============== null.go =================
 
 // tests if the slice is empty
