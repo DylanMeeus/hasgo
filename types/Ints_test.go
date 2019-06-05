@@ -341,7 +341,7 @@ var (
 		},
 	}
 
-	intsModeTests = []struct {
+	intsModesTests = []struct {
 		input  Ints
 		output Ints
 	}{
@@ -592,8 +592,8 @@ func Test_IntsIntercalate(t *testing.T) {
 	}
 }
 
-func Test_IntsMode(t *testing.T) {
-	for _, test := range intsModeTests {
+func Test_IntsModes(t *testing.T) {
+	for _, test := range intsModesTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Modes(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
