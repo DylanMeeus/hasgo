@@ -301,6 +301,38 @@ var (
 		},
 	}
 
+	intsIntersperseTests = []struct {
+		input       Ints
+		intersperse int64
+		output      Ints
+	}{
+		{
+			nil,
+			0,
+			Ints{},
+		},
+		{
+			nil,
+			1337,
+			Ints{},
+		},
+		{
+			Ints{},
+			0,
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3},
+			0,
+			Ints{1, 0, 2, 0, 3},
+		},
+		{
+			Ints{1, 2, 3},
+			1337,
+			Ints{1, 1337, 2, 1337, 3},
+		},
+	}
+
 	intsIntercalateTests = []struct {
 		input       Ints
 		intercalate [][]int64
@@ -607,6 +639,16 @@ func Test_IntsNull(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Null(); res != test.null {
 				t.Errorf("expected %v but got %v", test.null, res)
+			}
+		})
+	}
+}
+
+func Test_IntsIntersperse(t *testing.T) {
+	for _, test := range intsIntersperseTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Intersperse(test.intersperse); !res.Equals(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

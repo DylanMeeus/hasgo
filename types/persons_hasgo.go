@@ -81,6 +81,19 @@ func (s persons) Intercalate(ss [][]person) (out persons) {
 	return out
 }
 
+// =============== intersperse.go =================
+
+func (s persons) Intersperse(value person) (out persons) {
+	for i, el := range s {
+		out = append(out, el)
+		if i == len(s)-1 {
+			break
+		}
+		out = append(out, value)
+	}
+	return
+}
+
 // =============== last.go =================
 
 // Returns the last element in the slice

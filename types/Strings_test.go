@@ -171,6 +171,28 @@ var (
 		},
 	}
 
+	stringsIntersperseTests = []struct {
+		input       Strings
+		intersperse string
+		output      Strings
+	}{
+		{
+			nil,
+			"leet",
+			Strings{},
+		},
+		{
+			Strings{"dylan", "ana"},
+			"meeus",
+			Strings{"dylan", "meeus", "ana"},
+		},
+		{
+			Strings{},
+			"leet",
+			Strings{},
+		},
+	}
+
 	stringsIntercalateTests = []struct {
 		input       Strings
 		intercalate [][]string
@@ -413,6 +435,16 @@ func Test_StringsNull(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Null(); res != test.null {
 				t.Errorf("expected %v but got %v", test.null, res)
+			}
+		})
+	}
+}
+
+func Test_StringsIntersperse(t *testing.T) {
+	for _, test := range stringsIntersperseTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Intersperse(test.intersperse); !res.Equals(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

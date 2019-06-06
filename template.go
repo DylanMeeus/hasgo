@@ -100,6 +100,18 @@ func (s SliceType) Intercalate(ss SliceSliceType) (out SliceType) {
 	return out
 }
 `,
+	"intersperse.go": `
+func (s SliceType) Intersperse(value ElementType) (out SliceType) {
+	for i, el := range s {
+		out = append(out, el)
+		if i == len(s)-1 {
+			break
+		}
+		out = append(out, value)
+	}
+	return
+}
+`,
 	"last.go": `
 // Returns the last element in the slice
 // If no element is found, returns the zero-value of the type
@@ -291,6 +303,7 @@ var funcDomains = map[string][]string{
 	"head.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"init.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"intercalate.go": []string{ForNumbers, ForStrings, ForStructs},
+	"intersperse.go": []string{ForNumbers, ForStrings, ForStructs},
 	"last.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"length.go":      []string{ForNumbers, ForStrings, ForStructs},
 	"map.go":         []string{ForNumbers, ForStrings, ForStructs},

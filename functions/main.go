@@ -26,6 +26,7 @@ var (
 		"head.go":        []string{ForNumbers, ForStrings, ForStructs},
 		"init.go":        []string{ForNumbers, ForStrings, ForStructs},
 		"intercalate.go": []string{ForNumbers, ForStrings, ForStructs},
+		"intersperse.go": []string{ForNumbers, ForStrings, ForStructs},
 		"last.go":        []string{ForNumbers, ForStrings, ForStructs},
 		"length.go":      []string{ForNumbers, ForStrings, ForStructs},
 		"map.go":         []string{ForNumbers, ForStrings, ForStructs},
