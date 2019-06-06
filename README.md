@@ -60,14 +60,14 @@ These functions can be generated for every type.
 | `Abs`        | `[a] -> [a]`                |        |   ✓    |        | Return a slice containing the absolute values|
 | `All`        | `[a] -> (a -> bool) -> bool`|   ✓    |   ✓    |    ✓   | Returns true if the predicate applies to all elements in the slice|
 | `Any`        | `[a] -> (a -> bool) -> bool`|   ✓    |   ✓    |    ✓   | Returns true if one or more elements satisfy the predicate|
-| `Average`    | `[a] -> a`                  |        |  ✓     |        | Returns the average of all elements|
+| `Average`    | `[a] -> a`                  |        |   ✓    |        | Returns the average of all elements|
 | `Filter`     | `[a] -> (a -> bool) -> [a]` |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
 | `Head`       | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Return the first element|
 | `Init`       | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|
 | `Intercalate`| `[a] -> [[a]] -> [a]`       |   ✓    |   ✓    |    ✓   | Intersperses the slice in between the provided 2d-slice |
 | `Intersperse`| `[a] -> a -> [a]`           |   ✓    |   ✓    |    ✓   | Intersperses the value in between all elements of the provided slice|  
 | `Last`       | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the last element|
-| `Length`     | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
+| `Length`     | `[a] -> int`                |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
 | `Map`        | `[a] -> (a -> a) -> [a]`    |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
 | `Maximum`    | `[a] -> a`                  |        |   ✓    |        | Returns the largest element|
 | `Minimum`    | `[a] -> a`                  |        |   ✓    |        | Returns the lowest element|
@@ -79,7 +79,7 @@ These functions can be generated for every type.
 | `Sort`       | `[a] -> [a]`                |   ✓    |   ✓    |        | Returns a sorted slice (original remains unsorted)|
 | `Sum`        | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
 | `Tail`       | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
-| `Take`       | `[a] -> a -> [a]`           |   ✓    |   ✓    |    ✓   | Take N elements from the slice, or all if N exceeds the length.|
+| `Take`       | `[a] -> uint64 -> [a]`      |   ✓    |   ✓    |    ✓   | Take N elements from the slice, or all if N exceeds the length.|
 | `Uncons`     | `[a] -> (a, [a])`           |   ✓    |   ✓    |    ✓   | Returns a tuple of the head and tail of the slice|
 
 
