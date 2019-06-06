@@ -108,6 +108,19 @@ func (s Ints) Intercalate(ss [][]int64) (out Ints) {
 	return out
 }
 
+// =============== intersperse.go =================
+
+func (s Ints) Intersperse(value int64) (out Ints) {
+	for i, el := range s {
+		out = append(out, el)
+		if i == len(s)-1 {
+			break
+		}
+		out = append(out, value)
+	}
+	return
+}
+
 // =============== last.go =================
 
 // Returns the last element in the slice
