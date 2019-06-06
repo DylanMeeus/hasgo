@@ -55,11 +55,12 @@ The first symbol of the signature is actually the method receiver in Go terms.
 | `Abs`        | `[a] -> [a]`                |        |   ✓    |        | Return a slice containing the absolute values|
 | `All`        | `[a] -> (a -> bool) -> bool`|   ✓    |   ✓    |    ✓   | Returns true if the predicate applies to all elements in the slice|
 | `Any`        | `[a] -> (a -> bool) -> bool`|   ✓    |   ✓    |    ✓   | Returns true if one or more elements satisfy the predicate|
-| `Average`    | `[a] -> a`                  |         |  ✓     |        | Returns the average of all elements|
+| `Average`    | `[a] -> a`                  |        |  ✓     |        | Returns the average of all elements|
 | `Filter`     | `[a] -> (a -> bool) -> [a]` |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
 | `Head`       | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Return the first element|
 | `init`       | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|
-| `intercalate`| `[a] -> [[a]] -> [a]`       |   ✓    |   ✓    |    ✓   | Intersperses the slice inbetween the provided 2d-slice |
+| `intercalate`| `[a] -> [[a]] -> [a]`       |   ✓    |   ✓    |    ✓   | Intersperses the slice in between the provided 2d-slice |
+| `intersperse`| `[a] -> a -> [a]`           |   ✓    |   ✓    |    ✓   | Intersperses the value in between all elements of the provided slice|  
 | `Last`       | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the last element|
 | `Length`     | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
 | `Map`        | `[a] -> (a -> a) -> [a]`    |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
