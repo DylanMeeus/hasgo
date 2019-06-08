@@ -432,6 +432,24 @@ var (
 			Ints{1},
 		},
 	}
+
+	intsStringTests = []struct {
+		input   Ints
+		unlines string
+	}{
+		{
+			nil,
+			"",
+		},
+		{
+			Ints{},
+			"",
+		},
+		{
+			Ints{1, 2, 3},
+			"1\n2\n3",
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -679,6 +697,16 @@ func Test_IntsNub(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Nub(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsUnlines(t *testing.T) {
+	for _, test := range intsStringTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Unlines(); res != test.unlines {
+				t.Errorf("expected %v but got %v", test.unlines, res)
 			}
 		})
 	}

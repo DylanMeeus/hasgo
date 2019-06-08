@@ -2,6 +2,7 @@
 package types
 
 import (
+	"fmt"
 	"math"
 	"sort"
 )
@@ -304,4 +305,18 @@ func (s Ints) Take(n uint64) (out Ints) {
 
 func (s Ints) Uncons() (head int64, tail Ints) {
 	return s.Head(), s.Tail()
+}
+
+// =============== unlines.go =================
+
+// Joins together the string representation of the slice
+// With newlines after each element.
+func (s Ints) Unlines() (out string) {
+	for i, v := range s {
+		out += fmt.Sprintf("%v", v)
+		if i != len(s)-1 {
+			out += "\n"
+		}
+	}
+	return
 }

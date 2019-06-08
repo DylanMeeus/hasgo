@@ -286,6 +286,23 @@ func (s SliceType) Uncons() (head ElementType, tail SliceType) {
 	return s.Head(), s.Tail()
 }
 `,
+	"unlines.go": `
+import (
+	"fmt"
+)
+
+// Joins together the string representation of the slice
+// With newlines after each element.
+func (s SliceType) Unlines() (out string) {
+	for i, v := range s {
+		out += fmt.Sprintf("%v", v)
+		if i != len(s)-1 {
+			out += "\n"
+		}
+	}
+	return
+}
+`,
 }
 
 const (
@@ -319,4 +336,5 @@ var funcDomains = map[string][]string{
 	"tail.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"take.go":        []string{ForNumbers, ForStrings, ForStructs},
 	"uncons.go":      []string{ForNumbers, ForStrings, ForStructs},
+	"unlines.go":     []string{ForNumbers, ForStrings, ForStructs},
 }

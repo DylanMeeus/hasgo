@@ -175,7 +175,6 @@ func generify(template string, sym symbols) (out string) {
 	out = strings.Replace(out, ElementTypeSymbol, sym.T, -1)
 	out = strings.Replace(out, SliceSliceTypeSymbol, "[][]"+sym.T, -1)
 	out = strings.Replace(out, SliceTypeSymbol, sym.ST, -1)
-	fmt.Println(out)
 	return
 }
 

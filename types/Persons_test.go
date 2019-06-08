@@ -232,6 +232,24 @@ var (
 			persons{ana},
 		},
 	}
+
+	structStringTests = []struct {
+		input   persons
+		unlines string
+	}{
+		{
+			nil,
+			"",
+		},
+		{
+			persons{},
+			"",
+		},
+		{
+			persons{dylan, ana},
+			"Dylan Meeus\nAna Esparza",
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -398,6 +416,16 @@ func Test_StructNub(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Nub(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StructUnlines(t *testing.T) {
+	for _, test := range structStringTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Unlines(); res != test.unlines {
+				t.Errorf("expected %v but got %v", test.unlines, res)
 			}
 		})
 	}

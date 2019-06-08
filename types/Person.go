@@ -9,6 +9,10 @@ type person struct {
 	age       int
 }
 
+func (p person) String() string {
+	return p.firstname + " " + p.lastname
+}
+
 func (is persons) EqualsOrdered(other persons) bool {
 	if len(is) != len(other) {
 		return false

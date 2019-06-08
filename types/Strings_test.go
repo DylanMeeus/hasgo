@@ -268,6 +268,29 @@ var (
 			Strings{"dylan"},
 		},
 	}
+
+	// haskell string-specific operations
+	stringsStringTests = []struct {
+		input   Strings
+		unlines string
+	}{
+		{
+			nil,
+			"",
+		},
+		{
+			Strings{},
+			"",
+		},
+		{
+			Strings{"hello", "world"},
+			"hello\nworld",
+		},
+		{
+			Strings{"Hello", "", "World"},
+			"Hello\n\nWorld",
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -475,6 +498,16 @@ func Test_StringsNub(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Nub(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsUnlines(t *testing.T) {
+	for _, test := range stringsStringTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Unlines(); res != test.unlines {
+				t.Errorf("expected %v but got %v", test.unlines, res)
 			}
 		})
 	}
