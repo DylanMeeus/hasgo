@@ -412,7 +412,7 @@ func Test_StructModes(t *testing.T) {
 }
 
 func Test_StructNub(t *testing.T) {
-	for _, test := range intsNubTests {
+	for _, test := range structNubTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Nub(); !res.Equals(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
