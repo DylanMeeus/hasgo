@@ -127,7 +127,7 @@ func (g *Generator) generate(s symbols) {
 		template, imports := extractImports(template)
 		g.AddImports(imports)
 		g.Printf("// =============== %v =================\n", function)
-		g.Printf(generify(template, s))
+		g.Print(generify(template, s))
 		g.NewLine()
 	}
 }
@@ -175,11 +175,16 @@ func generify(template string, sym symbols) (out string) {
 	out = strings.Replace(out, ElementTypeSymbol, sym.T, -1)
 	out = strings.Replace(out, SliceSliceTypeSymbol, "[][]"+sym.T, -1)
 	out = strings.Replace(out, SliceTypeSymbol, sym.ST, -1)
+	fmt.Println(out)
 	return
 }
 
 func (g *Generator) Printf(format string, args ...interface{}) {
 	fmt.Fprintf(&g.buf, format, args...)
+}
+
+func (g *Generator) Print(s string) {
+	fmt.Fprint(&g.buf, s)
 }
 
 func (g *Generator) NewLine() {
