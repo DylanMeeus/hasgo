@@ -273,22 +273,27 @@ var (
 	stringsStringTests = []struct {
 		input   Strings
 		unlines string
+		unwords string
 	}{
 		{
 			nil,
+			"",
 			"",
 		},
 		{
 			Strings{},
 			"",
+			"",
 		},
 		{
 			Strings{"hello", "world"},
 			"hello\nworld",
+			"hello world",
 		},
 		{
 			Strings{"Hello", "", "World"},
 			"Hello\n\nWorld",
+			"Hello  World",
 		},
 	}
 )
@@ -508,6 +513,16 @@ func Test_StringsUnlines(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Unlines(); res != test.unlines {
 				t.Errorf("expected %v but got %v", test.unlines, res)
+			}
+		})
+	}
+}
+
+func Test_StringsUnwords(t *testing.T) {
+	for _, test := range stringsStringTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Unwords(); res != test.unwords {
+				t.Errorf("expected %v but got %v", test.unwords, res)
 			}
 		})
 	}

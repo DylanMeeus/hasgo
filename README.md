@@ -82,6 +82,7 @@ These functions can be generated for every type.
 | `Take`       | `[a] -> uint64 -> [a]`      |   ✓    |   ✓    |    ✓   | Take N elements from the slice, or all if N exceeds the length.|
 | `Uncons`     | `[a] -> (a, [a])`           |   ✓    |   ✓    |    ✓   | Returns a tuple of the head and tail of the slice|
 | `Unlines`    | `[a] -> string`             |   ✓    |   ✓    |    ✓   | Returns a newline separated string of all elements in the slice| 
+| `Unwords`    | `[a] -> string`             |   ✓    |   ✓    |    ✓   | Returns a space-separated string of all elements in the slice| 
 
 
 ### Hardcoded functions

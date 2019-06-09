@@ -43,6 +43,7 @@ var (
 		"take.go":        []string{ForNumbers, ForStrings, ForStructs},
 		"uncons.go":      []string{ForNumbers, ForStrings, ForStructs},
 		"unlines.go":     []string{ForNumbers, ForStrings, ForStructs},
+		"unwords.go":     []string{ForNumbers, ForStrings, ForStructs},
 	}
 )
 

@@ -236,18 +236,22 @@ var (
 	structStringTests = []struct {
 		input   persons
 		unlines string
+		unwords string
 	}{
 		{
 			nil,
+			"",
 			"",
 		},
 		{
 			persons{},
 			"",
+			"",
 		},
 		{
 			persons{dylan, ana},
 			"Dylan Meeus\nAna Esparza",
+			"Dylan Meeus Ana Esparza",
 		},
 	}
 )
@@ -426,6 +430,16 @@ func Test_StructUnlines(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Unlines(); res != test.unlines {
 				t.Errorf("expected %v but got %v", test.unlines, res)
+			}
+		})
+	}
+}
+
+func Test_StructUnwords(t *testing.T) {
+	for _, test := range structStringTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Unwords(); res != test.unwords {
+				t.Errorf("expected %v but got %v", test.unwords, res)
 			}
 		})
 	}
