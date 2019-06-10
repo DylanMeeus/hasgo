@@ -58,6 +58,21 @@ func (s Ints) Average() float64 {
 	return float64(sum) / float64(len(s))
 }
 
+// =============== delete.go =================
+
+// delete the first element in the list.
+func (s Ints) Delete(e int64) (out Ints) {
+	deleted := false
+	for _, v := range s {
+		if deleted || v != e {
+			out = append(out, v)
+		} else {
+			deleted = true
+		}
+	}
+	return
+}
+
 // =============== filter.go =================
 
 func (s Ints) Filter(f func(int64) bool) (out Ints) {

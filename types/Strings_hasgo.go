@@ -35,6 +35,21 @@ func (s Strings) Any(f func(string) bool) bool {
 	return false
 }
 
+// =============== delete.go =================
+
+// delete the first element in the list.
+func (s Strings) Delete(e string) (out Strings) {
+	deleted := false
+	for _, v := range s {
+		if deleted || v != e {
+			out = append(out, v)
+		} else {
+			deleted = true
+		}
+	}
+	return
+}
+
 // =============== filter.go =================
 
 func (s Strings) Filter(f func(string) bool) (out Strings) {

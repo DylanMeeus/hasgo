@@ -22,6 +22,7 @@ var (
 		"all.go":         []string{ForNumbers, ForStrings, ForStructs},
 		"any.go":         []string{ForNumbers, ForStrings, ForStructs},
 		"average.go":     []string{ForNumbers},
+		"delete.go":      []string{ForNumbers, ForStrings, ForStructs},
 		"filter.go":      []string{ForNumbers, ForStrings, ForStructs},
 		"head.go":        []string{ForNumbers, ForStrings, ForStructs},
 		"init.go":        []string{ForNumbers, ForStrings, ForStructs},

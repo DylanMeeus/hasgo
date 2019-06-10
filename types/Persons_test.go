@@ -254,6 +254,28 @@ var (
 			"Dylan Meeus Ana Esparza",
 		},
 	}
+
+	structDeleteTests = []struct {
+		input   persons
+		element person
+		output  persons
+	}{
+		{
+			nil,
+			ana,
+			persons{},
+		},
+		{
+			persons{},
+			dylan,
+			persons{},
+		},
+		{
+			persons{dylan, ana, ana, dylan},
+			ana,
+			persons{dylan, ana, dylan},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -440,6 +462,16 @@ func Test_StructUnwords(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Unwords(); res != test.unwords {
 				t.Errorf("expected %v but got %v", test.unwords, res)
+			}
+		})
+	}
+}
+
+func Test_StructDelete(t *testing.T) {
+	for _, test := range structDeleteTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Delete(test.element); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

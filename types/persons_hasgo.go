@@ -34,6 +34,21 @@ func (s persons) Any(f func(person) bool) bool {
 	return false
 }
 
+// =============== delete.go =================
+
+// delete the first element in the list.
+func (s persons) Delete(e person) (out persons) {
+	deleted := false
+	for _, v := range s {
+		if deleted || v != e {
+			out = append(out, v)
+		} else {
+			deleted = true
+		}
+	}
+	return
+}
+
 // =============== filter.go =================
 
 func (s persons) Filter(f func(person) bool) (out persons) {

@@ -454,6 +454,33 @@ var (
 			"1 2 3",
 		},
 	}
+
+	intsDeleteTests = []struct {
+		input   Ints
+		element int64
+		output  Ints
+	}{
+		{
+			nil,
+			0,
+			Ints{},
+		},
+		{
+			Ints{},
+			0,
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 3, 4, 5, 3},
+			3,
+			Ints{1, 2, 3, 4, 5, 3},
+		},
+		{
+			Ints{1, 2, 3},
+			-1,
+			Ints{1, 2, 3},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -721,6 +748,16 @@ func Test_IntsUnwords(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Unwords(); res != test.unwords {
 				t.Errorf("expected %v but got %v", test.unwords, res)
+			}
+		})
+	}
+}
+
+func Test_IntsDelete(t *testing.T) {
+	for _, test := range intsDeleteTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Delete(test.element); !test.output.EqualsOrdered(res) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

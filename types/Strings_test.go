@@ -296,6 +296,28 @@ var (
 			"Hello  World",
 		},
 	}
+
+	stringsDeleteTests = []struct {
+		input   Strings
+		element string
+		output  Strings
+	}{
+		{
+			nil,
+			"a",
+			Strings{},
+		},
+		{
+			Strings{},
+			"",
+			Strings{},
+		},
+		{
+			Strings{"a", "b", "a", "c"},
+			"a",
+			Strings{"b", "a", "c"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -523,6 +545,16 @@ func Test_StringsUnwords(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Unwords(); res != test.unwords {
 				t.Errorf("expected %v but got %v", test.unwords, res)
+			}
+		})
+	}
+}
+
+func Test_StringsDelete(t *testing.T) {
+	for _, test := range stringsDeleteTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Delete(test.element); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}
