@@ -7,6 +7,8 @@ import (
 	"math"
 )
 
+// Returns the absolute value of all elements in the slice.
+// Can be generated for number-types.
 func (s SliceType) Abs() (out SliceType) {
 	for _, v := range s {
 		out = append(out, ElementType(math.Abs(float64(v))))
@@ -15,6 +17,8 @@ func (s SliceType) Abs() (out SliceType) {
 }
 `,
 	"all.go": `
+// Returns true if all elements of the slice satisfy the predicate.
+// Can be generated for any type.
 func (s SliceType) All(f func(ElementType) bool) bool {
 	if f == nil {
 		return false
@@ -28,7 +32,8 @@ func (s SliceType) All(f func(ElementType) bool) bool {
 }
 `,
 	"any.go": `
-// Returns true if any of the elements satisfy the predicate
+// Returns true if any of the elements satisfy the predicate.
+// Can be generated for any type.
 func (s SliceType) Any(f func(ElementType) bool) bool {
 	if f == nil {
 		return false
@@ -42,6 +47,8 @@ func (s SliceType) Any(f func(ElementType) bool) bool {
 }
 `,
 	"average.go": `
+// Returns the average of all elements in the slice.
+// Can be generated for all number types.
 func (s SliceType) Average() float64 {
 	var sum ElementType
 	if len(s) == 0 {
@@ -54,7 +61,8 @@ func (s SliceType) Average() float64 {
 }
 `,
 	"delete.go": `
-// delete the first element in the list.
+// Delete the first element in the list.
+// Can be generated for any type.
 func (s SliceType) Delete(e ElementType) (out SliceType) {
 	deleted := false
 	for _, v := range s {
@@ -68,6 +76,8 @@ func (s SliceType) Delete(e ElementType) (out SliceType) {
 }
 `,
 	"filter.go": `
+// Returns a slice containing only the elements that match the predicate.
+// Can be generated for any type.
 func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	for _, v := range s {
 		if f(v) {
@@ -78,8 +88,9 @@ func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 }
 `,
 	"head.go": `
-// Returns the first element in the slice
-// If no element is found, returns the zero-value of the type
+// Returns the first element in the slice.
+// If no element is found, returns the zero-value of the type.
+// Can be generated for any type.
 func (s SliceType) Head() (out ElementType) {
 	if len(s) > 0 {
 		out = s[0]
@@ -88,7 +99,8 @@ func (s SliceType) Head() (out ElementType) {
 }
 `,
 	"init.go": `
-// Take n-1 elements from a slice, where n = len(list)
+// Take n-1 elements from a slice, where n = len(list).
+// Can be generated for any type.
 func (s SliceType) Init() (out SliceType) {
 	if len(s) == 0 {
 		return
@@ -98,7 +110,8 @@ func (s SliceType) Init() (out SliceType) {
 }
 `,
 	"intercalate.go": `
-// inserts the method receiver slice into the function slice at each step
+// Inserts the method receiver slice into the function slice at each step.
+// Can be generated for any type.
 func (s SliceType) Intercalate(ss SliceSliceType) (out SliceType) {
 	for i, slice := range ss {
 		for _, el := range slice {
@@ -115,6 +128,8 @@ func (s SliceType) Intercalate(ss SliceSliceType) (out SliceType) {
 }
 `,
 	"intersperse.go": `
+// Inserts the receiving value inbetween each element of the method receiver.
+// Can be generated for any type.
 func (s SliceType) Intersperse(value ElementType) (out SliceType) {
 	for i, el := range s {
 		out = append(out, el)
@@ -129,6 +144,7 @@ func (s SliceType) Intersperse(value ElementType) (out SliceType) {
 	"last.go": `
 // Returns the last element in the slice
 // If no element is found, returns the zero-value of the type
+// Can be generated for any type.
 func (s SliceType) Last() (out ElementType) {
 	if len(s) > 0 {
 		out = s[len(s)-1]
@@ -137,12 +153,15 @@ func (s SliceType) Last() (out ElementType) {
 }
 `,
 	"length.go": `
+// Returns the length (len) of a slice.
+// Can be generated for any type.
 func (s SliceType) Length() int {
 	return len(s)
 }
 `,
 	"map.go": `
 // Return a new slice with the map operation applied to each element.
+// Can be generated for any type.
 func (s SliceType) Map(f func(ElementType) ElementType) (out SliceType) {
 	if f == nil {
 		return s
@@ -154,6 +173,8 @@ func (s SliceType) Map(f func(ElementType) ElementType) (out SliceType) {
 }
 `,
 	"maximum.go": `
+// Returns the maximum in a slice.
+// Can be generated for number types.
 func (s SliceType) Maximum() (out ElementType) {
 	if len(s) == 0 {
 		return
@@ -167,6 +188,8 @@ func (s SliceType) Maximum() (out ElementType) {
 }
 `,
 	"minimum.go": `
+// Returns the minimum of a slice.
+// Can be generated for number types.
 func (s SliceType) Minimum() ElementType {
 	if len(s) == 0 {
 		return 0 // bit strange?
@@ -181,6 +204,8 @@ func (s SliceType) Minimum() ElementType {
 }
 `,
 	"modes.go": `
+// Returns the elements with highest frequency in the slice.
+// Can be generated for any type.
 func (s SliceType) Modes() (out SliceType) {
 	if len(s) == 0 {
 		return
@@ -208,6 +233,9 @@ func (s SliceType) Modes() (out SliceType) {
 }
 `,
 	"nub.go": `
+// Returns a slice containing only the unique elements of the receiver.
+// The order of the elements is preserved.
+// Can be generated for any type.
 func (s SliceType) Nub() (out SliceType) {
 	if len(s) == 0 {
 		return
@@ -224,12 +252,15 @@ func (s SliceType) Nub() (out SliceType) {
 }
 `,
 	"null.go": `
-// tests if the slice is empty
+// Returns true the slice is empty.
+// Can be generated for any type.
 func (s SliceType) Null() bool {
 	return len(s) == 0
 }
 `,
 	"product.go": `
+// Returns the product of all elements in the slice.
+// Can be generated for any number type.
 func (s SliceType) Product() ElementType {
 	var prod ElementType
 	for _, v := range s {
@@ -239,7 +270,8 @@ func (s SliceType) Product() ElementType {
 }
 `,
 	"reverse.go": `
-// Returns the reversed slice
+// Returns the reversed slice.
+// Can be generated for any type.
 func (s SliceType) Reverse() (out SliceType) {
 	for i := len(s) - 1; i >= 0; i-- {
 		out = append(out, s[i])
@@ -252,7 +284,8 @@ import (
 	"sort"
 )
 
-// wrapper around go sort functions
+// Wrapper around go sort function.
+// Can be generated for any type.
 func (s SliceType) Sort() SliceType {
 	out := make(SliceType, len(s))
 	copy(out, s)
@@ -274,6 +307,7 @@ func (s SliceType) Sum() ElementType {
 	"tail.go": `
 // Take [1 -> n] elements from a slice, where n = len(list)
 // Returns an empty slice if there are less than 2 elements in slice
+// Can be generated for any type.
 func (s SliceType) Tail() (out SliceType) {
 	if len(s) <= 1 {
 		return
@@ -283,6 +317,8 @@ func (s SliceType) Tail() (out SliceType) {
 }
 `,
 	"take.go": `
+// Take the first n elements of the slice, or the entire slice if n > len(slice).
+// Can be generated for any type.
 func (s SliceType) Take(n uint64) (out SliceType) {
 	if len(s) == 0 {
 		return
@@ -296,6 +332,8 @@ func (s SliceType) Take(n uint64) (out SliceType) {
 }
 `,
 	"uncons.go": `
+// Decompose a slice into the head and tail component.
+// Can be generated for any type.
 func (s SliceType) Uncons() (head ElementType, tail SliceType) {
 	return s.Head(), s.Tail()
 }
@@ -305,8 +343,8 @@ import (
 	"fmt"
 )
 
-// Joins together the string representation of the slice
-// With newlines after each element.
+// Joins together the string representation of the slice with newlines after each element.
+// Can be generated for any type.
 func (s SliceType) Unlines() (out string) {
 	for i, v := range s {
 		out += fmt.Sprintf("%v", v)
@@ -322,8 +360,8 @@ import (
 	"fmt"
 )
 
-// Joins together the string representation of the slice
-// With newlines after each element.
+// Joins together the string representation of the slice with newlines after each element.
+// Can be generated for any type.
 func (s SliceType) Unwords() (out string) {
 	for i, v := range s {
 		out += fmt.Sprintf("%v", v)
