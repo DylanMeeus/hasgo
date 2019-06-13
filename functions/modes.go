@@ -1,5 +1,7 @@
 package functions
 
+// Returns the elements with highest frequency in the slice.
+// Can be generated for any type.
 func (s SliceType) Modes() (out SliceType) {
 	if len(s) == 0 {
 		return

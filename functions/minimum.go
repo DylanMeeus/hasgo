@@ -1,5 +1,7 @@
 package functions
 
+// Returns the minimum of a slice.
+// Can be generated for number types.
 func (s SliceType) Minimum() ElementType {
 	if len(s) == 0 {
 		return 0 // bit strange?
