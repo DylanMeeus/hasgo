@@ -1,6 +1,7 @@
 package functions
 
-// Returns true if any of the elements satisfy the predicate
+// Returns true if any of the elements satisfy the predicate.
+// Can be generated for any type.
 func (s SliceType) Any(f func(ElementType) bool) bool {
 	if f == nil {
 		return false
