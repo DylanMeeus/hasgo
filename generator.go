@@ -34,7 +34,7 @@ var domainTemplate = template.Must(template.New("").
 // generate the templates that will be used for hasgo
 func main() {
 	data := map[string]string{}
-	for k, _ := range fun.Templates() {
+	for k := range fun.Templates() {
 		content, err := ioutil.ReadFile("./functions/" + k)
 		// remove the package statement..
 		parts := strings.Split(string(content), "\n")

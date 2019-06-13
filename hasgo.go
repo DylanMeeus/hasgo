@@ -23,18 +23,18 @@ var (
 	SType       = flag.String("S", "", "Corresponding Slice Type for T")
 	Pkg         = flag.String("P", "types", "Package for which to generate")
 	numberTypes = map[string]struct{}{
-		"int":     struct{}{},
-		"int32":   struct{}{},
-		"int64":   struct{}{},
-		"uint":    struct{}{},
-		"uint32":  struct{}{},
-		"uint64":  struct{}{},
-		"float":   struct{}{},
-		"float32": struct{}{},
-		"float64": struct{}{},
+		"int":     {},
+		"int32":   {},
+		"int64":   {},
+		"uint":    {},
+		"uint32":  {},
+		"uint64":  {},
+		"float":   {},
+		"float32": {},
+		"float64": {},
 	}
 	stringTypes = map[string]struct{}{
-		"string": struct{}{},
+		"string": {},
 	}
 )
 
@@ -115,7 +115,7 @@ func validFunction(function, T string) bool {
 // write the data for the generator
 func (g *Generator) generate(s symbols) {
 	funcs := []string{}
-	for function, _ := range hasgoTemplates {
+	for function := range hasgoTemplates {
 		funcs = append(funcs, function)
 	}
 	sort.Strings(funcs)
@@ -224,7 +224,7 @@ func (g *Generator) addPackage(pkg *packages.Package) {
 
 // return all unique imports
 func (g *Generator) Imports() (out []string) {
-	for k, _ := range g.imports {
+	for k := range g.imports {
 		out = append(out, k)
 	}
 	return
