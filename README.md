@@ -1,5 +1,7 @@
-[![Build Status](https://travis-ci.com/DylanMeeus/hasgo.svg?branch=master)](https://travis-ci.com/DylanMeeus/hasgo)
-# Hasgo
+# Hasgo [![Build Status](https://travis-ci.com/DylanMeeus/hasgo.svg?branch=master)](https://travis-ci.com/DylanMeeus/hasgo)
+
+Coverage status: [gocover.io](https://gocover.io/github.com/DylanMeeus/hasgo/types)
+Our report card[Report Card](https://goreportcard.com/badge/github.com/DylanMeeus/hasgo)](https://goreportcard.com/report/github.com/DylanMeeus/hasgo)
 
 Hasgo is a code generator with functions influenced by Haskell. 
 It comes with some types out-of-the-box so you can start using it without running the generator.
@@ -51,6 +53,8 @@ go get -u github.com/DylanMeeus/hasgo
 These are the function currently available with Hasgo.
 It shows you which type of data they operate on as well as the Haskell type definition. 
 The first symbol of the signature is actually the method receiver in Go terms. 
+
+Alternatively, you can consult the [godoc](https://godoc.org/github.com/DylanMeeus/hasgo/types)
 
 ### Generic functions
 These functions can be generated for every type.
