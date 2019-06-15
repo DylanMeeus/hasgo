@@ -8,7 +8,7 @@ import (
 
 // =============== all.go =================
 
-// Returns true if all elements of the slice satisfy the predicate.
+// All returns true if all elements of the slice satisfy the predicate.
 // Can be generated for any type.
 func (s Strings) All(f func(string) bool) bool {
 	if f == nil {
@@ -24,7 +24,7 @@ func (s Strings) All(f func(string) bool) bool {
 
 // =============== any.go =================
 
-// Returns true if any of the elements satisfy the predicate.
+// Any returns true if any of the elements satisfy the predicate.
 // Can be generated for any type.
 func (s Strings) Any(f func(string) bool) bool {
 	if f == nil {
@@ -40,7 +40,8 @@ func (s Strings) Any(f func(string) bool) bool {
 
 // =============== delete.go =================
 
-// Delete the first element in the list.
+// Delete returns a slice with the first matching element
+// removed from the slice.
 // Can be generated for any type.
 func (s Strings) Delete(e string) (out Strings) {
 	deleted := false
@@ -56,7 +57,7 @@ func (s Strings) Delete(e string) (out Strings) {
 
 // =============== filter.go =================
 
-// Returns a slice containing only the elements that match the predicate.
+// Filter returns a slice containing only the elements that match the predicate.
 // Can be generated for any type.
 func (s Strings) Filter(f func(string) bool) (out Strings) {
 	for _, v := range s {
@@ -69,7 +70,7 @@ func (s Strings) Filter(f func(string) bool) (out Strings) {
 
 // =============== head.go =================
 
-// Returns the first element in the slice.
+// Head returns the first element in the slice.
 // If no element is found, returns the zero-value of the type.
 // Can be generated for any type.
 func (s Strings) Head() (out string) {
@@ -81,7 +82,7 @@ func (s Strings) Head() (out string) {
 
 // =============== init.go =================
 
-// Take n-1 elements from a slice, where n = len(list).
+// Init takes n-1 elements from a slice, where n = len(list).
 // Can be generated for any type.
 func (s Strings) Init() (out Strings) {
 	if len(s) == 0 {
@@ -93,7 +94,7 @@ func (s Strings) Init() (out Strings) {
 
 // =============== intercalate.go =================
 
-// Inserts the method receiver slice into the function slice at each step.
+// Intercalate inserts the method receiver slice into the function slice at each step.
 // Can be generated for any type.
 func (s Strings) Intercalate(ss [][]string) (out Strings) {
 	for i, slice := range ss {
@@ -112,7 +113,7 @@ func (s Strings) Intercalate(ss [][]string) (out Strings) {
 
 // =============== intersperse.go =================
 
-// Inserts the receiving value inbetween each element of the method receiver.
+// Intersperse inserts the receiving value between each element of the method receiver.
 // Can be generated for any type.
 func (s Strings) Intersperse(value string) (out Strings) {
 	for i, el := range s {
@@ -127,7 +128,7 @@ func (s Strings) Intersperse(value string) (out Strings) {
 
 // =============== last.go =================
 
-// Returns the last element in the slice
+// Last returns the last element in the slice
 // If no element is found, returns the zero-value of the type
 // Can be generated for any type.
 func (s Strings) Last() (out string) {
@@ -139,7 +140,7 @@ func (s Strings) Last() (out string) {
 
 // =============== length.go =================
 
-// Returns the length (len) of a slice.
+// Length returns the length (len) of a slice.
 // Can be generated for any type.
 func (s Strings) Length() int {
 	return len(s)
@@ -147,7 +148,7 @@ func (s Strings) Length() int {
 
 // =============== map.go =================
 
-// Return a new slice with the map operation applied to each element.
+// Map return a new slice with the map operation applied to each element.
 // Can be generated for any type.
 func (s Strings) Map(f func(string) string) (out Strings) {
 	if f == nil {
@@ -161,7 +162,7 @@ func (s Strings) Map(f func(string) string) (out Strings) {
 
 // =============== modes.go =================
 
-// Returns the elements with highest frequency in the slice.
+// Modes returns the elements with highest frequency in the slice.
 // Can be generated for any type.
 func (s Strings) Modes() (out Strings) {
 	if len(s) == 0 {
@@ -191,7 +192,7 @@ func (s Strings) Modes() (out Strings) {
 
 // =============== nub.go =================
 
-// Returns a slice containing only the unique elements of the receiver.
+// Nub returns a slice containing only the unique elements of the receiver.
 // The order of the elements is preserved.
 // Can be generated for any type.
 func (s Strings) Nub() (out Strings) {
@@ -211,7 +212,7 @@ func (s Strings) Nub() (out Strings) {
 
 // =============== null.go =================
 
-// Returns true the slice is empty.
+// Null returns true the slice is empty.
 // Can be generated for any type.
 func (s Strings) Null() bool {
 	return len(s) == 0
@@ -219,7 +220,7 @@ func (s Strings) Null() bool {
 
 // =============== reverse.go =================
 
-// Returns the reversed slice.
+// Reverse returns the reversed slice.
 // Can be generated for any type.
 func (s Strings) Reverse() (out Strings) {
 	for i := len(s) - 1; i >= 0; i-- {
@@ -230,7 +231,7 @@ func (s Strings) Reverse() (out Strings) {
 
 // =============== sort.go =================
 
-// Wrapper around go sort function.
+// Sort is a wrapper around go sort function.
 // Can be generated for any type.
 func (s Strings) Sort() Strings {
 	out := make(Strings, len(s))
@@ -243,6 +244,8 @@ func (s Strings) Sort() Strings {
 
 // =============== sum.go =================
 
+// Sum returns the sum of all elements in the slice.
+// Can be generated for any number type.
 func (s Strings) Sum() string {
 	var sum string
 	for _, v := range s {
@@ -253,7 +256,7 @@ func (s Strings) Sum() string {
 
 // =============== tail.go =================
 
-// Take [1 -> n] elements from a slice, where n = len(list)
+// Tail takes [1 -> n] elements from a slice, where n = len(list)
 // Returns an empty slice if there are less than 2 elements in slice
 // Can be generated for any type.
 func (s Strings) Tail() (out Strings) {
@@ -266,7 +269,7 @@ func (s Strings) Tail() (out Strings) {
 
 // =============== take.go =================
 
-// Take the first n elements of the slice, or the entire slice if n > len(slice).
+// Take takes the first n elements of the slice, or the entire slice if n > len(slice).
 // Can be generated for any type.
 func (s Strings) Take(n uint64) (out Strings) {
 	if len(s) == 0 {
@@ -282,7 +285,7 @@ func (s Strings) Take(n uint64) (out Strings) {
 
 // =============== uncons.go =================
 
-// Decompose a slice into the head and tail component.
+// Uncons decomposes a slice into the head and tail component.
 // Can be generated for any type.
 func (s Strings) Uncons() (head string, tail Strings) {
 	return s.Head(), s.Tail()
@@ -290,7 +293,7 @@ func (s Strings) Uncons() (head string, tail Strings) {
 
 // =============== unlines.go =================
 
-// Joins together the string representation of the slice with newlines after each element.
+// Unlines joins together the string representation of the slice with newlines after each element.
 // Can be generated for any type.
 func (s Strings) Unlines() (out string) {
 	for i, v := range s {
@@ -304,7 +307,7 @@ func (s Strings) Unlines() (out string) {
 
 // =============== unwords.go =================
 
-// Joins together the string representation of the slice with newlines after each element.
+// Unwords joins together the string representation of the slice with newlines after each element.
 // Can be generated for any type.
 func (s Strings) Unwords() (out string) {
 	for i, v := range s {

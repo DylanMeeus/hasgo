@@ -13,14 +13,14 @@ import (
 )
 
 const (
-	ElementTypeSymbol    = "ElementType"
-	SliceTypeSymbol      = "SliceType"
-	SliceSliceTypeSymbol = "SliceSliceType" // todo: generalize for N slices
+	elementTypeSymbol    = "ElementType"
+	sliceTypeSymbol      = "SliceType"
+	sliceSliceTypeSymbol = "SliceSliceType" // todo: generalize for N slices
 )
 
 var (
-	Type        = flag.String("T", "", "Type for which to generate data")
-	SType       = flag.String("S", "", "Corresponding Slice Type for T")
+	unitType    = flag.String("T", "", "Type for which to generate data")
+	sliceType   = flag.String("S", "", "Corresponding Slice Type for T")
 	Pkg         = flag.String("P", "types", "Package for which to generate")
 	numberTypes = map[string]struct{}{
 		"int":     {},
@@ -44,12 +44,12 @@ func check(e error) {
 	}
 }
 
-// the Type / SType for which we are generating data..
+// the Type / sliceType for which we are generating data..
 type symbols struct {
 	T, ST string
 }
 
-type Generator struct {
+type generator struct {
 	buf     bytes.Buffer        // accumulate the output
 	pkg     string              // package in which to place the generated code.
 	imports map[string]struct{} // the imports that the generator needs to add
@@ -64,9 +64,9 @@ type Generator struct {
 
 func main() {
 	flag.Parse()
-	fmt.Printf("type: %v - slice: %v\n", *Type, *SType)
-	sym := symbols{*Type, *SType}
-	g := Generator{
+	fmt.Printf("type: %v - slice: %v\n", *unitType, *sliceType)
+	sym := symbols{*unitType, *sliceType}
+	g := generator{
 		imports: map[string]struct{}{},
 		pkg:     *Pkg,
 	}
@@ -74,7 +74,7 @@ func main() {
 	// stringer prints everything in one file. This might be bad.
 	// but let's roll with it for now :-)
 	g.generate(sym)
-	err := ioutil.WriteFile(fmt.Sprintf("%v_hasgo.go", *SType), g.format(), 0644)
+	err := ioutil.WriteFile(fmt.Sprintf("%v_hasgo.go", *sliceType), g.format(), 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -113,7 +113,7 @@ func validFunction(function, T string) bool {
 }
 
 // write the data for the generator
-func (g *Generator) generate(s symbols) {
+func (g *generator) generate(s symbols) {
 	funcs := []string{}
 	for function := range hasgoTemplates {
 		funcs = append(funcs, function)
@@ -125,10 +125,10 @@ func (g *Generator) generate(s symbols) {
 			continue
 		}
 		template, imports := extractImports(template)
-		g.AddImports(imports)
-		g.Printf("// =============== %v =================\n", function)
-		g.Print(generify(template, s))
-		g.NewLine()
+		g.addImports(imports)
+		g.printf("// =============== %v =================\n", function)
+		g.print(generify(template, s))
+		g.newline()
 	}
 }
 
@@ -172,25 +172,25 @@ func extractImports(template string) (outtemp string, imports []string) {
 // replace the placeholders by the correct symbols
 func generify(template string, sym symbols) (out string) {
 	out = template
-	out = strings.Replace(out, ElementTypeSymbol, sym.T, -1)
-	out = strings.Replace(out, SliceSliceTypeSymbol, "[][]"+sym.T, -1)
-	out = strings.Replace(out, SliceTypeSymbol, sym.ST, -1)
+	out = strings.Replace(out, elementTypeSymbol, sym.T, -1)
+	out = strings.Replace(out, sliceSliceTypeSymbol, "[][]"+sym.T, -1)
+	out = strings.Replace(out, sliceTypeSymbol, sym.ST, -1)
 	return
 }
 
-func (g *Generator) Printf(format string, args ...interface{}) {
+func (g *generator) printf(format string, args ...interface{}) {
 	fmt.Fprintf(&g.buf, format, args...)
 }
 
-func (g *Generator) Print(s string) {
+func (g *generator) print(s string) {
 	fmt.Fprint(&g.buf, s)
 }
 
-func (g *Generator) NewLine() {
-	g.Printf("\n")
+func (g *generator) newline() {
+	g.printf("\n")
 }
 
-func (g *Generator) AddImports(imports []string) {
+func (g *generator) addImports(imports []string) {
 	for _, imp := range imports {
 		// sanitize:
 		sane := strings.TrimSpace(imp)
@@ -199,7 +199,7 @@ func (g *Generator) AddImports(imports []string) {
 }
 
 // analyze the package
-func (g *Generator) parsePackage(patterns []string, tags []string) {
+func (g *generator) parsePackage(patterns []string, tags []string) {
 	cfg := &packages.Config{
 		Mode:       packages.LoadSyntax,
 		Tests:      false,
@@ -215,7 +215,7 @@ func (g *Generator) parsePackage(patterns []string, tags []string) {
 }
 
 // add a package to the generator
-func (g *Generator) addPackage(pkg *packages.Package) {
+func (g *generator) addPackage(pkg *packages.Package) {
 	fmt.Println("adding files..")
 	for _, file := range pkg.Syntax {
 		fmt.Printf("file %v\n", file)
@@ -223,7 +223,7 @@ func (g *Generator) addPackage(pkg *packages.Package) {
 }
 
 // return all unique imports
-func (g *Generator) Imports() (out []string) {
+func (g *generator) listImports() (out []string) {
 	for k := range g.imports {
 		out = append(out, k)
 	}
@@ -232,12 +232,12 @@ func (g *Generator) Imports() (out []string) {
 
 // print the formatted source code
 // adds the package declaration + imports
-func (g *Generator) format() []byte {
+func (g *generator) format() []byte {
 	code := "// code generated by hasgo. [DO NOT EDIT!]" +
 		"\n" +
 		"package " + g.pkg + "\n"
 
-	if imports := g.Imports(); len(imports) > 0 {
+	if imports := g.listImports(); len(imports) > 0 {
 		code += "import (\n"
 		code += strings.Join(imports, "\n") + "\n)\n"
 	}

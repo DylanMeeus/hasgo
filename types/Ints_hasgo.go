@@ -9,7 +9,7 @@ import (
 
 // =============== abs.go =================
 
-// Returns the absolute value of all elements in the slice.
+// Abs returns the absolute value of all elements in the slice.
 // Can be generated for number-types.
 func (s Ints) Abs() (out Ints) {
 	for _, v := range s {
@@ -20,7 +20,7 @@ func (s Ints) Abs() (out Ints) {
 
 // =============== all.go =================
 
-// Returns true if all elements of the slice satisfy the predicate.
+// All returns true if all elements of the slice satisfy the predicate.
 // Can be generated for any type.
 func (s Ints) All(f func(int64) bool) bool {
 	if f == nil {
@@ -36,7 +36,7 @@ func (s Ints) All(f func(int64) bool) bool {
 
 // =============== any.go =================
 
-// Returns true if any of the elements satisfy the predicate.
+// Any returns true if any of the elements satisfy the predicate.
 // Can be generated for any type.
 func (s Ints) Any(f func(int64) bool) bool {
 	if f == nil {
@@ -52,7 +52,7 @@ func (s Ints) Any(f func(int64) bool) bool {
 
 // =============== average.go =================
 
-// Returns the average of all elements in the slice.
+// Average returns the average of all elements in the slice.
 // Can be generated for all number types.
 func (s Ints) Average() float64 {
 	var sum int64
@@ -67,7 +67,8 @@ func (s Ints) Average() float64 {
 
 // =============== delete.go =================
 
-// Delete the first element in the list.
+// Delete returns a slice with the first matching element
+// removed from the slice.
 // Can be generated for any type.
 func (s Ints) Delete(e int64) (out Ints) {
 	deleted := false
@@ -83,7 +84,7 @@ func (s Ints) Delete(e int64) (out Ints) {
 
 // =============== filter.go =================
 
-// Returns a slice containing only the elements that match the predicate.
+// Filter returns a slice containing only the elements that match the predicate.
 // Can be generated for any type.
 func (s Ints) Filter(f func(int64) bool) (out Ints) {
 	for _, v := range s {
@@ -96,7 +97,7 @@ func (s Ints) Filter(f func(int64) bool) (out Ints) {
 
 // =============== head.go =================
 
-// Returns the first element in the slice.
+// Head returns the first element in the slice.
 // If no element is found, returns the zero-value of the type.
 // Can be generated for any type.
 func (s Ints) Head() (out int64) {
@@ -108,7 +109,7 @@ func (s Ints) Head() (out int64) {
 
 // =============== init.go =================
 
-// Take n-1 elements from a slice, where n = len(list).
+// Init takes n-1 elements from a slice, where n = len(list).
 // Can be generated for any type.
 func (s Ints) Init() (out Ints) {
 	if len(s) == 0 {
@@ -120,7 +121,7 @@ func (s Ints) Init() (out Ints) {
 
 // =============== intercalate.go =================
 
-// Inserts the method receiver slice into the function slice at each step.
+// Intercalate inserts the method receiver slice into the function slice at each step.
 // Can be generated for any type.
 func (s Ints) Intercalate(ss [][]int64) (out Ints) {
 	for i, slice := range ss {
@@ -139,7 +140,7 @@ func (s Ints) Intercalate(ss [][]int64) (out Ints) {
 
 // =============== intersperse.go =================
 
-// Inserts the receiving value inbetween each element of the method receiver.
+// Intersperse inserts the receiving value between each element of the method receiver.
 // Can be generated for any type.
 func (s Ints) Intersperse(value int64) (out Ints) {
 	for i, el := range s {
@@ -154,7 +155,7 @@ func (s Ints) Intersperse(value int64) (out Ints) {
 
 // =============== last.go =================
 
-// Returns the last element in the slice
+// Last returns the last element in the slice
 // If no element is found, returns the zero-value of the type
 // Can be generated for any type.
 func (s Ints) Last() (out int64) {
@@ -166,7 +167,7 @@ func (s Ints) Last() (out int64) {
 
 // =============== length.go =================
 
-// Returns the length (len) of a slice.
+// Length returns the length (len) of a slice.
 // Can be generated for any type.
 func (s Ints) Length() int {
 	return len(s)
@@ -174,7 +175,7 @@ func (s Ints) Length() int {
 
 // =============== map.go =================
 
-// Return a new slice with the map operation applied to each element.
+// Map return a new slice with the map operation applied to each element.
 // Can be generated for any type.
 func (s Ints) Map(f func(int64) int64) (out Ints) {
 	if f == nil {
@@ -188,7 +189,7 @@ func (s Ints) Map(f func(int64) int64) (out Ints) {
 
 // =============== maximum.go =================
 
-// Returns the maximum in a slice.
+// Maximum returns the maximum in a slice.
 // Can be generated for number types.
 func (s Ints) Maximum() (out int64) {
 	if len(s) == 0 {
@@ -204,7 +205,7 @@ func (s Ints) Maximum() (out int64) {
 
 // =============== minimum.go =================
 
-// Returns the minimum of a slice.
+// Minimum returns the minimum of a slice.
 // Can be generated for number types.
 func (s Ints) Minimum() int64 {
 	if len(s) == 0 {
@@ -221,7 +222,7 @@ func (s Ints) Minimum() int64 {
 
 // =============== modes.go =================
 
-// Returns the elements with highest frequency in the slice.
+// Modes returns the elements with highest frequency in the slice.
 // Can be generated for any type.
 func (s Ints) Modes() (out Ints) {
 	if len(s) == 0 {
@@ -251,7 +252,7 @@ func (s Ints) Modes() (out Ints) {
 
 // =============== nub.go =================
 
-// Returns a slice containing only the unique elements of the receiver.
+// Nub returns a slice containing only the unique elements of the receiver.
 // The order of the elements is preserved.
 // Can be generated for any type.
 func (s Ints) Nub() (out Ints) {
@@ -271,7 +272,7 @@ func (s Ints) Nub() (out Ints) {
 
 // =============== null.go =================
 
-// Returns true the slice is empty.
+// Null returns true the slice is empty.
 // Can be generated for any type.
 func (s Ints) Null() bool {
 	return len(s) == 0
@@ -279,7 +280,7 @@ func (s Ints) Null() bool {
 
 // =============== product.go =================
 
-// Returns the product of all elements in the slice.
+// Product returns the product of all elements in the slice.
 // Can be generated for any number type.
 func (s Ints) Product() int64 {
 	var prod int64
@@ -291,7 +292,7 @@ func (s Ints) Product() int64 {
 
 // =============== reverse.go =================
 
-// Returns the reversed slice.
+// Reverse returns the reversed slice.
 // Can be generated for any type.
 func (s Ints) Reverse() (out Ints) {
 	for i := len(s) - 1; i >= 0; i-- {
@@ -302,7 +303,7 @@ func (s Ints) Reverse() (out Ints) {
 
 // =============== sort.go =================
 
-// Wrapper around go sort function.
+// Sort is a wrapper around go sort function.
 // Can be generated for any type.
 func (s Ints) Sort() Ints {
 	out := make(Ints, len(s))
@@ -315,6 +316,8 @@ func (s Ints) Sort() Ints {
 
 // =============== sum.go =================
 
+// Sum returns the sum of all elements in the slice.
+// Can be generated for any number type.
 func (s Ints) Sum() int64 {
 	var sum int64
 	for _, v := range s {
@@ -325,7 +328,7 @@ func (s Ints) Sum() int64 {
 
 // =============== tail.go =================
 
-// Take [1 -> n] elements from a slice, where n = len(list)
+// Tail takes [1 -> n] elements from a slice, where n = len(list)
 // Returns an empty slice if there are less than 2 elements in slice
 // Can be generated for any type.
 func (s Ints) Tail() (out Ints) {
@@ -338,7 +341,7 @@ func (s Ints) Tail() (out Ints) {
 
 // =============== take.go =================
 
-// Take the first n elements of the slice, or the entire slice if n > len(slice).
+// Take takes the first n elements of the slice, or the entire slice if n > len(slice).
 // Can be generated for any type.
 func (s Ints) Take(n uint64) (out Ints) {
 	if len(s) == 0 {
@@ -354,7 +357,7 @@ func (s Ints) Take(n uint64) (out Ints) {
 
 // =============== uncons.go =================
 
-// Decompose a slice into the head and tail component.
+// Uncons decomposes a slice into the head and tail component.
 // Can be generated for any type.
 func (s Ints) Uncons() (head int64, tail Ints) {
 	return s.Head(), s.Tail()
@@ -362,7 +365,7 @@ func (s Ints) Uncons() (head int64, tail Ints) {
 
 // =============== unlines.go =================
 
-// Joins together the string representation of the slice with newlines after each element.
+// Unlines joins together the string representation of the slice with newlines after each element.
 // Can be generated for any type.
 func (s Ints) Unlines() (out string) {
 	for i, v := range s {
@@ -376,7 +379,7 @@ func (s Ints) Unlines() (out string) {
 
 // =============== unwords.go =================
 
-// Joins together the string representation of the slice with newlines after each element.
+// Unwords joins together the string representation of the slice with newlines after each element.
 // Can be generated for any type.
 func (s Ints) Unwords() (out string) {
 	for i, v := range s {
