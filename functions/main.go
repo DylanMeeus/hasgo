@@ -1,19 +1,27 @@
 package functions
 
+// Symbol is represents a data token to be parsed.
 type Symbol interface {
-	Symbol() // representation in source code
+	Symbol()
 }
 
+// Types for which the function can be generated
 const (
 	ForNumbers = "ForNumbers"
 	ForStrings = "ForStrings"
 	ForStructs = "ForStructs"
 )
 
+// ElementType represents a single entry in a slice.
 type ElementType float64
+
+// SliceType represents a 1D slice.
 type SliceType []ElementType
+
+// SliceSliceType represents a 2D slice.
 type SliceSliceType [][]ElementType
 
+// Template is the content of a function file.
 type Template string
 
 var (
@@ -48,6 +56,7 @@ var (
 	}
 )
 
+// Templates returns all entries in the template map
 func Templates() map[string][]string {
 	return templates
 }

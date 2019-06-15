@@ -1,9 +1,10 @@
 package types
 
+// Strings is a wrapper around []string
 //go:generate hasgo -T=string -S=Strings
 type Strings []string
 
-// Creates a slice with `value` repeated `count` times
+// StringReplicate creates a slice with `value` repeated `count` times
 func StringReplicate(count uint64, value string) (out Strings) {
 	out = make(Strings, count)
 	for i := uint64(0); i < count; i++ {
@@ -12,6 +13,7 @@ func StringReplicate(count uint64, value string) (out Strings) {
 	return
 }
 
+// EqualsOrdered verifies that both slices contain the same elements in the same position.
 func (is Strings) EqualsOrdered(other Strings) bool {
 	if len(is) != len(other) {
 		return false
@@ -24,6 +26,7 @@ func (is Strings) EqualsOrdered(other Strings) bool {
 	return true
 }
 
+// Equals verifies that both slices contain the same elements, regardless of position.
 func (is Strings) Equals(other Strings) bool {
 	if len(is) != len(other) {
 		return false

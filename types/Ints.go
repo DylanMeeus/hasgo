@@ -1,10 +1,13 @@
 package types
 
+// Int is a wrapper around int64
 //go:generate hasgo -T=int64 -S=Ints
 type Int int64
+
+// Ints is a wrapper around []int64
 type Ints []int64
 
-// Creates a slice with `value` repeated `count` times
+// IntReplicate creates a slice with `value` repeated `count` times
 func IntReplicate(count uint64, value int64) (out Ints) {
 	out = make(Ints, count)
 	for i := uint64(0); i < count; i++ {
@@ -13,7 +16,7 @@ func IntReplicate(count uint64, value int64) (out Ints) {
 	return
 }
 
-// Create a range like you would with list comprehension in Haskell
+// IntRange creates a range similar to list comprehension in Haskell
 // Ranges in Haskell are _inclusive_ on both bounds.
 // IntRange(0,10) == [0..10] == []int{0,1,2,3,4,5,6,7,8,9,10}
 func IntRange(start, stop int64) Ints {
@@ -30,7 +33,7 @@ func IntRange(start, stop int64) Ints {
 	return out
 }
 
-// are the elements in the slices equal (same position)
+// EqualsOrdered verifies that the elements in the slices are equal (same position)
 func (is Ints) EqualsOrdered(other Ints) bool {
 	if len(is) != len(other) {
 		return false
@@ -43,6 +46,7 @@ func (is Ints) EqualsOrdered(other Ints) bool {
 	return true
 }
 
+// Equals verifies that both slices have the same elements, ignoring their position.
 func (is Ints) Equals(other Ints) bool {
 	if len(is) != len(other) {
 		return false
