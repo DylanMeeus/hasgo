@@ -21,7 +21,7 @@ const (
 var (
 	unitType    = flag.String("T", "", "Type for which to generate data")
 	sliceType   = flag.String("S", "", "Corresponding Slice Type for T")
-	Pkg         = flag.String("P", "types", "Package for which to generate")
+	packag      = flag.String("P", "types", "Package for which to generate")
 	numberTypes = map[string]struct{}{
 		"int":     {},
 		"int32":   {},
@@ -68,7 +68,7 @@ func main() {
 	sym := symbols{*unitType, *sliceType}
 	g := generator{
 		imports: map[string]struct{}{},
-		pkg:     *Pkg,
+		pkg:     *packag,
 	}
 	g.parsePackage(os.Args, nil)
 	// stringer prints everything in one file. This might be bad.
