@@ -1,6 +1,6 @@
 package functions
 
-// Returns the first element in the slice.
+// Head returns the first element in the slice.
 // If no element is found, returns the zero-value of the type.
 // Can be generated for any type.
 func (s SliceType) Head() (out ElementType) {

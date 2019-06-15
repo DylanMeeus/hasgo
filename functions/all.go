@@ -1,6 +1,6 @@
 package functions
 
-// Returns true if all elements of the slice satisfy the predicate.
+// All returns true if all elements of the slice satisfy the predicate.
 // Can be generated for any type.
 func (s SliceType) All(f func(ElementType) bool) bool {
 	if f == nil {

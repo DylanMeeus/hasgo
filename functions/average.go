@@ -1,6 +1,6 @@
 package functions
 
-// Returns the average of all elements in the slice.
+// Average returns the average of all elements in the slice.
 // Can be generated for all number types.
 func (s SliceType) Average() float64 {
 	var sum ElementType

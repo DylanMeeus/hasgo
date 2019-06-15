@@ -1,6 +1,6 @@
 package functions
 
-// Returns the product of all elements in the slice.
+// Product returns the product of all elements in the slice.
 // Can be generated for any number type.
 func (s SliceType) Product() ElementType {
 	var prod ElementType

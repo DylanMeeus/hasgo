@@ -1,6 +1,6 @@
 package functions
 
-// Take the first n elements of the slice, or the entire slice if n > len(slice).
+// Take takes the first n elements of the slice, or the entire slice if n > len(slice).
 // Can be generated for any type.
 func (s SliceType) Take(n uint64) (out SliceType) {
 	if len(s) == 0 {

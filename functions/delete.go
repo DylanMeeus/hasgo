@@ -1,6 +1,7 @@
 package functions
 
-// Delete the first element in the list.
+// Delete returns a slice with the first matching element 
+	// removed from the slice. 
 // Can be generated for any type.
 func (s SliceType) Delete(e ElementType) (out SliceType) {
 	deleted := false

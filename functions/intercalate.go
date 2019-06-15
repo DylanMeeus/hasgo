@@ -1,6 +1,6 @@
 package functions
 
-// Inserts the method receiver slice into the function slice at each step.
+// Intercalate inserts the method receiver slice into the function slice at each step.
 // Can be generated for any type.
 func (s SliceType) Intercalate(ss SliceSliceType) (out SliceType) {
 	for i, slice := range ss {

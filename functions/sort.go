@@ -4,7 +4,7 @@ import (
 	"sort"
 )
 
-// Wrapper around go sort function.
+// Sort is a wrapper around go sort function.
 // Can be generated for any type.
 func (s SliceType) Sort() SliceType {
 	out := make(SliceType, len(s))
