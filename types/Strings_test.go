@@ -355,6 +355,28 @@ var (
 			Strings{"hello", "world"},
 		},
 	}
+
+	stringsMinMaxByTests = []struct {
+		input      Strings
+		comparator func(s1, s2 string) string
+		max        string
+	}{
+		{
+			nil,
+			func(s1, s2 string) string { return "" },
+			"",
+		},
+		{
+			Strings{"a", "bb", "aaa", "cc"},
+			func(s1, s2 string) string {
+				if len(s1) > len(s2) {
+					return s1
+				}
+				return s2
+			},
+			"aaa",
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -612,6 +634,16 @@ func Test_StringsLines(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := Lines(test.input); !res.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsMaximumBy(t *testing.T) {
+	for _, test := range stringsMinMaxByTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.MaximumBy(test.comparator); res != test.max {
+				t.Errorf("expected %v but got %v", test.max, res)
 			}
 		})
 	}

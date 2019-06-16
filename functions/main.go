@@ -40,6 +40,7 @@ var (
 		"length.go":      {ForNumbers, ForStrings, ForStructs},
 		"map.go":         {ForNumbers, ForStrings, ForStructs},
 		"maximum.go":     {ForNumbers},
+		"maximumby.go":   {ForNumbers, ForStrings, ForStructs},
 		"minimum.go":     {ForNumbers},
 		"modes.go":       {ForNumbers, ForStrings, ForStructs},
 		"nub.go":         {ForNumbers, ForStrings, ForStructs},

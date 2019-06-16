@@ -160,6 +160,21 @@ func (s Strings) Map(f func(string) string) (out Strings) {
 	return
 }
 
+// =============== maximumby.go =================
+
+// MaximumBy returns the maximum elements according to a custom comparator.
+// Can be generated for any type.
+func (s Strings) MaximumBy(f func(e1, e2 string) string) (max string) {
+	if len(s) == 0 {
+		return
+	}
+	max = s[0]
+	for _, el := range s[1:] {
+		max = f(max, el)
+	}
+	return
+}
+
 // =============== modes.go =================
 
 // Modes returns the elements with highest frequency in the slice.

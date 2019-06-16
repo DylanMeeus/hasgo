@@ -276,6 +276,28 @@ var (
 			persons{dylan, ana, dylan},
 		},
 	}
+
+	structMinMaxByTests = []struct {
+		input      persons
+		comparator func(p1, p2 person) person
+		max        person
+	}{
+		{
+			nil,
+			func(p1, p2 person) person { return p1 },
+			person{},
+		},
+		{
+			persons{dylan, ana, sean},
+			func(p1, p2 person) person {
+				if p1.age > p2.age {
+					return p1
+				}
+				return p2
+			},
+			ana,
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -472,6 +494,16 @@ func Test_StructDelete(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Delete(test.element); !res.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_structMaximumBy(t *testing.T) {
+	for _, test := range structMinMaxByTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.MaximumBy(test.comparator); res != test.max {
+				t.Errorf("expected %v but got %v", test.max, res)
 			}
 		})
 	}

@@ -203,6 +203,21 @@ func (s Ints) Maximum() (out int64) {
 	return
 }
 
+// =============== maximumby.go =================
+
+// MaximumBy returns the maximum elements according to a custom comparator.
+// Can be generated for any type.
+func (s Ints) MaximumBy(f func(e1, e2 int64) int64) (max int64) {
+	if len(s) == 0 {
+		return
+	}
+	max = s[0]
+	for _, el := range s[1:] {
+		max = f(max, el)
+	}
+	return
+}
+
 // =============== minimum.go =================
 
 // Minimum returns the minimum of a slice.

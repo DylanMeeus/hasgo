@@ -75,6 +75,7 @@ These functions can be generated for every type.
 | `Length`     | `[a] -> int`                |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
 | `Map`        | `[a] -> (a -> a) -> [a]`    |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
 | `Maximum`    | `[a] -> a`                  |        |   ✓    |        | Returns the largest element|
+| `MaximumBy`  | `[a] -> (a -> a) -> a -> a` |   ✓    |   ✓    |    ✓   | Returns the maximum element according to comparator|
 | `Minimum`    | `[a] -> a`                  |        |   ✓    |        | Returns the lowest element|
 | `Modes`      | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns the elements with the highest frequency |
 | `Nub`        | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns a Slice containing one of each of the input elements |

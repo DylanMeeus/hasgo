@@ -219,6 +219,28 @@ var (
 		},
 	}
 
+	intsMinMaxByTests = []struct {
+		input      Ints
+		comparator func(i1, i2 int64) int64
+		max        int64
+	}{
+		{
+			nil,
+			func(i1, i2 int64) int64 { return i1 },
+			0,
+		},
+		{
+			Ints{1, 2, 3, 4},
+			func(i1, i2 int64) int64 {
+				if i1 > i2 {
+					return i1
+				}
+				return i2
+			},
+			4,
+		},
+	}
+
 	intsMapTests = []struct {
 		input   Ints
 		mapfunc func(int64) int64
@@ -758,6 +780,16 @@ func Test_IntsDelete(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Delete(test.element); !test.output.EqualsOrdered(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsMaximumBy(t *testing.T) {
+	for _, test := range intsMinMaxByTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.MaximumBy(test.comparator); res != test.max {
+				t.Errorf("expected %v but got %v", test.max, res)
 			}
 		})
 	}
