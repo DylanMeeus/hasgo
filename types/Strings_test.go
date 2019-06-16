@@ -318,6 +318,43 @@ var (
 			Strings{"b", "a", "c"},
 		},
 	}
+
+	stringsWordsTests = []struct {
+		input  string
+		output Strings
+	}{
+
+		{
+			"",
+			Strings{},
+		},
+		{
+			"hello world",
+			Strings{"hello", "world"},
+		},
+		{
+			"hello",
+			Strings{"hello"},
+		},
+	}
+
+	stringsLinesTests = []struct {
+		input  string
+		output Strings
+	}{
+		{
+			"",
+			Strings{},
+		},
+		{
+			"hello",
+			Strings{"hello"},
+		},
+		{
+			"hello\nworld",
+			Strings{"hello", "world"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -554,6 +591,26 @@ func Test_StringsDelete(t *testing.T) {
 	for _, test := range stringsDeleteTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Delete(test.element); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsWords(t *testing.T) {
+	for _, test := range stringsWordsTests {
+		t.Run("", func(t *testing.T) {
+			if res := Words(test.input); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsLines(t *testing.T) {
+	for _, test := range stringsLinesTests {
+		t.Run("", func(t *testing.T) {
+			if res := Lines(test.input); !res.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

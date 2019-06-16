@@ -96,15 +96,17 @@ The built-in types (Strings, Ints) have some functions defined on them that are 
 Mostly because we could not create them in a generic way. 
 
 
-| Type     | Function         | Signature                    | Description  |
-|--------- |---------------   |------------------------------|--------------| 
-| `Ints`   | `Equals`         | \*`Ints -> Ints -> bool`       | Returns true if both slices contain the same elements| 
-| `Ints`   | `EqualsOrdered`  | \*`Ints -> Ints -> bool`       | Returns true if both slices contain the same elements, in the same position| 
-| `Ints`   | `IntRange`       | `int64 -> int64 -> Ints`     | Return an integer range from [start,stop]|
-| `Ints`   | `IntReplicate`   | `uint64 -> int64 -> Ints`    | Return a slice with the input element repeated n times|
-| `Strings`| `Equals`         | \*`Strings -> Strings -> bool` | Returns true if both slices contain the same elements| 
-| `Strings`| `EqualsOrdered`  | \*`Strings -> Strings -> bool` | Returns true if both slices contain the same elements, in the same position| 
-| `Strings`| `StringReplicate`| `uint64 -> string -> Strings`| Return a slice with the input element repeated n times|
+| Type     | Function         | Signature                     | Description  |
+|--------- |---------------   |-------------------------------|--------------| 
+| `Ints`   | `Equals`         | \*`Ints -> Ints -> bool`      | Returns true if both slices contain the same elements| 
+| `Ints`   | `EqualsOrdered`  | \*`Ints -> Ints -> bool`      | Returns true if both slices contain the same elements, in the same position| 
+| `Ints`   | `IntRange`       | `int64 -> int64 -> Ints`      | Return an integer range from [start,stop]|
+| `Ints`   | `IntReplicate`   | `uint64 -> int64 -> Ints`     | Return a slice with the input element repeated n times|
+| `Strings`| `Equals`         | \*`Strings -> Strings -> bool`| Returns true if both slices contain the same elements| 
+| `Strings`| `EqualsOrdered`  | \*`Strings -> Strings -> bool`| Returns true if both slices contain the same elements, in the same position| 
+| `Strings`| `Lines`          | `string -> Strings`           | Returns Strings separated by a newline.|
+| `Strings`| `StringReplicate`| `uint64 -> string -> Strings` | Return a slice with the input element repeated n times|
+| `Strings`| `Words`          | `string -> Strings`           | Returns Strings separated by a space.|
 
 \* (Functions prefixed by a star are functions added to the type itself, where first element in the
 signature is the method receiver. So for examples, the Equals method is `Ints{1,2}.Equals(Ints{1})`.

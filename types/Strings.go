@@ -1,5 +1,9 @@
 package types
 
+import (
+	"strings"
+)
+
 // Strings is a wrapper around []string
 //go:generate hasgo -T=string -S=Strings
 type Strings []string
@@ -13,10 +17,18 @@ func StringReplicate(count uint64, value string) (out Strings) {
 	return
 }
 
+const (
+	wordSeparator = " "
+	lineSeparator = "\n"
+)
+
 // EqualsOrdered verifies that both slices contain the same elements in the same position.
 func (is Strings) EqualsOrdered(other Strings) bool {
 	if len(is) != len(other) {
 		return false
+	}
+	if len(is) == 0 && len(other) == 0 {
+		return true
 	}
 	for i := range is {
 		if is[i] != other[i] {
@@ -31,6 +43,9 @@ func (is Strings) Equals(other Strings) bool {
 	if len(is) != len(other) {
 		return false
 	}
+	if len(is) == 0 && len(other) == 0 {
+		return true
+	}
 	contains := make(map[string]struct{}, 0)
 	for _, i := range is {
 		contains[i] = struct{}{}
@@ -41,4 +56,21 @@ func (is Strings) Equals(other Strings) bool {
 		}
 	}
 	return true
+}
+
+// Words is a wrapper around strings.Split(string, " ")
+func Words(s string) Strings {
+	return split(s, wordSeparator)
+}
+
+// Lines is a wrapper around strings.Split(string, "\n")
+func Lines(s string) Strings {
+	return split(s, lineSeparator)
+}
+
+func split(s, sep string) Strings {
+	if s == "" {
+		return Strings{}
+	}
+	return Strings(strings.Split(s, sep))
 }
