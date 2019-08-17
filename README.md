@@ -92,7 +92,7 @@ These functions can be generated for every type.
 
 ### Hardcoded functions
 
-The built-in types (Strings, Ints) have some functions defined on them that are not generated.
+The built-in types (Strings, Ints, Bools) have some functions defined on them that are not generated.
 Mostly because we could not create them in a generic way. 
 
 
@@ -107,6 +107,8 @@ Mostly because we could not create them in a generic way.
 | `Strings`| `Lines`          | `string -> Strings`           | Returns Strings separated by a newline.|
 | `Strings`| `StringReplicate`| `uint64 -> string -> Strings` | Return a slice with the input element repeated n times|
 | `Strings`| `Words`          | `string -> Strings`           | Returns Strings separated by a space.|
+| `Bools`  | `And`            | `Bools -> bool`               | Returns true if all bools are true.|
+| `Bools`  | `Or`             | `Bools -> bool   `            | Returns true if any bool is true.|
 
 \* (Functions prefixed by a star are functions added to the type itself, where first element in the
 signature is the method receiver. So for examples, the Equals method is `Ints{1,2}.Equals(Ints{1})`.
