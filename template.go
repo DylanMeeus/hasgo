@@ -88,6 +88,16 @@ func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	return
 }
 `,
+	"foldr.go": `
+// Foldr reduces a list by iteratively applying f from left->right, starting at the default
+// zero-value of an element. Thus, for an empty slice, the result is the default zero-value.
+func (s SliceType) Foldr(f func(e1, e2 ElementType) ElementType) (out ElementType) {
+	for _, v := range s {
+		out = f(out, v)
+	}
+	return
+}
+`,
 	"head.go": `
 // Head returns the first element in the slice.
 // If no element is found, returns the zero-value of the type.
@@ -404,6 +414,7 @@ var funcDomains = map[string][]string{
 	"average.go":     {ForNumbers},
 	"delete.go":      {ForNumbers, ForStrings, ForStructs},
 	"filter.go":      {ForNumbers, ForStrings, ForStructs},
+	"foldr.go":       {ForNumbers, ForStrings, ForStructs},
 	"head.go":        {ForNumbers, ForStrings, ForStructs},
 	"init.go":        {ForNumbers, ForStrings, ForStructs},
 	"intercalate.go": {ForNumbers, ForStrings, ForStructs},
