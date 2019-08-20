@@ -10,6 +10,7 @@ import (
 func main() {
 	fmt.Printf("product: %v\n", Multiply(1, hasgo.Ints{1, 2, 3}))
 	EpicFunction()
+	fmt.Printf("fold %v\n", fold())
 }
 
 // EpicFunction is a simple example as seen on the github homepage.
@@ -30,4 +31,11 @@ func Multiply(product int64, numbers hasgo.Ints) int64 {
 	}
 	h, rest := numbers.Uncons()
 	return Multiply(product*h, rest)
+}
+
+func fold() int64 {
+	result := hasgo.IntRange(0, 10).
+		Foldr(0, func(i1, i2 int64) int64 { return i1 - i2 })
+	return result
+
 }

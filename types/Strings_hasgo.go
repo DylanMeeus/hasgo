@@ -68,10 +68,10 @@ func (s Strings) Filter(f func(string) bool) (out Strings) {
 	return
 }
 
-// =============== foldr.go =================
+// =============== foldl.go =================
 
 // Foldr reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
-func (s Strings) Foldr(z string, f func(e1, e2 string) string) (out string) {
+func (s Strings) Foldl(z string, f func(e1, e2 string) string) (out string) {
 	if len(s) == 0 {
 		return
 	}

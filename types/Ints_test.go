@@ -525,8 +525,8 @@ var (
 		{
 			Ints{1, 2, 3, 4, 5},
 			0,
-			func(i1, i2 int64) int64 { return i1 + i2 },
-			15,
+			func(i1, i2 int64) int64 { return i1 - i2 },
+			-13,
 		},
 	}
 )
@@ -821,10 +821,10 @@ func Test_IntsMaximumBy(t *testing.T) {
 	}
 }
 
-func Test_IntsFoldr(t *testing.T) {
+func Test_IntsFoldl(t *testing.T) {
 	for _, test := range intsFoldTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Foldr(test.init, test.foldfunc); res != test.output {
+			if res := test.input.Foldl(test.init, test.foldfunc); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

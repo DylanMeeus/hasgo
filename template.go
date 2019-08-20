@@ -88,9 +88,9 @@ func (s SliceType) Filter(f func(ElementType) bool) (out SliceType) {
 	return
 }
 `,
-	"foldr.go": `
+	"foldl.go": `
 // Foldr reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
-func (s SliceType) Foldr(z ElementType, f func(e1, e2 ElementType) ElementType) (out ElementType) {
+func (s SliceType) Foldl(z ElementType, f func(e1, e2 ElementType) ElementType) (out ElementType) {
 	if len(s) == 0 {
 		return
 	}
@@ -417,7 +417,7 @@ var funcDomains = map[string][]string{
 	"average.go":     {ForNumbers},
 	"delete.go":      {ForNumbers, ForStrings, ForStructs},
 	"filter.go":      {ForNumbers, ForStrings, ForStructs},
-	"foldr.go":       {ForNumbers, ForStrings, ForStructs},
+	"foldl.go":       {ForNumbers, ForStrings, ForStructs},
 	"head.go":        {ForNumbers, ForStrings, ForStructs},
 	"init.go":        {ForNumbers, ForStrings, ForStructs},
 	"intercalate.go": {ForNumbers, ForStrings, ForStructs},

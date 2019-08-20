@@ -381,7 +381,7 @@ var (
 	stringsFoldTests = []struct {
 		input     Strings
 		init      string
-		foldrfunc func(s1, s2 string) string
+		foldlfunc func(s1, s2 string) string
 		output    string
 	}{
 		{
@@ -668,10 +668,10 @@ func Test_StringsWords(t *testing.T) {
 	}
 }
 
-func Test_StringsFoldr(t *testing.T) {
+func Test_StringsFoldl(t *testing.T) {
 	for _, test := range stringsFoldTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Foldr(test.init, test.foldrfunc); res != test.output {
+			if res := test.input.Foldl(test.init, test.foldlfunc); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

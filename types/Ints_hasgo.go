@@ -95,10 +95,10 @@ func (s Ints) Filter(f func(int64) bool) (out Ints) {
 	return
 }
 
-// =============== foldr.go =================
+// =============== foldl.go =================
 
 // Foldr reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
-func (s Ints) Foldr(z int64, f func(e1, e2 int64) int64) (out int64) {
+func (s Ints) Foldl(z int64, f func(e1, e2 int64) int64) (out int64) {
 	if len(s) == 0 {
 		return
 	}

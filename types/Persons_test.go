@@ -302,8 +302,8 @@ var (
 	structFoldTests = []struct {
 		input     persons
 		init      person
-		foldrfunc func(p1, p2 person) person
-		foldr     person
+		foldlfunc func(p1, p2 person) person
+		foldl     person
 	}{
 		{
 			nil,
@@ -534,11 +534,11 @@ func Test_structMaximumBy(t *testing.T) {
 	}
 }
 
-func Test_structFoldr(t *testing.T) {
+func Test_structFoldl(t *testing.T) {
 	for _, test := range structFoldTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Foldr(test.init, test.foldrfunc); res != test.foldr {
-				t.Errorf("expected %v but got %v", test.foldr, res)
+			if res := test.input.Foldl(test.init, test.foldlfunc); res != test.foldl {
+				t.Errorf("expected %v but got %v", test.foldl, res)
 			}
 		})
 	}

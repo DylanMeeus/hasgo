@@ -32,7 +32,7 @@ var (
 		"average.go":     {ForNumbers},
 		"delete.go":      {ForNumbers, ForStrings, ForStructs},
 		"filter.go":      {ForNumbers, ForStrings, ForStructs},
-		"foldr.go":       {ForNumbers, ForStrings, ForStructs},
+		"foldl.go":       {ForNumbers, ForStrings, ForStructs},
 		"head.go":        {ForNumbers, ForStrings, ForStructs},
 		"init.go":        {ForNumbers, ForStrings, ForStructs},
 		"intercalate.go": {ForNumbers, ForStrings, ForStructs},
