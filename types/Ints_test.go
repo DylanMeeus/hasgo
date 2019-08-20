@@ -504,29 +504,31 @@ var (
 		},
 	}
 
-
-	intsFoldTests = []struct{
-		input Ints
-		foldfunc func(int64, int64)int64
-		output int64
+	intsFoldTests = []struct {
+		input    Ints
+		init     int64
+		foldfunc func(int64, int64) int64
+		output   int64
 	}{
 		{
 			nil,
-			func(i1,i2 int64)int64 {return i1 + i2},
+			0,
+			func(i1, i2 int64) int64 { return i1 + i2 },
 			0,
 		},
 		{
 			Ints{1},
-			func(i1,i2 int64)int64 {return i1 + i2},
 			1,
+			func(i1, i2 int64) int64 { return i1 + i2 },
+			2,
 		},
 		{
-			Ints{1,2,3,4,5},
-			func(i1,i2 int64)int64 {return i1 + i2},
+			Ints{1, 2, 3, 4, 5},
+			0,
+			func(i1, i2 int64) int64 { return i1 + i2 },
 			15,
 		},
 	}
-
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -822,7 +824,7 @@ func Test_IntsMaximumBy(t *testing.T) {
 func Test_IntsFoldr(t *testing.T) {
 	for _, test := range intsFoldTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Foldr(test.foldfunc); res != test.output {
+			if res := test.input.Foldr(test.init, test.foldfunc); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

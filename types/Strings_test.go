@@ -377,6 +377,45 @@ var (
 			"aaa",
 		},
 	}
+
+	stringsFoldTests = []struct {
+		input     Strings
+		init      string
+		foldrfunc func(s1, s2 string) string
+		output    string
+	}{
+		{
+			nil,
+			"",
+			func(s1, s2 string) string { return s1 },
+			"",
+		},
+		{
+			Strings{},
+			"",
+			func(s1, s2 string) string { return s1 },
+			"",
+		},
+		{
+			Strings{"one"},
+			"zero",
+			func(s1, s2 string) string {
+				return s1 + " " + s2
+			},
+			"one zero",
+		},
+		{
+			Strings{"one", "two", "three", "ten"},
+			"",
+			func(s1, s2 string) string {
+				if len(s1) > len(s2) {
+					return s1
+				}
+				return s2
+			},
+			"three",
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -623,6 +662,16 @@ func Test_StringsWords(t *testing.T) {
 	for _, test := range stringsWordsTests {
 		t.Run("", func(t *testing.T) {
 			if res := Words(test.input); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsFoldr(t *testing.T) {
+	for _, test := range stringsFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldr(test.init, test.foldrfunc); res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

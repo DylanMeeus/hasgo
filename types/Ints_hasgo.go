@@ -97,13 +97,16 @@ func (s Ints) Filter(f func(int64) bool) (out Ints) {
 
 // =============== foldr.go =================
 
-// Foldr reduces a list by iteratively applying f from left->right, starting at the default
-// zero-value of an element. Thus, for an empty slice, the result is the default zero-value.
-func (s Ints) Foldr(f func(e1, e2 int64) int64) (out int64) {
-	for _, v := range s {
+// Foldr reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
+func (s Ints) Foldr(z int64, f func(e1, e2 int64) int64) (out int64) {
+	if len(s) == 0 {
+		return
+	}
+	out = s[0]
+	for _, v := range s[1:] {
 		out = f(out, v)
 	}
-	return
+	return f(out, z)
 }
 
 // =============== head.go =================

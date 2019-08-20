@@ -58,36 +58,37 @@ Alternatively, you can consult the [godoc](https://godoc.org/github.com/DylanMee
 ### Generic functions
 These functions can be generated for every type.
 
-| Function     | Signature                   | String | Number | Struct | Description |
-|------------  | --------------------------  | :----: | :----: | :----: | ----------- |
-| `Abs`        | `[a] -> [a]`                |        |   ✓    |        | Return a slice containing the absolute values|
-| `All`        | `[a] -> (a -> bool) -> bool`|   ✓    |   ✓    |    ✓   | Returns true if the predicate applies to all elements in the slice|
-| `Any`        | `[a] -> (a -> bool) -> bool`|   ✓    |   ✓    |    ✓   | Returns true if one or more elements satisfy the predicate|
-| `Average`    | `[a] -> a`                  |        |   ✓    |        | Returns the average of all elements|
-| `Delete `    | `[a] -> a -> [a]`           |   ✓    |  ✓     |    ✓   | Returns the slice with the first occurance of the element deleted.|
-| `Filter`     | `[a] -> (a -> bool) -> [a]` |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
-| `Head`       | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Return the first element|
-| `Init`       | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|
-| `Intercalate`| `[a] -> [[a]] -> [a]`       |   ✓    |   ✓    |    ✓   | Intersperses the slice in between the provided 2d-slice |
-| `Intersperse`| `[a] -> a -> [a]`           |   ✓    |   ✓    |    ✓   | Intersperses the value in between all elements of the provided slice|  
-| `Last`       | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | Returns the last element|
-| `Length`     | `[a] -> int`                |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
-| `Map`        | `[a] -> (a -> a) -> [a]`    |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
-| `Maximum`    | `[a] -> a`                  |        |   ✓    |        | Returns the largest element|
-| `MaximumBy`  | `[a] -> (a -> a) -> a -> a` |   ✓    |   ✓    |    ✓   | Returns the maximum element according to comparator|
-| `Minimum`    | `[a] -> a`                  |        |   ✓    |        | Returns the lowest element|
-| `Modes`      | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns the elements with the highest frequency |
-| `Nub`        | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns a Slice containing one of each of the input elements |
-| `Null`       | `[a] -> bool`               |   ✓    |   ✓    |    ✓   | Returns true if the slice is empty, false otherwise|
-| `Product`    | `[a] -> a`                  |   ✓    |        |        | Returns the product of all elements in the slice.|
-| `Reverse`    | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns a slice with the elements reversed|
-| `Sort`       | `[a] -> [a]`                |   ✓    |   ✓    |        | Returns a sorted slice (original remains unsorted)|
-| `Sum`        | `[a] -> a`                  |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
-| `Tail`       | `[a] -> [a]`                |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
-| `Take`       | `[a] -> uint64 -> [a]`      |   ✓    |   ✓    |    ✓   | Take N elements from the slice, or all if N exceeds the length.|
-| `Uncons`     | `[a] -> (a, [a])`           |   ✓    |   ✓    |    ✓   | Returns a tuple of the head and tail of the slice|
-| `Unlines`    | `[a] -> string`             |   ✓    |   ✓    |    ✓   | Returns a newline separated string of all elements in the slice| 
-| `Unwords`    | `[a] -> string`             |   ✓    |   ✓    |    ✓   | Returns a space-separated string of all elements in the slice| 
+| Function     | Signature                        | String | Number | Struct | Description |
+|------------  | -------------------------------  | :----: | :----: | :----: | ----------- |
+| `Abs`        | `[a] -> [a]`                     |        |   ✓    |        | Return a slice containing the absolute values|
+| `All`        | `[a] -> (a -> bool) -> bool`     |   ✓    |   ✓    |    ✓   | Returns true if the predicate applies to all elements in the slice|
+| `Any`        | `[a] -> (a -> bool) -> bool`     |   ✓    |   ✓    |    ✓   | Returns true if one or more elements satisfy the predicate|
+| `Average`    | `[a] -> a`                       |        |   ✓    |        | Returns the average of all elements|
+| `Delete `    | `[a] -> a -> [a]`                |   ✓    |   ✓    |    ✓   | Returns the slice with the first occurance of the element deleted.|
+| `Filter`     | `[a] -> (a -> bool) -> [a]`      |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
+| `Foldr`      | `[a] -> a -> (a -> a -> a) -> a` |   ✓    |   ✓    |    ✓   | Right fold over the slice to reduce it to one element.|
+| `Head`       | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | Return the first element|
+| `Init`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|
+| `Intercalate`| `[a] -> [[a]] -> [a]`            |   ✓    |   ✓    |    ✓   | Intersperses the slice in between the provided 2d-slice |
+| `Intersperse`| `[a] -> a -> [a]`                |   ✓    |   ✓    |    ✓   | Intersperses the value in between all elements of the provided slice|  
+| `Last`       | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | Returns the last element|
+| `Length`     | `[a] -> int`                     |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
+| `Map`        | `[a] -> (a -> a) -> [a]`         |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
+| `Maximum`    | `[a] -> a`                       |        |   ✓    |        | Returns the largest element|
+| `MaximumBy`  | `[a] -> (a -> a) -> a -> a`      |   ✓    |   ✓    |    ✓   | Returns the maximum element according to comparator|
+| `Minimum`    | `[a] -> a`                       |        |   ✓    |        | Returns the lowest element|
+| `Modes`      | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns the elements with the highest frequency |
+| `Nub`        | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns a Slice containing one of each of the input elements |
+| `Null`       | `[a] -> bool`                    |   ✓    |   ✓    |    ✓   | Returns true if the slice is empty, false otherwise|
+| `Product`    | `[a] -> a`                       |   ✓    |        |        | Returns the product of all elements in the slice.|
+| `Reverse`    | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns a slice with the elements reversed|
+| `Sort`       | `[a] -> [a]`                     |   ✓    |   ✓    |        | Returns a sorted slice (original remains unsorted)|
+| `Sum`        | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
+| `Tail`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
+| `Take`       | `[a] -> uint64 -> [a]`           |   ✓    |   ✓    |    ✓   | Take N elements from the slice, or all if N exceeds the length.|
+| `Uncons`     | `[a] -> (a, [a])`                |   ✓    |   ✓    |    ✓   | Returns a tuple of the head and tail of the slice|
+| `Unlines`    | `[a] -> string`                  |   ✓    |   ✓    |    ✓   | Returns a newline separated string of all elements in the slice| 
+| `Unwords`    | `[a] -> string`                  |   ✓    |   ✓    |    ✓   | Returns a space-separated string of all elements in the slice| 
 
 
 ### Hardcoded functions

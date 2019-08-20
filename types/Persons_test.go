@@ -298,6 +298,31 @@ var (
 			ana,
 		},
 	}
+
+	structFoldTests = []struct {
+		input     persons
+		init      person
+		foldrfunc func(p1, p2 person) person
+		foldr     person
+	}{
+		{
+			nil,
+			person{},
+			func(p1, p2 person) person { return p1 },
+			person{},
+		},
+		{
+			persons{dylan, ana, sean},
+			person{},
+			func(p1, p2 person) person {
+				if p1.age > p2.age {
+					return p1
+				}
+				return p2
+			},
+			ana,
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -504,6 +529,16 @@ func Test_structMaximumBy(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.MaximumBy(test.comparator); res != test.max {
 				t.Errorf("expected %v but got %v", test.max, res)
+			}
+		})
+	}
+}
+
+func Test_structFoldr(t *testing.T) {
+	for _, test := range structFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldr(test.init, test.foldrfunc); res != test.foldr {
+				t.Errorf("expected %v but got %v", test.foldr, res)
 			}
 		})
 	}
