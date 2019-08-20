@@ -508,12 +508,14 @@ var (
 		input    Ints
 		init     int64
 		foldfunc func(int64, int64) int64
-		output   int64
+		foldl    int64
+		foldl1   int64
 	}{
 		{
 			nil,
 			0,
 			func(i1, i2 int64) int64 { return i1 + i2 },
+			0,
 			0,
 		},
 		{
@@ -521,11 +523,13 @@ var (
 			1,
 			func(i1, i2 int64) int64 { return i1 + i2 },
 			2,
+			1,
 		},
 		{
 			Ints{1, 2, 3, 4, 5},
 			0,
 			func(i1, i2 int64) int64 { return i1 - i2 },
+			-13,
 			-13,
 		},
 	}
@@ -824,8 +828,18 @@ func Test_IntsMaximumBy(t *testing.T) {
 func Test_IntsFoldl(t *testing.T) {
 	for _, test := range intsFoldTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Foldl(test.init, test.foldfunc); res != test.output {
-				t.Errorf("expected %v but got %v", test.output, res)
+			if res := test.input.Foldl(test.init, test.foldfunc); res != test.foldl {
+				t.Errorf("expected %v but got %v", test.foldl, res)
+			}
+		})
+	}
+}
+
+func Test_IntsFoldl1(t *testing.T) {
+	for _, test := range intsFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldl1(test.foldfunc); res != test.foldl1 {
+				t.Errorf("expected %v but got %v", test.foldl1, res)
 			}
 		})
 	}

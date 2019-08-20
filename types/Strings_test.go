@@ -382,18 +382,21 @@ var (
 		input     Strings
 		init      string
 		foldlfunc func(s1, s2 string) string
-		output    string
+		foldl     string
+		foldl1    string
 	}{
 		{
 			nil,
 			"",
 			func(s1, s2 string) string { return s1 },
 			"",
+			"",
 		},
 		{
 			Strings{},
 			"",
 			func(s1, s2 string) string { return s1 },
+			"",
 			"",
 		},
 		{
@@ -403,6 +406,7 @@ var (
 				return s1 + " " + s2
 			},
 			"one zero",
+			"one",
 		},
 		{
 			Strings{"one", "two", "three", "ten"},
@@ -413,6 +417,7 @@ var (
 				}
 				return s2
 			},
+			"three",
 			"three",
 		},
 	}
@@ -668,11 +673,21 @@ func Test_StringsWords(t *testing.T) {
 	}
 }
 
+func Test_StringsFoldl1(t *testing.T) {
+	for _, test := range stringsFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldl1(test.foldlfunc); res != test.foldl1 {
+				t.Errorf("expected %v but got %v", test.foldl1, res)
+			}
+		})
+	}
+}
+
 func Test_StringsFoldl(t *testing.T) {
 	for _, test := range stringsFoldTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Foldl(test.init, test.foldlfunc); res != test.output {
-				t.Errorf("expected %v but got %v", test.output, res)
+			if res := test.input.Foldl(test.init, test.foldlfunc); res != test.foldl {
+				t.Errorf("expected %v but got %v", test.foldl, res)
 			}
 		})
 	}

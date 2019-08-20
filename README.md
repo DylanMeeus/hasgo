@@ -66,7 +66,8 @@ These functions can be generated for every type.
 | `Average`    | `[a] -> a`                       |        |   ✓    |        | Returns the average of all elements|
 | `Delete `    | `[a] -> a -> [a]`                |   ✓    |   ✓    |    ✓   | Returns the slice with the first occurance of the element deleted.|
 | `Filter`     | `[a] -> (a -> bool) -> [a]`      |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
-| `Foldl`      | `[a] -> a -> (a -> a -> a) -> a` |   ✓    |   ✓    |    ✓   | Left fold over the slice to reduce it to one element.|
+| `Foldl`      | `[a] -> a -> (a -> a -> a) -> a` |   ✓    |   ✓    |    ✓   | Left fold over the slice to reduce it to one element with starting value.|
+| `Foldl`      | `[a] -> (a -> a -> a) -> a`      |   ✓    |   ✓    |    ✓   | Left fold over the slice to reduce it to one element.|
 | `Head`       | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | Return the first element|
 | `Init`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|
 | `Intercalate`| `[a] -> [[a]] -> [a]`            |   ✓    |   ✓    |    ✓   | Intersperses the slice in between the provided 2d-slice |

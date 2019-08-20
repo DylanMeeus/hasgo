@@ -304,11 +304,13 @@ var (
 		init      person
 		foldlfunc func(p1, p2 person) person
 		foldl     person
+		foldl1    person
 	}{
 		{
 			nil,
 			person{},
 			func(p1, p2 person) person { return p1 },
+			person{},
 			person{},
 		},
 		{
@@ -320,6 +322,7 @@ var (
 				}
 				return p2
 			},
+			ana,
 			ana,
 		},
 	}
@@ -539,6 +542,16 @@ func Test_structFoldl(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Foldl(test.init, test.foldlfunc); res != test.foldl {
 				t.Errorf("expected %v but got %v", test.foldl, res)
+			}
+		})
+	}
+}
+
+func Test_structFoldl1(t *testing.T) {
+	for _, test := range structFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldl1(test.foldlfunc); res != test.foldl1 {
+				t.Errorf("expected %v but got %v", test.foldl1, res)
 			}
 		})
 	}
