@@ -3,7 +3,7 @@
 package main
 
 import (
-	fun "./functions"
+	fun "functions"
 	"io/ioutil"
 	"os"
 	"strings"
