@@ -43,6 +43,10 @@ You can find more [examples here](https://github.com/DylanMeeus/hasgo/tree/maste
 go get -u github.com/DylanMeeus/hasgo
 ```
 
+Or add hasgo to your `go.mod` file.
+
+`require github.com/DylanMeeus/hasgo/v1.0.2`
+
 ## Types 
 * `Ints` ([]int64)
 * `Strings` ([]string)
