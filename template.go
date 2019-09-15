@@ -418,39 +418,40 @@ func (s SliceType) Unwords() (out string) {
 }
 
 const (
- ForNumbers = "ForNumbers"
-ForStrings = "ForStrings"
-ForStructs = "ForStructs"
+	ForNumbers = "ForNumbers"
+	ForStrings = "ForStrings"
+	ForStructs = "ForStructs"
 )
+
 var funcDomains = map[string][]string{
-	"abs.go": []string{   ForNumbers  },
-	"all.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"any.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"average.go": []string{   ForNumbers  },
-	"delete.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"filter.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"foldl.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"foldl1.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"head.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"init.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"intercalate.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"intersperse.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"last.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"length.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"map.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"maximum.go": []string{   ForNumbers  },
-	"maximumby.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"minimum.go": []string{   ForNumbers  },
-	"modes.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"nub.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"null.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"product.go": []string{   ForNumbers  },
-	"reverse.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"sort.go": []string{   ForNumbers   , ForStrings  },
-	"sum.go": []string{   ForNumbers   , ForStrings  },
-	"tail.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"take.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"uncons.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"unlines.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
-	"unwords.go": []string{   ForNumbers   , ForStrings   , ForStructs  },
+	"abs.go":         {ForNumbers},
+	"all.go":         {ForNumbers, ForStrings, ForStructs},
+	"any.go":         {ForNumbers, ForStrings, ForStructs},
+	"average.go":     {ForNumbers},
+	"delete.go":      {ForNumbers, ForStrings, ForStructs},
+	"filter.go":      {ForNumbers, ForStrings, ForStructs},
+	"foldl.go":       {ForNumbers, ForStrings, ForStructs},
+	"foldl1.go":      {ForNumbers, ForStrings, ForStructs},
+	"head.go":        {ForNumbers, ForStrings, ForStructs},
+	"init.go":        {ForNumbers, ForStrings, ForStructs},
+	"intercalate.go": {ForNumbers, ForStrings, ForStructs},
+	"intersperse.go": {ForNumbers, ForStrings, ForStructs},
+	"last.go":        {ForNumbers, ForStrings, ForStructs},
+	"length.go":      {ForNumbers, ForStrings, ForStructs},
+	"map.go":         {ForNumbers, ForStrings, ForStructs},
+	"maximum.go":     {ForNumbers},
+	"maximumby.go":   {ForNumbers, ForStrings, ForStructs},
+	"minimum.go":     {ForNumbers},
+	"modes.go":       {ForNumbers, ForStrings, ForStructs},
+	"nub.go":         {ForNumbers, ForStrings, ForStructs},
+	"null.go":        {ForNumbers, ForStrings, ForStructs},
+	"product.go":     {ForNumbers},
+	"reverse.go":     {ForNumbers, ForStrings, ForStructs},
+	"sort.go":        {ForNumbers, ForStrings},
+	"sum.go":         {ForNumbers, ForStrings},
+	"tail.go":        {ForNumbers, ForStrings, ForStructs},
+	"take.go":        {ForNumbers, ForStrings, ForStructs},
+	"uncons.go":      {ForNumbers, ForStrings, ForStructs},
+	"unlines.go":     {ForNumbers, ForStrings, ForStructs},
+	"unwords.go":     {ForNumbers, ForStrings, ForStructs},
 }
