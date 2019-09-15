@@ -6,5 +6,6 @@ replace functions => ./functions
 
 require (
 	functions v0.0.0
+	github.com/DylanMeeus/hasgo/types v0.0.0-20190915133841-bd481ce3492e
 	golang.org/x/tools v0.0.0-20190909191543-dab579b76279
 )
