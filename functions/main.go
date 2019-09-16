@@ -34,6 +34,7 @@ var (
 		"filter.go":      {ForNumbers, ForStrings, ForStructs},
 		"foldl.go":       {ForNumbers, ForStrings, ForStructs},
 		"foldl1.go":      {ForNumbers, ForStrings, ForStructs},
+		"foldr1.go":      {ForNumbers, ForStrings, ForStructs},
 		"head.go":        {ForNumbers, ForStrings, ForStructs},
 		"init.go":        {ForNumbers, ForStrings, ForStructs},
 		"intercalate.go": {ForNumbers, ForStrings, ForStructs},
