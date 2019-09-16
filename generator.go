@@ -3,7 +3,7 @@
 package main
 
 import (
-	fun "github.com/DylanMeeus/hasgo/functions"
+	fun "functions"
 	"io/ioutil"
 	"os"
 	"strings"

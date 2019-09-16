@@ -123,6 +123,21 @@ func (s Ints) Foldl1(f func(e1, e2 int64) int64) (out int64) {
 	return
 }
 
+// =============== foldr1.go =================
+
+// Foldr reduces a list by iteratively applying f from right -> left. Thus, for an empty slice, the result is the default zero-value.
+func (s Ints) Foldr1(f func(e1, e2 int64) int64) (out int64) {
+	if len(s) == 0 {
+		return
+	}
+	s = s.Reverse()
+	out = s[0]
+	for _, v := range s[1:] {
+		out = f(out, v)
+	}
+	return
+}
+
 // =============== head.go =================
 
 // Head returns the first element in the slice.
