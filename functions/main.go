@@ -31,6 +31,7 @@ var (
 		"any.go":         {ForNumbers, ForStrings, ForStructs},
 		"average.go":     {ForNumbers},
 		"delete.go":      {ForNumbers, ForStrings, ForStructs},
+		"elem.go":        {ForNumbers, ForStrings, ForStructs},
 		"filter.go":      {ForNumbers, ForStrings, ForStructs},
 		"foldl.go":       {ForNumbers, ForStrings, ForStructs},
 		"foldl1.go":      {ForNumbers, ForStrings, ForStructs},
