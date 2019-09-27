@@ -76,6 +76,18 @@ func (s SliceType) Delete(e ElementType) (out SliceType) {
 	return
 }
 `,
+	"elem.go": `
+// Filter returns a slice containing only the elements that match the predicate.
+// Can be generated for any type.
+func (s SliceType) Elem(el ElementType) bool {
+	for _, e := range s {
+		if e == el {
+			return true
+		}
+	}
+	return false
+}
+`,
 	"filter.go": `
 // Filter returns a slice containing only the elements that match the predicate.
 // Can be generated for any type.
@@ -429,6 +441,7 @@ var funcDomains = map[string][]string{
 	"any.go":         {ForNumbers, ForStrings, ForStructs},
 	"average.go":     {ForNumbers},
 	"delete.go":      {ForNumbers, ForStrings, ForStructs},
+	"elem.go":        {ForNumbers, ForStrings, ForStructs},
 	"filter.go":      {ForNumbers, ForStrings, ForStructs},
 	"foldl.go":       {ForNumbers, ForStrings, ForStructs},
 	"foldl1.go":      {ForNumbers, ForStrings, ForStructs},

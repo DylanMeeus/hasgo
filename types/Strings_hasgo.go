@@ -55,6 +55,19 @@ func (s Strings) Delete(e string) (out Strings) {
 	return
 }
 
+// =============== elem.go =================
+
+// Filter returns a slice containing only the elements that match the predicate.
+// Can be generated for any type.
+func (s Strings) Elem(el string) bool {
+	for _, e := range s {
+		if e == el {
+			return true
+		}
+	}
+	return false
+}
+
 // =============== filter.go =================
 
 // Filter returns a slice containing only the elements that match the predicate.

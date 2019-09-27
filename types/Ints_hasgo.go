@@ -82,6 +82,19 @@ func (s Ints) Delete(e int64) (out Ints) {
 	return
 }
 
+// =============== elem.go =================
+
+// Filter returns a slice containing only the elements that match the predicate.
+// Can be generated for any type.
+func (s Ints) Elem(el int64) bool {
+	for _, e := range s {
+		if e == el {
+			return true
+		}
+	}
+	return false
+}
+
 // =============== filter.go =================
 
 // Filter returns a slice containing only the elements that match the predicate.

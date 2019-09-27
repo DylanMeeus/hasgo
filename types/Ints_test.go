@@ -533,6 +533,33 @@ var (
 			-13,
 		},
 	}
+
+	intsElemTests = []struct {
+		input  Ints
+		needle int64
+		output bool
+	}{
+		{
+			nil,
+			0,
+			false,
+		},
+		{
+			Ints{},
+			0,
+			false,
+		},
+		{
+			Ints{1, 2, 3, 4},
+			1,
+			true,
+		},
+		{
+			Ints{1, 2, 3, 4},
+			100,
+			false,
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -840,6 +867,16 @@ func Test_IntsFoldl1(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Foldl1(test.foldfunc); res != test.foldl1 {
 				t.Errorf("expected %v but got %v", test.foldl1, res)
+			}
+		})
+	}
+}
+
+func Test_IntsElem(t *testing.T) {
+	for _, test := range intsElemTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Elem(test.needle); res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

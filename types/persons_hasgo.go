@@ -54,6 +54,19 @@ func (s persons) Delete(e person) (out persons) {
 	return
 }
 
+// =============== elem.go =================
+
+// Filter returns a slice containing only the elements that match the predicate.
+// Can be generated for any type.
+func (s persons) Elem(el person) bool {
+	for _, e := range s {
+		if e == el {
+			return true
+		}
+	}
+	return false
+}
+
 // =============== filter.go =================
 
 // Filter returns a slice containing only the elements that match the predicate.

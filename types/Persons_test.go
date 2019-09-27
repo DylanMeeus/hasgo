@@ -326,6 +326,33 @@ var (
 			ana,
 		},
 	}
+
+	structElemTests = []struct {
+		input  persons
+		needle person
+		output bool
+	}{
+		{
+			nil,
+			ana,
+			false,
+		},
+		{
+			persons{},
+			ana,
+			false,
+		},
+		{
+			persons{dylan, ana, sean},
+			ana,
+			true,
+		},
+		{
+			persons{dylan, sean},
+			ana,
+			false,
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -552,6 +579,16 @@ func Test_structFoldl1(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Foldl1(test.foldlfunc); res != test.foldl1 {
 				t.Errorf("expected %v but got %v", test.foldl1, res)
+			}
+		})
+	}
+}
+
+func Test_structElem(t *testing.T) {
+	for _, test := range structElemTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Elem(test.needle); res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

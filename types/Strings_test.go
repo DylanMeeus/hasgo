@@ -421,6 +421,33 @@ var (
 			"three",
 		},
 	}
+
+	stringsElemTests = []struct {
+		input  Strings
+		needle string
+		output bool
+	}{
+		{
+			nil,
+			"",
+			false,
+		},
+		{
+			Strings{},
+			"",
+			false,
+		},
+		{
+			Strings{"hello", "world"},
+			"hello",
+			true,
+		},
+		{
+			Strings{"Hello", "World"},
+			"",
+			false,
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -708,6 +735,16 @@ func Test_StringsMaximumBy(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.MaximumBy(test.comparator); res != test.max {
 				t.Errorf("expected %v but got %v", test.max, res)
+			}
+		})
+	}
+}
+
+func Test_StringsElem(t *testing.T) {
+	for _, test := range stringsElemTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Elem(test.needle); res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}
