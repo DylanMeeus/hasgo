@@ -1,9 +1,5 @@
-github.com/DylanMeeus/hasgo/functions v0.0.0-20190915135554-37d7be08d34f h1:e7UsxeD1fI25rAVRiN/HnEH6VufXwyt++6drksXiPXo=
-github.com/DylanMeeus/hasgo/functions v0.0.0-20190915135554-37d7be08d34f/go.mod h1:xTNdc6boFkN2qHej/ittba712vnT5JOZ1nb2yk48NYw=
-github.com/DylanMeeus/hasgo/functions v0.0.0-20190927165719-2ac04723c925 h1:Lo36EI1UyUcnsODh/efqkBfJksqRVohxg3ArkuDXRcs=
-github.com/DylanMeeus/hasgo/functions v0.0.0-20190927165719-2ac04723c925/go.mod h1:xTNdc6boFkN2qHej/ittba712vnT5JOZ1nb2yk48NYw=
-github.com/DylanMeeus/hasgo/types v0.0.0-20190915133841-bd481ce3492e h1:3oUNVu3R5z3ki7NU0t/3teKgUyD+QPyUo9IVqdgFWcE=
-github.com/DylanMeeus/hasgo/types v0.0.0-20190915133841-bd481ce3492e/go.mod h1:P0jbBiMGpKS6NnhmaQAbua54O5bnRVLOFQPP+1wx6NE=
+github.com/DylanMeeus/hasgo/types v0.0.0-20190927174927-88a14c2b81f9 h1:5LkAy3JLCgusoBlyMWTZt+WWVrbRNDkaac7TK3gMieU=
+github.com/DylanMeeus/hasgo/types v0.0.0-20190927174927-88a14c2b81f9/go.mod h1:P0jbBiMGpKS6NnhmaQAbua54O5bnRVLOFQPP+1wx6NE=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/net v0.0.0-20190620200207-3b0461eec859/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
 golang.org/x/sync v0.0.0-20190423024810-112230192c58/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
