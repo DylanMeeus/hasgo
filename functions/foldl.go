@@ -1,6 +1,6 @@
 package functions
 
-// Foldr reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
+// Foldl reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
 func (s SliceType) Foldl(z ElementType, f func(e1, e2 ElementType) ElementType) (out ElementType) {
 	if len(s) == 0 {
 		return

@@ -54,6 +54,7 @@ var (
 		"sum.go":         {ForNumbers, ForStrings},
 		"tail.go":        {ForNumbers, ForStrings, ForStructs},
 		"take.go":        {ForNumbers, ForStrings, ForStructs},
+		"takewhile.go":   {ForNumbers, ForStrings, ForStructs},
 		"uncons.go":      {ForNumbers, ForStrings, ForStructs},
 		"unlines.go":     {ForNumbers, ForStrings, ForStructs},
 		"unwords.go":     {ForNumbers, ForStrings, ForStructs},

@@ -9,7 +9,7 @@ func (s SliceType) Modes() (out SliceType) {
 
 	counts := make(map[ElementType]int)
 	for _, v := range s {
-		counts[v] += 1
+		counts[v]++
 	}
 
 	var max int
