@@ -313,6 +313,23 @@ func (s persons) Take(n uint64) (out persons) {
 	return
 }
 
+// =============== takewhile.go =================
+
+// TakeWhile continues appending to the output as long as the predicate is satisfied.
+// Can be generated for any type.
+func (s persons) TakeWhile(p func(person) bool) (out persons) {
+	if len(s) == 0 {
+		return
+	}
+	for _, e := range s {
+		if !p(e) {
+			return
+		}
+		out = append(out, e)
+	}
+	return
+}
+
 // =============== uncons.go =================
 
 // Uncons decomposes a slice into the head and tail component.

@@ -339,6 +339,23 @@ func (s Strings) Take(n uint64) (out Strings) {
 	return
 }
 
+// =============== takewhile.go =================
+
+// TakeWhile continues appending to the output as long as the predicate is satisfied.
+// Can be generated for any type.
+func (s Strings) TakeWhile(p func(string) bool) (out Strings) {
+	if len(s) == 0 {
+		return
+	}
+	for _, e := range s {
+		if !p(e) {
+			return
+		}
+		out = append(out, e)
+	}
+	return
+}
+
 // =============== uncons.go =================
 
 // Uncons decomposes a slice into the head and tail component.
