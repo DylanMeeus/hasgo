@@ -57,7 +57,7 @@ func (s Strings) Delete(e string) (out Strings) {
 
 // =============== elem.go =================
 
-// Filter returns a slice containing only the elements that match the predicate.
+// Elem returns true if the slice contains the element
 // Can be generated for any type.
 func (s Strings) Elem(el string) bool {
 	for _, e := range s {
@@ -83,7 +83,7 @@ func (s Strings) Filter(f func(string) bool) (out Strings) {
 
 // =============== foldl.go =================
 
-// Foldr reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
+// Foldl reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
 func (s Strings) Foldl(z string, f func(e1, e2 string) string) (out string) {
 	if len(s) == 0 {
 		return
@@ -97,7 +97,7 @@ func (s Strings) Foldl(z string, f func(e1, e2 string) string) (out string) {
 
 // =============== foldl1.go =================
 
-// Foldr reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
+// Foldl1 reduces a list by iteratively applying f from left->right. Thus, for an empty slice, the result is the default zero-value.
 func (s Strings) Foldl1(f func(e1, e2 string) string) (out string) {
 	if len(s) == 0 {
 		return
@@ -227,7 +227,7 @@ func (s Strings) Modes() (out Strings) {
 
 	counts := make(map[string]int)
 	for _, v := range s {
-		counts[v] += 1
+		counts[v]++
 	}
 
 	var max int
