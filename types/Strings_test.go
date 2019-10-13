@@ -64,14 +64,38 @@ var (
 	}
 
 	stringsTakeTests = []struct {
-		input      Strings
-		takeAmount uint64
-		take       Strings
-		init       Strings
-		tail       Strings
-		head       string
-		last       string
+		input       Strings
+		takeAmount  uint64
+		take        Strings
+		init        Strings
+		tail        Strings
+		head        string
+		last        string
+		whilePred   func(string) bool
+		whileOutput Strings
 	}{
+		{
+			nil,
+			0,
+			Strings{},
+			Strings{},
+			Strings{},
+			"",
+			"",
+			func(s string) bool { return len(s) < 2 },
+			Strings{},
+		},
+		{
+			Strings{},
+			0,
+			Strings{},
+			Strings{},
+			Strings{},
+			"",
+			"",
+			func(s string) bool { return len(s) < 2 },
+			Strings{},
+		},
 		{
 			Strings{"a", "b", "c"},
 			2,
@@ -80,6 +104,8 @@ var (
 			Strings{"b", "c"},
 			"a",
 			"c",
+			func(s string) bool { return len(s) < 2 },
+			Strings{"a", "b", "c"},
 		},
 	}
 
@@ -475,6 +501,16 @@ func Test_StringsTake(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Take(test.takeAmount); !res.EqualsOrdered(test.take) {
 				t.Errorf("expected %v but got %v", test.take, res)
+			}
+		})
+	}
+}
+
+func Test_StringsTakewhile(t *testing.T) {
+	for _, test := range stringsTakeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.TakeWhile(test.whilePred); !res.EqualsOrdered(test.whileOutput) {
+				t.Errorf("expected %v but got %v", test.whileOutput, res)
 			}
 		})
 	}
