@@ -111,13 +111,15 @@ var (
 
 	// tests that take a subset of the slice
 	intsTakeTests = []struct {
-		input      Ints
-		takeAmount uint64
-		take       Ints
-		init       Ints
-		tail       Ints
-		head       int64
-		last       int64
+		input       Ints
+		takeAmount  uint64
+		take        Ints
+		init        Ints
+		tail        Ints
+		head        int64
+		last        int64
+		whilePred   func(int64) bool
+		whileOutput Ints
 	}{
 		{
 			nil,
@@ -127,6 +129,8 @@ var (
 			Ints{},
 			0,
 			0,
+			nil,
+			Ints{},
 		},
 		{
 			Ints{},
@@ -136,6 +140,8 @@ var (
 			Ints{},
 			0,
 			0,
+			nil,
+			Ints{},
 		},
 		{
 			IntRange(0, 10),
@@ -145,6 +151,8 @@ var (
 			IntRange(1, 10),
 			0,
 			10,
+			func(u int64) bool { return u < 5 },
+			IntRange(0, 4),
 		},
 		{
 			IntRange(0, 10),
@@ -154,6 +162,8 @@ var (
 			IntRange(1, 10),
 			0,
 			10,
+			func(u int64) bool { return u < 100 },
+			IntRange(0, 10),
 		},
 	}
 
@@ -647,6 +657,16 @@ func Test_IntsTake(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Take(test.takeAmount); !res.EqualsOrdered(test.take) {
 				t.Errorf("expected %v but got %v", test.take, res)
+			}
+		})
+	}
+}
+
+func Test_IntsTakewhile(t *testing.T) {
+	for _, test := range intsTakeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.TakeWhile(test.whilePred); !res.EqualsOrdered(test.whileOutput) {
+				t.Errorf("expected %v but got %v", test.whileOutput, res)
 			}
 		})
 	}
