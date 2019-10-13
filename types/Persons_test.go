@@ -50,13 +50,15 @@ var (
 	}
 
 	structTakeTests = []struct {
-		input      persons
-		takeAmount uint64
-		take       persons
-		init       persons
-		tail       persons
-		head       person
-		last       person
+		input       persons
+		takeAmount  uint64
+		take        persons
+		init        persons
+		tail        persons
+		head        person
+		last        person
+		whilePred   func(person) bool
+		whileOutput persons
 	}{
 		{
 			persons{dylan, ana, sean, tom},
@@ -66,6 +68,8 @@ var (
 			persons{ana, sean, tom},
 			dylan,
 			tom,
+			func(p person) bool { return p.age < 30 },
+			persons{dylan},
 		},
 	}
 
@@ -390,6 +394,16 @@ func Test_StructTake(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Take(test.takeAmount); !res.EqualsOrdered(test.take) {
 				t.Errorf("expected %v but got %v", test.take, res)
+			}
+		})
+	}
+}
+
+func Test_StructTakeWhile(t *testing.T) {
+	for _, test := range structTakeTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.TakeWhile(test.whilePred); !res.EqualsOrdered(test.whileOutput) {
+				t.Errorf("expected %v but got %v", test.whileOutput, res)
 			}
 		})
 	}
