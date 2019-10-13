@@ -92,6 +92,7 @@ These functions can be generated for every type.
 | `Sum`        | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
 | `Tail`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
 | `Take`       | `[a] -> uint64 -> [a]`           |   ✓    |   ✓    |    ✓   | Take N elements from the slice, or all if N exceeds the length.|
+| `TakeWhile`  | `[a] -> (a -> bool) -> [a]       |   ✓    |   ✓    |    ✓   | Take all elements until the first one that does not match the predicate.|
 | `Uncons`     | `[a] -> (a, [a])`                |   ✓    |   ✓    |    ✓   | Returns a tuple of the head and tail of the slice|
 | `Unlines`    | `[a] -> string`                  |   ✓    |   ✓    |    ✓   | Returns a newline separated string of all elements in the slice| 
 | `Unwords`    | `[a] -> string`                  |   ✓    |   ✓    |    ✓   | Returns a space-separated string of all elements in the slice| 
