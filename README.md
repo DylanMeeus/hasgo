@@ -68,7 +68,8 @@ These functions can be generated for every type.
 | `All`        | `[a] -> (a -> bool) -> bool`     |   ✓    |   ✓    |    ✓   | Returns true if the predicate applies to all elements in the slice|
 | `Any`        | `[a] -> (a -> bool) -> bool`     |   ✓    |   ✓    |    ✓   | Returns true if one or more elements satisfy the predicate|
 | `Average`    | `[a] -> a`                       |        |   ✓    |        | Returns the average of all elements|
-| `Delete `    | `[a] -> a -> [a]`                |   ✓    |   ✓    |    ✓   | Returns the slice with the first occurance of the element deleted.|
+| `Delete`     | `[a] -> a -> [a]`                |   ✓    |   ✓    |    ✓   | Returns the slice with the first occurance of the element deleted.|
+| `Drop`       | `Int -> [a] -> [a]`              |   ✓    |   ✓    |    ✓   | Returns the suffix of xs after the first n elements. |
 | `Elem`       | `[a] -> a -> bool`               |   ✓    |   ✓    |    ✓   | Returns true if the slice contains the element.|
 | `Filter`     | `[a] -> (a -> bool) -> [a]`      |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
 | `Foldl`      | `[a] -> a -> (a -> a -> a) -> a` |   ✓    |   ✓    |    ✓   | Left fold over the slice to reduce it to one element with starting value.|

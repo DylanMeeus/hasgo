@@ -357,6 +357,33 @@ var (
 			false,
 		},
 	}
+
+	structDropTests = []struct {
+		input  persons
+		drop   int
+		output persons
+	}{
+		{
+			nil,
+			0,
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean, chris},
+			5,
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean, chris},
+			1,
+			persons{ana, sean, chris},
+		},
+		{
+			persons{dylan, ana, sean, chris},
+			3,
+			persons{chris},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -602,6 +629,16 @@ func Test_structElem(t *testing.T) {
 	for _, test := range structElemTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Elem(test.needle); res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_structDrop(t *testing.T) {
+	for _, test := range structDropTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Drop(test.drop); !test.output.Equals(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
