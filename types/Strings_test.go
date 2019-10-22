@@ -501,6 +501,33 @@ var (
 			Strings{"Meeus"},
 		},
 	}
+
+	stringsDropWhileTests = []struct {
+		input    Strings
+		dropfunc func(string) bool
+		output   Strings
+	}{
+		{
+			nil,
+			func(s string) bool { return len(s) < 4 },
+			Strings{},
+		},
+		{
+			Strings{"abc", "abcd", "abcdef", "abcdefg"},
+			nil,
+			Strings{"abc", "abcd", "abcdef", "abcdefg"},
+		},
+		{
+			Strings{"a", "ab", "abc", "abcd", "abcdef", "abcdefg"},
+			func(s string) bool { return len(s) < 4 },
+			Strings{"abcd", "abcdef", "abcdefg"},
+		},
+		{
+			Strings{"abc", "abcdef", "abc"},
+			func(s string) bool { return len(s) < 4 },
+			Strings{"abcdef", "abc"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -817,6 +844,16 @@ func Test_StringsDrop(t *testing.T) {
 	for _, test := range stringsDropTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Drop(test.drop); !test.output.Equals(res) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsDropWhile(t *testing.T) {
+	for _, test := range stringsDropWhileTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.DropWhile(test.dropfunc); !test.output.Equals(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
