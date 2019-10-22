@@ -54,6 +54,16 @@ func (s persons) Delete(e person) (out persons) {
 	return
 }
 
+// =============== drop.go =================
+
+func (s persons) Drop(i int) (out persons) {
+	for i < len(s) {
+		out = append(out, s[i])
+		i++
+	}
+	return
+}
+
 // =============== elem.go =================
 
 // Elem returns true if the slice contains the element

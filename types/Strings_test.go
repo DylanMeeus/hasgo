@@ -474,6 +474,33 @@ var (
 			false,
 		},
 	}
+
+	stringsDropTests = []struct {
+		input  Strings
+		drop   int
+		output Strings
+	}{
+		{
+			nil,
+			0,
+			Strings{},
+		},
+		{
+			Strings{"Chris", "Evans", "Dylan", "Meeus"},
+			5,
+			Strings{},
+		},
+		{
+			Strings{"Chris", "Evans", "Dylan", "Meeus"},
+			1,
+			Strings{"Evans", "Dylan", "Meeus"},
+		},
+		{
+			Strings{"Chris", "Evans", "Dylan", "Meeus"},
+			3,
+			Strings{"Meeus"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -780,6 +807,16 @@ func Test_StringsElem(t *testing.T) {
 	for _, test := range stringsElemTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Elem(test.needle); res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsDrop(t *testing.T) {
+	for _, test := range stringsDropTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Drop(test.drop); !test.output.Equals(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

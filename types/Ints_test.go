@@ -570,6 +570,33 @@ var (
 			false,
 		},
 	}
+
+	intsDropTests = []struct {
+		input  Ints
+		drop   int
+		output Ints
+	}{
+		{
+			nil,
+			0,
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4},
+			5,
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4},
+			1,
+			Ints{2, 3, 4},
+		},
+		{
+			Ints{1, 2, 3, 4},
+			3,
+			Ints{4},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -896,6 +923,16 @@ func Test_IntsElem(t *testing.T) {
 	for _, test := range intsElemTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Elem(test.needle); res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsDrop(t *testing.T) {
+	for _, test := range intsDropTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Drop(test.drop); !test.output.Equals(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

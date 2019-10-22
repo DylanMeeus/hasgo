@@ -55,6 +55,16 @@ func (s Strings) Delete(e string) (out Strings) {
 	return
 }
 
+// =============== drop.go =================
+
+func (s Strings) Drop(i int) (out Strings) {
+	for i < len(s) {
+		out = append(out, s[i])
+		i++
+	}
+	return
+}
+
 // =============== elem.go =================
 
 // Elem returns true if the slice contains the element

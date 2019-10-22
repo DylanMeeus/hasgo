@@ -76,6 +76,15 @@ func (s SliceType) Delete(e ElementType) (out SliceType) {
 	return
 }
 `,
+	"drop.go": `
+func (s SliceType) Drop(i int) (out SliceType) {
+	for i < len(s) {
+		out = append(out, s[i])
+		i++
+	}
+	return
+}
+`,
 	"elem.go": `
 // Elem returns true if the slice contains the element
 // Can be generated for any type.
@@ -457,6 +466,7 @@ var funcDomains = map[string][]string{
 	"any.go":         {ForNumbers, ForStrings, ForStructs},
 	"average.go":     {ForNumbers},
 	"delete.go":      {ForNumbers, ForStrings, ForStructs},
+	"drop.go":        {ForNumbers, ForStrings, ForStructs},
 	"elem.go":        {ForNumbers, ForStrings, ForStructs},
 	"filter.go":      {ForNumbers, ForStrings, ForStructs},
 	"foldl.go":       {ForNumbers, ForStrings, ForStructs},
