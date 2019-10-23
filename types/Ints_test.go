@@ -597,6 +597,38 @@ var (
 			Ints{4},
 		},
 	}
+
+	intsDropWhileTests = []struct {
+		input    Ints
+		dropfunc func(int64) bool
+		output   Ints
+	}{
+		{
+			nil,
+			func(i int64) bool { return i < 3 },
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			nil,
+			Ints{1, 2, 3, 4, 5},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			func(i int64) bool { return i < 10 },
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			func(i int64) bool { return i < 3 },
+			Ints{3, 4, 5},
+		},
+		{
+			Ints{1, 2, 3, 4, 3, 2, 1},
+			func(i int64) bool { return i < 3 },
+			Ints{3, 4, 3, 2, 1},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -933,6 +965,16 @@ func Test_IntsDrop(t *testing.T) {
 	for _, test := range intsDropTests {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Drop(test.drop); !test.output.Equals(res) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsDropWhile(t *testing.T) {
+	for _, test := range intsDropWhileTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.DropWhile(test.dropfunc); !test.output.Equals(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})

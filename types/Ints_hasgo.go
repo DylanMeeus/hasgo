@@ -94,6 +94,28 @@ func (s Ints) Drop(i int) (out Ints) {
 	return
 }
 
+// =============== dropwhile.go =================
+
+// DropWhile returns a new slice containing all elements after the predicate fails for the first time.
+// Can be generated for any type.
+func (s Ints) DropWhile(f func(int64) bool) (out Ints) {
+	if f == nil {
+		return s
+	}
+	failed := false
+	for _, v := range s {
+		if failed {
+			out = append(out, v)
+			continue
+		}
+		if !f(v) {
+			out = append(out, v)
+			failed = true
+		}
+	}
+	return
+}
+
 // =============== elem.go =================
 
 // Elem returns true if the slice contains the element
