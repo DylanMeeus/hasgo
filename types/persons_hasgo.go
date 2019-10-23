@@ -56,6 +56,8 @@ func (s persons) Delete(e person) (out persons) {
 
 // =============== drop.go =================
 
+// Drop returns a new Slice with the elements after the provided key.
+// Can be generated for any type.
 func (s persons) Drop(i int) (out persons) {
 	for i < len(s) {
 		out = append(out, s[i])
