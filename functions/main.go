@@ -52,6 +52,7 @@ var (
 		"product.go":     {ForNumbers},
 		"reverse.go":     {ForNumbers, ForStrings, ForStructs},
 		"sort.go":        {ForNumbers, ForStrings},
+		"span.go":        {ForNumbers, ForStrings, ForStructs},
 		"sum.go":         {ForNumbers, ForStrings},
 		"tail.go":        {ForNumbers, ForStrings, ForStructs},
 		"take.go":        {ForNumbers, ForStrings, ForStructs},

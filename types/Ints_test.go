@@ -597,6 +597,44 @@ var (
 			Ints{4},
 		},
 	}
+
+	intsSpanTests = []struct {
+		input    Ints
+		spanfunc func(int64) bool
+		before   Ints
+		after    Ints
+	}{
+		{
+			nil,
+			func(i int64) bool { return i < 3 },
+			Ints{},
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			nil,
+			Ints{},
+			Ints{1, 2, 3, 4, 5},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			func(i int64) bool { return i < 9 },
+			Ints{1, 2, 3, 4, 5},
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			func(i int64) bool { return i > 9 },
+			Ints{},
+			Ints{1, 2, 3, 4, 5},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			func(i int64) bool { return i < 3 },
+			Ints{1, 2},
+			Ints{3, 4, 5},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -934,6 +972,17 @@ func Test_IntsDrop(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Drop(test.drop); !test.output.Equals(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsSpan(t *testing.T) {
+	for _, test := range intsSpanTests {
+		t.Run("", func(t *testing.T) {
+			before, after := test.input.Span(test.spanfunc)
+			if !test.before.Equals(before) || !test.after.Equals(after) {
+				t.Errorf("expected (%v, %v) but got (%v, %v)", test.before, test.after, before, after)
 			}
 		})
 	}

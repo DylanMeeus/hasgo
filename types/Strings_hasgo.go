@@ -308,6 +308,34 @@ func (s Strings) Sort() Strings {
 	return out
 }
 
+// =============== span.go =================
+
+// Span returns a tuple of any elements that satisfy the predicate up until the first failure, followed by
+// the rest of the elements.
+// Can be generated for any type.
+func (s Strings) Span(f func(string) bool) (before Strings, after Strings) {
+	if f == nil {
+		return before, s
+	}
+
+	failed := false
+
+	for _, v := range s {
+		if failed {
+			after = append(after, v)
+			continue
+		}
+		if !f(v) {
+			after = append(after, v)
+			failed = true
+			continue
+		}
+		before = append(before, v)
+	}
+
+	return before, after
+}
+
 // =============== sum.go =================
 
 // Sum returns the sum of all elements in the slice.

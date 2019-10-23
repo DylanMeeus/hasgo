@@ -501,6 +501,44 @@ var (
 			Strings{"Meeus"},
 		},
 	}
+
+	stringsSpanTests = []struct {
+		input    Strings
+		spanfunc func(string) bool
+		before   Strings
+		after    Strings
+	}{
+		{
+			nil,
+			func(s string) bool { return len(s) < 3 },
+			Strings{},
+			Strings{},
+		},
+		{
+			Strings{"ABC", "ABCD", "ABCDE", "ABCDEF"},
+			nil,
+			Strings{},
+			Strings{"ABC", "ABCD", "ABCDE", "ABCDEF"},
+		},
+		{
+			Strings{"ABC", "ABCD", "ABCDE", "ABCDEF"},
+			func(s string) bool { return len(s) < 9 },
+			Strings{"ABC", "ABCD", "ABCDE", "ABCDEF"},
+			Strings{},
+		},
+		{
+			Strings{"ABC", "ABCD", "ABCDE", "ABCDEF"},
+			func(s string) bool { return len(s) > 9 },
+			Strings{},
+			Strings{"ABC", "ABCD", "ABCDE", "ABCDEF"},
+		},
+		{
+			Strings{"ABC", "ABCD", "ABCDE", "ABCDEF"},
+			func(s string) bool { return len(s) < 5 },
+			Strings{"ABC", "ABCD"},
+			Strings{"ABCDE", "ABCDEF"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -818,6 +856,17 @@ func Test_StringsDrop(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Drop(test.drop); !test.output.Equals(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsSpan(t *testing.T) {
+	for _, test := range stringsSpanTests {
+		t.Run("", func(t *testing.T) {
+			before, after := test.input.Span(test.spanfunc)
+			if !test.before.Equals(before) || !test.after.Equals(after) {
+				t.Errorf("expected (%v, %v) but got (%v, %v)", test.before, test.after, before, after)
 			}
 		})
 	}
