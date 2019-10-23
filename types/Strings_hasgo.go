@@ -67,6 +67,8 @@ func (s Strings) Drop(i int) (out Strings) {
 
 // =============== dropwhile.go =================
 
+// DropWhile returns a new slice containing all elements after the predicate fails for the first time.
+// Can be generated for any type.
 func (s Strings) DropWhile(f func(string) bool) (out Strings) {
 	if f == nil {
 		return s
