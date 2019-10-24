@@ -381,7 +381,7 @@ func (s SliceType) Span(f func(ElementType) bool) (before SliceType, after Slice
 		before = append(before, v)
 	}
 
-	return before, after
+	return
 }
 `,
 	"sum.go": `

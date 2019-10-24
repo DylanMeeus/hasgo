@@ -405,7 +405,7 @@ func (s Ints) Span(f func(int64) bool) (before Ints, after Ints) {
 		before = append(before, v)
 	}
 
-	return before, after
+	return
 }
 
 // =============== sum.go =================

@@ -319,7 +319,7 @@ func (s persons) Span(f func(person) bool) (before persons, after persons) {
 		before = append(before, v)
 	}
 
-	return before, after
+	return
 }
 
 // =============== tail.go =================

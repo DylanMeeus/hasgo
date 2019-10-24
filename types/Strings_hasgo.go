@@ -333,7 +333,7 @@ func (s Strings) Span(f func(string) bool) (before Strings, after Strings) {
 		before = append(before, v)
 	}
 
-	return before, after
+	return
 }
 
 // =============== sum.go =================
