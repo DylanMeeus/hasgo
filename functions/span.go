@@ -11,16 +11,12 @@ func (s SliceType) Span(f func(ElementType) bool) (before SliceType, after Slice
 	failed := false
 
 	for _, v := range s {
-		if failed {
-			after = append(after, v)
-			continue
-		}
-		if !f(v) {
+		if failed || !f(v) {
 			after = append(after, v)
 			failed = true
-			continue
+		} else {
+			before = append(before, v)
 		}
-		before = append(before, v)
 	}
 
 	return
