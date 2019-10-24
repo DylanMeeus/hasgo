@@ -65,6 +65,34 @@ func (s Ints) Average() float64 {
 	return float64(sum) / float64(len(s))
 }
 
+// =============== break.go =================
+
+// Break returns a tuple of any elements that do not satisfy the predicate up until the first time it passes, followed
+// by the rest of the elements.
+// Can be generated on any type.
+func (s Ints) Break(f func(int64) bool) (before Ints, after Ints) {
+	if f == nil {
+		return before, s
+	}
+
+	passed := false
+
+	for _, v := range s {
+		if passed {
+			after = append(after, v)
+			continue
+		}
+		if f(v) {
+			after = append(after, v)
+			passed = true
+			continue
+		}
+		before = append(before, v)
+	}
+
+	return
+}
+
 // =============== delete.go =================
 
 // Delete returns a slice with the first matching element

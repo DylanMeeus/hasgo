@@ -30,6 +30,7 @@ var (
 		"all.go":         {ForNumbers, ForStrings, ForStructs},
 		"any.go":         {ForNumbers, ForStrings, ForStructs},
 		"average.go":     {ForNumbers},
+		"break.go":       {ForNumbers, ForStrings, ForStructs},
 		"delete.go":      {ForNumbers, ForStrings, ForStructs},
 		"drop.go":        {ForNumbers, ForStrings, ForStructs},
 		"dropwhile.go":   {ForNumbers, ForStrings, ForStructs},

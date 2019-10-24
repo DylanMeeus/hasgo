@@ -629,6 +629,44 @@ var (
 			Ints{3, 4, 3, 2, 1},
 		},
 	}
+
+	intsBreakTests = []struct {
+		input     Ints
+		breakfunc func(int64) bool
+		before    Ints
+		after     Ints
+	}{
+		{
+			nil,
+			func(i int64) bool { return i < 3 },
+			Ints{},
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			nil,
+			Ints{},
+			Ints{1, 2, 3, 4, 5},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			func(i int64) bool { return i < 10 },
+			Ints{},
+			Ints{1, 2, 3, 4, 5},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			func(i int64) bool { return i > 10 },
+			Ints{1, 2, 3, 4, 5},
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			func(i int64) bool { return i > 3 },
+			Ints{1, 2, 3},
+			Ints{4, 5},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -976,6 +1014,17 @@ func Test_IntsDropWhile(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.DropWhile(test.dropfunc); !test.output.Equals(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsBreak(t *testing.T) {
+	for _, test := range intsBreakTests {
+		t.Run("", func(t *testing.T) {
+			before, after := test.input.Break(test.breakfunc)
+			if !test.before.Equals(before) || !test.after.Equals(after) {
+				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
 			}
 		})
 	}
