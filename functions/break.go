@@ -11,16 +11,12 @@ func (s SliceType) Break(f func(ElementType) bool) (before SliceType, after Slic
 	passed := false
 
 	for _, v := range s {
-		if passed {
-			after = append(after, v)
-			continue
-		}
-		if f(v) {
+		if passed || f(v) {
 			after = append(after, v)
 			passed = true
-			continue
+		} else {
+			before = append(before, v)
 		}
-		before = append(before, v)
 	}
 
 	return

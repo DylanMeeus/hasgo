@@ -51,16 +51,12 @@ func (s Strings) Break(f func(string) bool) (before Strings, after Strings) {
 	passed := false
 
 	for _, v := range s {
-		if passed {
-			after = append(after, v)
-			continue
-		}
-		if f(v) {
+		if passed || f(v) {
 			after = append(after, v)
 			passed = true
-			continue
+		} else {
+			before = append(before, v)
 		}
-		before = append(before, v)
 	}
 
 	return

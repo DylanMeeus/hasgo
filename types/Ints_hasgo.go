@@ -78,16 +78,12 @@ func (s Ints) Break(f func(int64) bool) (before Ints, after Ints) {
 	passed := false
 
 	for _, v := range s {
-		if passed {
-			after = append(after, v)
-			continue
-		}
-		if f(v) {
+		if passed || f(v) {
 			after = append(after, v)
 			passed = true
-			continue
+		} else {
+			before = append(before, v)
 		}
-		before = append(before, v)
 	}
 
 	return
