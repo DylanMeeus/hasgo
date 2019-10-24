@@ -60,6 +60,29 @@ func (s SliceType) Average() float64 {
 	return float64(sum) / float64(len(s))
 }
 `,
+	"break.go": `
+// Break returns a tuple of any elements that do not satisfy the predicate up until the first time it passes, followed
+// by the rest of the elements.
+// Can be generated on any type.
+func (s SliceType) Break(f func(ElementType) bool) (before SliceType, after SliceType) {
+	if f == nil {
+		return before, s
+	}
+
+	passed := false
+
+	for _, v := range s {
+		if passed || f(v) {
+			after = append(after, v)
+			passed = true
+		} else {
+			before = append(before, v)
+		}
+	}
+
+	return
+}
+`,
 	"delete.go": `
 // Delete returns a slice with the first matching element
 // removed from the slice.
@@ -488,6 +511,7 @@ var funcDomains = map[string][]string{
 	"all.go":         {ForNumbers, ForStrings, ForStructs},
 	"any.go":         {ForNumbers, ForStrings, ForStructs},
 	"average.go":     {ForNumbers},
+	"break.go":       {ForNumbers, ForStrings, ForStructs},
 	"delete.go":      {ForNumbers, ForStrings, ForStructs},
 	"drop.go":        {ForNumbers, ForStrings, ForStructs},
 	"dropwhile.go":   {ForNumbers, ForStrings, ForStructs},

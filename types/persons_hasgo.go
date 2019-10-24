@@ -37,6 +37,30 @@ func (s persons) Any(f func(person) bool) bool {
 	return false
 }
 
+// =============== break.go =================
+
+// Break returns a tuple of any elements that do not satisfy the predicate up until the first time it passes, followed
+// by the rest of the elements.
+// Can be generated on any type.
+func (s persons) Break(f func(person) bool) (before persons, after persons) {
+	if f == nil {
+		return before, s
+	}
+
+	passed := false
+
+	for _, v := range s {
+		if passed || f(v) {
+			after = append(after, v)
+			passed = true
+		} else {
+			before = append(before, v)
+		}
+	}
+
+	return
+}
+
 // =============== delete.go =================
 
 // Delete returns a slice with the first matching element
