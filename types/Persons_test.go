@@ -385,6 +385,44 @@ var (
 		},
 	}
 
+	structSpanTests = []struct {
+		input    persons
+		spanfunc func(person) bool
+		before   persons
+		after    persons
+	}{
+		{
+			nil,
+			func(p person) bool { return p.age < 27 },
+			persons{},
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			nil,
+			persons{},
+			persons{dylan, ana, sean, tom, chris},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			func(p person) bool { return p.age < 100 },
+			persons{dylan, ana, sean, tom, chris},
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			func(p person) bool { return p.age > 100 },
+			persons{},
+			persons{dylan, ana, sean, tom, chris},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			func(p person) bool { return p.age < 27 },
+			persons{dylan},
+			persons{ana, sean, tom, chris},
+		},
+	}
+
 	structDropWhileTests = []struct {
 		input    persons
 		dropfunc func(person) bool
@@ -705,6 +743,17 @@ func Test_structDrop(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Drop(test.drop); !test.output.Equals(res) {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_structSpan(t *testing.T) {
+	for _, test := range structSpanTests {
+		t.Run("", func(t *testing.T) {
+			before, after := test.input.Span(test.spanfunc)
+			if !test.before.Equals(before) || !test.after.Equals(after) {
+				t.Errorf("expected (%v, %v) but got (%v, %v)", test.before, test.after, before, after)
 			}
 		})
 	}

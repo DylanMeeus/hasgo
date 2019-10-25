@@ -342,6 +342,30 @@ func (s persons) Reverse() (out persons) {
 	return
 }
 
+// =============== span.go =================
+
+// Span returns a tuple of any elements that satisfy the predicate up until the first failure, followed by
+// the rest of the elements.
+// Can be generated for any type.
+func (s persons) Span(f func(person) bool) (before persons, after persons) {
+	if f == nil {
+		return before, s
+	}
+
+	failed := false
+
+	for _, v := range s {
+		if failed || !f(v) {
+			after = append(after, v)
+			failed = true
+		} else {
+			before = append(before, v)
+		}
+	}
+
+	return
+}
+
 // =============== tail.go =================
 
 // Tail takes [1 -> n] elements from a slice, where n = len(list)

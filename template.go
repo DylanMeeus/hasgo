@@ -403,6 +403,29 @@ func (s SliceType) Sort() SliceType {
 	return out
 }
 `,
+	"span.go": `
+// Span returns a tuple of any elements that satisfy the predicate up until the first failure, followed by
+// the rest of the elements.
+// Can be generated for any type.
+func (s SliceType) Span(f func(ElementType) bool) (before SliceType, after SliceType) {
+	if f == nil {
+		return before, s
+	}
+
+	failed := false
+
+	for _, v := range s {
+		if failed || !f(v) {
+			after = append(after, v)
+			failed = true
+		} else {
+			before = append(before, v)
+		}
+	}
+
+	return
+}
+`,
 	"sum.go": `
 // Sum returns the sum of all elements in the slice.
 // Can be generated for any number type.
@@ -535,6 +558,7 @@ var funcDomains = map[string][]string{
 	"product.go":     {ForNumbers},
 	"reverse.go":     {ForNumbers, ForStrings, ForStructs},
 	"sort.go":        {ForNumbers, ForStrings},
+	"span.go":        {ForNumbers, ForStrings, ForStructs},
 	"sum.go":         {ForNumbers, ForStrings},
 	"tail.go":        {ForNumbers, ForStrings, ForStructs},
 	"take.go":        {ForNumbers, ForStrings, ForStructs},

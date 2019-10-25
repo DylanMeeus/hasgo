@@ -92,6 +92,7 @@ These functions can be generated for every type.
 | `Product`    | `[a] -> a`                       |   ✓    |        |        | Returns the product of all elements in the slice.|
 | `Reverse`    | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns a slice with the elements reversed|
 | `Sort`       | `[a] -> [a]`                     |   ✓    |   ✓    |        | Returns a sorted slice (original remains unsorted)|
+| `Span`       | `(a -> bool) -> [a] -> ([a], [a])`|  ✓    |   ✓    |    ✓   | Returns a tuple of all elements until the first one that does not match the predicate, followed by the remaining elements. |
 | `Sum`        | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
 | `Tail`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
 | `Take`       | `[a] -> uint64 -> [a]`           |   ✓    |   ✓    |    ✓   | Take N elements from the slice, or all if N exceeds the length.|
