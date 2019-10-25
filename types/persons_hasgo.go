@@ -306,19 +306,6 @@ func (s persons) Span(f func(person) bool) (before persons, after persons) {
 
 	failed := false
 
-	//for _, v := range s {
-	//	if failed {
-	//		after = append(after, v)
-	//		continue
-	//	}
-	//	if !f(v) {
-	//		after = append(after, v)
-	//		failed = true
-	//		continue
-	//	}
-	//	before = append(before, v)
-	//}
-
 	for _, v := range s {
 		if failed || !f(v) {
 			after = append(after, v)
