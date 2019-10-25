@@ -422,6 +422,71 @@ var (
 			persons{ana, sean, tom, chris},
 		},
 	}
+
+	structDropWhileTests = []struct {
+		input    persons
+		dropfunc func(person) bool
+		output   persons
+	}{
+		{
+			nil,
+			func(p person) bool { return p.age < 27 },
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			nil,
+			persons{dylan, ana, sean, tom, chris},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			func(p person) bool { return p.age < 50 },
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			func(p person) bool { return p.age < 30 },
+			persons{ana, sean, tom, chris},
+		},
+	}
+
+	structBreakTests = []struct {
+		input     persons
+		breakfunc func(person) bool
+		before    persons
+		after     persons
+	}{
+		{
+			nil,
+			func(p person) bool { return p.age < 27 },
+			persons{},
+			persons{},
+		},
+		{
+			persons{sean, dylan, tom, chris, ana},
+			nil,
+			persons{},
+			persons{sean, dylan, tom, chris, ana},
+		},
+		{
+			persons{sean, dylan, tom, chris, ana},
+			func(p person) bool { return p.age < 100 },
+			persons{},
+			persons{sean, dylan, tom, chris, ana},
+		},
+		{
+			persons{sean, dylan, tom, chris, ana},
+			func(p person) bool { return p.age > 100 },
+			persons{sean, dylan, tom, chris, ana},
+			persons{},
+		},
+		{
+			persons{sean, dylan, tom, chris, ana},
+			func(p person) bool { return p.age > 26 },
+			persons{sean, dylan, tom},
+			persons{chris, ana},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -689,6 +754,27 @@ func Test_structSpan(t *testing.T) {
 			before, after := test.input.Span(test.spanfunc)
 			if !test.before.Equals(before) || !test.after.Equals(after) {
 				t.Errorf("expected (%v, %v) but got (%v, %v)", test.before, test.after, before, after)
+			}
+		})
+	}
+}
+
+func Test_structDropWhile(t *testing.T) {
+	for _, test := range structDropWhileTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.DropWhile(test.dropfunc); !test.output.Equals(res) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_structBreak(t *testing.T) {
+	for _, test := range structBreakTests {
+		t.Run("", func(t *testing.T) {
+			before, after := test.input.Break(test.breakfunc)
+			if !test.before.Equals(before) || !test.after.Equals(after) {
+				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
 			}
 		})
 	}

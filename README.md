@@ -68,8 +68,10 @@ These functions can be generated for every type.
 | `All`        | `[a] -> (a -> bool) -> bool`     |   ✓    |   ✓    |    ✓   | Returns true if the predicate applies to all elements in the slice|
 | `Any`        | `[a] -> (a -> bool) -> bool`     |   ✓    |   ✓    |    ✓   | Returns true if one or more elements satisfy the predicate|
 | `Average`    | `[a] -> a`                       |        |   ✓    |        | Returns the average of all elements|
+| `Break`      | `(a -> bool) -> [a] -> ([a], [a])`|  ✓    |   ✓    |    ✓   | Returns a tuple of all elements until the first one that matches the predicate, followed by the remaining elements. |
 | `Delete`     | `[a] -> a -> [a]`                |   ✓    |   ✓    |    ✓   | Returns the slice with the first occurance of the element deleted.|
 | `Drop`       | `Int -> [a] -> [a]`              |   ✓    |   ✓    |    ✓   | Returns the suffix of xs after the first n elements. |
+| `DropWhile`  | `(a -> bool) -> [a] -> [a]`      |   ✓    |   ✓    |    ✓   | Returns the suffix of xs after the predicate's first failure. |
 | `Elem`       | `[a] -> a -> bool`               |   ✓    |   ✓    |    ✓   | Returns true if the slice contains the element.|
 | `Filter`     | `[a] -> (a -> bool) -> [a]`      |   ✓    |   ✓    |    ✓   | Filter the slice based on a predicate|
 | `Foldl`      | `[a] -> a -> (a -> a -> a) -> a` |   ✓    |   ✓    |    ✓   | Left fold over the slice to reduce it to one element with starting value.|
@@ -94,7 +96,7 @@ These functions can be generated for every type.
 | `Sum`        | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
 | `Tail`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
 | `Take`       | `[a] -> uint64 -> [a]`           |   ✓    |   ✓    |    ✓   | Take N elements from the slice, or all if N exceeds the length.|
-| `TakeWhile`  | `[a] -> (a -> bool) -> [a]       |   ✓    |   ✓    |    ✓   | Take all elements until the first one that does not match the predicate.|
+| `TakeWhile`  | `[a] -> (a -> bool) -> [a]`      |   ✓    |   ✓    |    ✓   | Take all elements until the first one that does not match the predicate.|
 | `Uncons`     | `[a] -> (a, [a])`                |   ✓    |   ✓    |    ✓   | Returns a tuple of the head and tail of the slice|
 | `Unlines`    | `[a] -> string`                  |   ✓    |   ✓    |    ✓   | Returns a newline separated string of all elements in the slice| 
 | `Unwords`    | `[a] -> string`                  |   ✓    |   ✓    |    ✓   | Returns a space-separated string of all elements in the slice| 

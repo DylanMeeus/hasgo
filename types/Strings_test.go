@@ -539,6 +539,71 @@ var (
 			Strings{"ABCDE", "ABCDEF"},
 		},
 	}
+
+	stringsDropWhileTests = []struct {
+		input    Strings
+		dropfunc func(string) bool
+		output   Strings
+	}{
+		{
+			nil,
+			func(s string) bool { return len(s) < 4 },
+			Strings{},
+		},
+		{
+			Strings{"abc", "abcd", "abcdef", "abcdefg"},
+			nil,
+			Strings{"abc", "abcd", "abcdef", "abcdefg"},
+		},
+		{
+			Strings{"a", "ab", "abc", "abcd", "abcdef", "abcdefg"},
+			func(s string) bool { return len(s) < 4 },
+			Strings{"abcd", "abcdef", "abcdefg"},
+		},
+		{
+			Strings{"abc", "abcdef", "abc"},
+			func(s string) bool { return len(s) < 4 },
+			Strings{"abcdef", "abc"},
+		},
+	}
+
+	stringsBreakTests = []struct {
+		input     Strings
+		breakfunc func(string) bool
+		before    Strings
+		after     Strings
+	}{
+		{
+			nil,
+			func(s string) bool { return len(s) < 3 },
+			Strings{},
+			Strings{},
+		},
+		{
+			Strings{"abc", "abcd", "abcde"},
+			nil,
+			Strings{},
+			Strings{"abc", "abcd", "abcde"},
+		},
+		{
+			Strings{"abc", "abcd", "abcde"},
+			func(s string) bool { return len(s) < 100 },
+			Strings{},
+			Strings{"abc", "abcd", "abcde"},
+		},
+		{
+			Strings{"abc", "abcd", "abcde"},
+			func(s string) bool { return len(s) > 100 },
+			Strings{"abc", "abcd", "abcde"},
+			Strings{},
+		},
+		{
+			Strings{"abc", "abcd", "abcde"},
+			func(s string) bool { return len(s) > 4 },
+			Strings{"abc", "abcd"},
+			Strings{"abcde"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -867,6 +932,27 @@ func Test_StringsSpan(t *testing.T) {
 			before, after := test.input.Span(test.spanfunc)
 			if !test.before.Equals(before) || !test.after.Equals(after) {
 				t.Errorf("expected (%v, %v) but got (%v, %v)", test.before, test.after, before, after)
+			}
+		})
+	}
+}
+
+func Test_StringsDropWhile(t *testing.T) {
+	for _, test := range stringsDropWhileTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.DropWhile(test.dropfunc); !test.output.Equals(res) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsBreak(t *testing.T) {
+	for _, test := range stringsBreakTests {
+		t.Run("", func(t *testing.T) {
+			before, after := test.input.Break(test.breakfunc)
+			if !test.before.Equals(before) || !test.after.Equals(after) {
+				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
 			}
 		})
 	}
