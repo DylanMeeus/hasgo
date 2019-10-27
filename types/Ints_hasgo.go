@@ -223,7 +223,6 @@ func (s Ints) Init() (out Ints) {
 // Inits returns all inits of a sequence, in order of small to large, as if it were called recursively.
 // Can be generated for any type.
 func (s Ints) Inits() (out [][]int64) {
-	// {1, 2, 3} -> {{}, {1}, {1, 2}, {1, 2, 3}}
 	out = append(out, make(Ints, 0))
 	for i := range s {
 		new := make(Ints, i+1)

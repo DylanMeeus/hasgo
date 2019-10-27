@@ -196,7 +196,6 @@ func (s Strings) Init() (out Strings) {
 // Inits returns all inits of a sequence, in order of small to large, as if it were called recursively.
 // Can be generated for any type.
 func (s Strings) Inits() (out [][]string) {
-	// {1, 2, 3} -> {{}, {1}, {1, 2}, {1, 2, 3}}
 	out = append(out, make(Strings, 0))
 	for i := range s {
 		new := make(Strings, i+1)

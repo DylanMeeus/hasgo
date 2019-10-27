@@ -195,7 +195,6 @@ func (s persons) Init() (out persons) {
 // Inits returns all inits of a sequence, in order of small to large, as if it were called recursively.
 // Can be generated for any type.
 func (s persons) Inits() (out [][]person) {
-	// {1, 2, 3} -> {{}, {1}, {1, 2}, {1, 2, 3}}
 	out = append(out, make(persons, 0))
 	for i := range s {
 		new := make(persons, i+1)
