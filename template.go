@@ -203,6 +203,22 @@ func (s SliceType) Init() (out SliceType) {
 	return slicecopy[:len(s)-1]
 }
 `,
+	"inits.go": `
+// Inits returns all inits of a sequence, in order of small to large, as if it were called recursively.
+// Can be generated for any type.
+func (s SliceType) Inits() (out SliceSliceType) {
+	// {1, 2, 3} -> {{}, {1}, {1, 2}, {1, 2, 3}}
+	out = append(out, make(SliceType, 0))
+	for i := range s {
+		new := make(SliceType, i+1)
+		for n := 0; n <= i; n++ {
+			new[n] = s[n]
+		}
+		out = append(out, new)
+	}
+	return
+}
+`,
 	"intercalate.go": `
 // Intercalate inserts the method receiver slice into the function slice at each step.
 // Can be generated for any type.
@@ -521,6 +537,7 @@ var funcDomains = map[string][]string{
 	"foldl1.go":      {ForNumbers, ForStrings, ForStructs},
 	"head.go":        {ForNumbers, ForStrings, ForStructs},
 	"init.go":        {ForNumbers, ForStrings, ForStructs},
+	"inits.go":       {ForNumbers, ForStrings, ForStructs},
 	"intercalate.go": {ForNumbers, ForStrings, ForStructs},
 	"intersperse.go": {ForNumbers, ForStrings, ForStructs},
 	"last.go":        {ForNumbers, ForStrings, ForStructs},

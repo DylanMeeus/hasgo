@@ -667,6 +667,25 @@ var (
 			Ints{4, 5},
 		},
 	}
+
+	intsInitsTests = []struct {
+		input  Ints
+		output []Ints
+	}{
+		{
+			nil,
+			[]Ints{},
+		},
+		{
+			Ints{1, 2, 3},
+			[]Ints{
+				{},
+				{1},
+				{1, 2},
+				{1, 2, 3},
+			},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -1025,6 +1044,19 @@ func Test_IntsBreak(t *testing.T) {
 			before, after := test.input.Break(test.breakfunc)
 			if !test.before.Equals(before) || !test.after.Equals(after) {
 				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
+			}
+		})
+	}
+}
+
+func Test_IntsInits(t *testing.T) {
+	for _, test := range intsInitsTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.Inits()
+			for i, v := range test.output {
+				if !v.EqualsOrdered(res[i]) {
+					t.Errorf("expected %v but got %v", v, res[i])
+				}
 			}
 		})
 	}

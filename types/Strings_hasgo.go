@@ -191,6 +191,23 @@ func (s Strings) Init() (out Strings) {
 	return slicecopy[:len(s)-1]
 }
 
+// =============== inits.go =================
+
+// Inits returns all inits of a sequence, in order of small to large, as if it were called recursively.
+// Can be generated for any type.
+func (s Strings) Inits() (out [][]string) {
+	// {1, 2, 3} -> {{}, {1}, {1, 2}, {1, 2, 3}}
+	out = append(out, make(Strings, 0))
+	for i := range s {
+		new := make(Strings, i+1)
+		for n := 0; n <= i; n++ {
+			new[n] = s[n]
+		}
+		out = append(out, new)
+	}
+	return
+}
+
 // =============== intercalate.go =================
 
 // Intercalate inserts the method receiver slice into the function slice at each step.
