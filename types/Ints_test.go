@@ -724,6 +724,25 @@ var (
 			},
 		},
 	}
+
+	intsTailsTests = []struct {
+		input  Ints
+		output []Ints
+	}{
+		{
+			nil,
+			[]Ints{},
+		},
+		{
+			Ints{1, 2, 3},
+			[]Ints{
+				{1, 2, 3},
+				{2, 3},
+				{3},
+				{},
+			},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -1102,6 +1121,19 @@ func Test_IntsInits(t *testing.T) {
 	for _, test := range intsInitsTests {
 		t.Run("", func(t *testing.T) {
 			res := test.input.Inits()
+			for i, v := range test.output {
+				if !v.EqualsOrdered(res[i]) {
+					t.Errorf("expected %v but got %v", v, res[i])
+				}
+			}
+		})
+	}
+}
+
+func Test_IntsTails(t *testing.T) {
+	for _, test := range intsTailsTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.Tails()
 			for i, v := range test.output {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])

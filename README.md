@@ -96,6 +96,7 @@ These functions can be generated for every type.
 | `Span`       | `(a -> bool) -> [a] -> ([a], [a])`|  ✓    |   ✓    |    ✓   | Returns a tuple of all elements until the first one that does not match the predicate, followed by the remaining elements. |
 | `Sum`        | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
 | `Tail`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
+| `Tails`      | `[a] -> [[a]]`                   |   ✓    |   ✓    |    ✓   | Returns all final segments of the slice, longest first. |
 | `Take`       | `[a] -> uint64 -> [a]`           |   ✓    |   ✓    |    ✓   | Take N elements from the slice, or all if N exceeds the length.|
 | `TakeWhile`  | `[a] -> (a -> bool) -> [a]`      |   ✓    |   ✓    |    ✓   | Take all elements until the first one that does not match the predicate.|
 | `Uncons`     | `[a] -> (a, [a])`                |   ✓    |   ✓    |    ✓   | Returns a tuple of the head and tail of the slice|
