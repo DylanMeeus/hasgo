@@ -209,11 +209,11 @@ func (s SliceType) Init() (out SliceType) {
 func (s SliceType) Inits() (out SliceSliceType) {
 	out = append(out, make(SliceType, 0))
 	for i := range s {
-		new := make(SliceType, i+1)
+		init := make(SliceType, i+1)
 		for n := 0; n <= i; n++ {
-			new[n] = s[n]
+			init[n] = s[n]
 		}
-		out = append(out, new)
+		out = append(out, init)
 	}
 	return
 }

@@ -225,11 +225,11 @@ func (s Ints) Init() (out Ints) {
 func (s Ints) Inits() (out [][]int64) {
 	out = append(out, make(Ints, 0))
 	for i := range s {
-		new := make(Ints, i+1)
+		init := make(Ints, i+1)
 		for n := 0; n <= i; n++ {
-			new[n] = s[n]
+			init[n] = s[n]
 		}
-		out = append(out, new)
+		out = append(out, init)
 	}
 	return
 }

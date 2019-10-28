@@ -198,11 +198,11 @@ func (s Strings) Init() (out Strings) {
 func (s Strings) Inits() (out [][]string) {
 	out = append(out, make(Strings, 0))
 	for i := range s {
-		new := make(Strings, i+1)
+		init := make(Strings, i+1)
 		for n := 0; n <= i; n++ {
-			new[n] = s[n]
+			init[n] = s[n]
 		}
-		out = append(out, new)
+		out = append(out, init)
 	}
 	return
 }

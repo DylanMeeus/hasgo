@@ -197,11 +197,11 @@ func (s persons) Init() (out persons) {
 func (s persons) Inits() (out [][]person) {
 	out = append(out, make(persons, 0))
 	for i := range s {
-		new := make(persons, i+1)
+		init := make(persons, i+1)
 		for n := 0; n <= i; n++ {
-			new[n] = s[n]
+			init[n] = s[n]
 		}
-		out = append(out, new)
+		out = append(out, init)
 	}
 	return
 }
