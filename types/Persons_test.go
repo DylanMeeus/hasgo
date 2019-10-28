@@ -487,6 +487,27 @@ var (
 			persons{chris, ana},
 		},
 	}
+
+	structInitsTests = []struct {
+		input  persons
+		output []persons
+	}{
+		{
+			nil,
+			[]persons{},
+		},
+		{
+			persons{sean, dylan, tom, chris, ana},
+			[]persons{
+				{},
+				{sean},
+				{sean, dylan},
+				{sean, dylan, tom},
+				{sean, dylan, tom, chris},
+				{sean, dylan, tom, chris, ana},
+			},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -775,6 +796,19 @@ func Test_structBreak(t *testing.T) {
 			before, after := test.input.Break(test.breakfunc)
 			if !test.before.Equals(before) || !test.after.Equals(after) {
 				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
+			}
+		})
+	}
+}
+
+func Test_structInits(t *testing.T) {
+	for _, test := range structInitsTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.Inits()
+			for i, v := range test.output {
+				if !v.EqualsOrdered(res[i]) {
+					t.Errorf("expected %v but got %v", v, res[i])
+				}
 			}
 		})
 	}

@@ -78,6 +78,7 @@ These functions can be generated for every type.
 | `Foldl1`     | `[a] -> (a -> a -> a) -> a`      |   ✓    |   ✓    |    ✓   | Left fold over the slice to reduce it to one element.|
 | `Head`       | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | Return the first element|
 | `Init`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|
+| `Inits`      | `[a] -> [[a]]`                   |   ✓    |   ✓    |    ✓   | Returns all initial segments of the slice, shortest first. |
 | `Intercalate`| `[a] -> [[a]] -> [a]`            |   ✓    |   ✓    |    ✓   | Intersperses the slice in between the provided 2d-slice |
 | `Intersperse`| `[a] -> a -> [a]`                |   ✓    |   ✓    |    ✓   | Intersperses the value in between all elements of the provided slice|  
 | `Last`       | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | Returns the last element|

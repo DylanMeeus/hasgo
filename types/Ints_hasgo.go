@@ -218,6 +218,22 @@ func (s Ints) Init() (out Ints) {
 	return slicecopy[:len(s)-1]
 }
 
+// =============== inits.go =================
+
+// Inits returns all inits of a sequence, in order of small to large, as if it were called recursively.
+// Can be generated for any type.
+func (s Ints) Inits() (out [][]int64) {
+	out = append(out, make(Ints, 0))
+	for i := range s {
+		init := make(Ints, i+1)
+		for n := 0; n <= i; n++ {
+			init[n] = s[n]
+		}
+		out = append(out, init)
+	}
+	return
+}
+
 // =============== intercalate.go =================
 
 // Intercalate inserts the method receiver slice into the function slice at each step.
