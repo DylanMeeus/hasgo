@@ -604,6 +604,24 @@ var (
 			Strings{"abcde"},
 		},
 	}
+	stringsInitsTests = []struct {
+		input  Strings
+		output []Strings
+	}{
+		{
+			nil,
+			[]Strings{},
+		},
+		{
+			Strings{"aaa", "bbb", "ccc"},
+			[]Strings{
+				{},
+				{"aaa"},
+				{"aaa", "bbb"},
+				{"aaa", "bbb", "ccc"},
+			},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -953,6 +971,19 @@ func Test_StringsBreak(t *testing.T) {
 			before, after := test.input.Break(test.breakfunc)
 			if !test.before.Equals(before) || !test.after.Equals(after) {
 				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
+			}
+		})
+	}
+}
+
+func Test_StringsInits(t *testing.T) {
+	for _, test := range stringsInitsTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.Inits()
+			for i, v := range test.output {
+				if !v.EqualsOrdered(res[i]) {
+					t.Errorf("expected %v but got %v", v, res[i])
+				}
 			}
 		})
 	}
