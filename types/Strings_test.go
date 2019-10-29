@@ -622,6 +622,56 @@ var (
 			},
 		},
 	}
+
+	stringsSplitAtTests = []struct {
+		input  Strings
+		i      int
+		before Strings
+		after  Strings
+	}{
+		{
+			nil,
+			5,
+			Strings{},
+			Strings{},
+		},
+		{
+			Strings{},
+			5,
+			Strings{},
+			Strings{},
+		},
+		{
+			Strings{"aaa", "bbb", "ccc", "ddd", "eee"},
+			0,
+			Strings{},
+			Strings{"aaa", "bbb", "ccc", "ddd", "eee"},
+		},
+		{
+			Strings{"aaa", "bbb", "ccc", "ddd", "eee"},
+			-1,
+			Strings{},
+			Strings{"aaa", "bbb", "ccc", "ddd", "eee"},
+		},
+		{
+			Strings{"aaa", "bbb", "ccc", "ddd", "eee"},
+			10,
+			Strings{"aaa", "bbb", "ccc", "ddd", "eee"},
+			Strings{},
+		},
+		{
+			Strings{"aaa", "bbb", "ccc", "ddd", "eee"},
+			5,
+			Strings{"aaa", "bbb", "ccc", "ddd", "eee"},
+			Strings{},
+		},
+		{
+			Strings{"aaa", "bbb", "ccc", "ddd", "eee"},
+			3,
+			Strings{"aaa", "bbb", "ccc"},
+			Strings{"ddd", "eee"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -984,6 +1034,16 @@ func Test_StringsInits(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_StringsSplitAt(t *testing.T) {
+	for _, test := range stringsSplitAtTests {
+		t.Run("", func(t *testing.T) {
+			if before, after := test.input.SplitAt(test.i); !test.before.Equals(before) || !test.after.Equals(after) {
+				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
 			}
 		})
 	}

@@ -724,6 +724,56 @@ var (
 			},
 		},
 	}
+
+	intsSplitAtTests = []struct {
+		input  Ints
+		i      int
+		before Ints
+		after  Ints
+	}{
+		{
+			nil,
+			5,
+			Ints{},
+			Ints{},
+		},
+		{
+			Ints{},
+			5,
+			Ints{},
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			0,
+			Ints{},
+			Ints{1, 2, 3, 4, 5},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			-1,
+			Ints{},
+			Ints{1, 2, 3, 4, 5},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			10,
+			Ints{1, 2, 3, 4, 5},
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			5,
+			Ints{1, 2, 3, 4, 5},
+			Ints{},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			3,
+			Ints{1, 2, 3},
+			Ints{4, 5},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -1106,6 +1156,16 @@ func Test_IntsInits(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_IntsSplitAt(t *testing.T) {
+	for _, test := range intsSplitAtTests {
+		t.Run("", func(t *testing.T) {
+			if before, after := test.input.SplitAt(test.i); !test.before.Equals(before) || !test.after.Equals(after) {
+				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
 			}
 		})
 	}

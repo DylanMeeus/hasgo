@@ -382,6 +382,21 @@ func (s persons) Span(f func(person) bool) (before persons, after persons) {
 	return
 }
 
+// =============== splitat.go =================
+
+// SplitAt splits the slice at the given index, returning before and after as a tuple.
+// Can be generated for any type.
+func (s persons) SplitAt(i int) (before, after persons) {
+	for k, v := range s {
+		if k < i {
+			before = append(before, v)
+		} else {
+			after = append(after, v)
+		}
+	}
+	return
+}
+
 // =============== tail.go =================
 
 // Tail takes [1 -> n] elements from a slice, where n = len(list)
