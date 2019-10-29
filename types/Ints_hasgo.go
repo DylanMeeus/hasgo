@@ -498,9 +498,10 @@ func (s Ints) Tail() (out Ints) {
 // Tails returns all tails of a sequence, in order of large to small, as if it were called recursively.
 // Can be generated for any type.
 func (s Ints) Tails() (out [][]int64) {
-	for i := range s {
-		scopy := append([]int64(nil), s...)
-		out = append(out, scopy[i:])
+	slicecopy := append([]int64(nil), s...)
+	for range s {
+		out = append(out, slicecopy)
+		slicecopy = slicecopy[1:]
 	}
 	out = append(out, make(Ints, 0))
 	return

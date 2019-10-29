@@ -400,9 +400,10 @@ func (s persons) Tail() (out persons) {
 // Tails returns all tails of a sequence, in order of large to small, as if it were called recursively.
 // Can be generated for any type.
 func (s persons) Tails() (out [][]person) {
-	for i := range s {
-		scopy := append([]person(nil), s...)
-		out = append(out, scopy[i:])
+	slicecopy := append([]person(nil), s...)
+	for range s {
+		out = append(out, slicecopy)
+		slicecopy = slicecopy[1:]
 	}
 	out = append(out, make(persons, 0))
 	return
