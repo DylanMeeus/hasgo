@@ -396,6 +396,39 @@ func (s Strings) Span(f func(string) bool) (before Strings, after Strings) {
 	return
 }
 
+// =============== splitat.go =================
+
+// SplitAt splits the slice at the given index, returning before and after as a tuple.
+// Can be generated for any type.
+func (s Strings) SplitAt(i int) (before, after Strings) {
+	for k, v := range s {
+		if k < i {
+			before = append(before, v)
+		} else {
+			after = append(after, v)
+		}
+	}
+	return
+}
+
+//package functions
+//
+//// SplitAt splits the slice at the given index, returning before and after as a tuple.
+//// Can be generated for any type.
+//func (s Strings) SplitAt(i int) (before, after Strings) {
+//	if i < 0 || i > len(s) {
+//		return
+//	}
+//	for k, v := range s {
+//		if k < i {
+//			before = append(before, v)
+//		} else {
+//			after = append(after, v)
+//		}
+//	}
+//	return
+//}
+
 // =============== sum.go =================
 
 // Sum returns the sum of all elements in the slice.

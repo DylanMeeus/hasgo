@@ -441,6 +441,38 @@ func (s SliceType) Span(f func(ElementType) bool) (before SliceType, after Slice
 	return
 }
 `,
+	"splitat.go": `
+// SplitAt splits the slice at the given index, returning before and after as a tuple.
+// Can be generated for any type.
+func (s SliceType) SplitAt(i int) (before, after SliceType) {
+	for k, v := range s {
+		if k < i {
+			before = append(before, v)
+		} else {
+			after = append(after, v)
+		}
+	}
+	return
+}
+
+//package functions
+//
+//// SplitAt splits the slice at the given index, returning before and after as a tuple.
+//// Can be generated for any type.
+//func (s SliceType) SplitAt(i int) (before, after SliceType) {
+//	if i < 0 || i > len(s) {
+//		return
+//	}
+//	for k, v := range s {
+//		if k < i {
+//			before = append(before, v)
+//		} else {
+//			after = append(after, v)
+//		}
+//	}
+//	return
+//}
+`,
 	"sum.go": `
 // Sum returns the sum of all elements in the slice.
 // Can be generated for any number type.
@@ -575,6 +607,7 @@ var funcDomains = map[string][]string{
 	"reverse.go":     {ForNumbers, ForStrings, ForStructs},
 	"sort.go":        {ForNumbers, ForStrings},
 	"span.go":        {ForNumbers, ForStrings, ForStructs},
+	"splitat.go":     {ForNumbers, ForStrings, ForStructs},
 	"sum.go":         {ForNumbers, ForStrings},
 	"tail.go":        {ForNumbers, ForStrings, ForStructs},
 	"take.go":        {ForNumbers, ForStrings, ForStructs},
