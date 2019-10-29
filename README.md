@@ -94,6 +94,7 @@ These functions can be generated for every type.
 | `Reverse`    | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns a slice with the elements reversed|
 | `Sort`       | `[a] -> [a]`                     |   ✓    |   ✓    |        | Returns a sorted slice (original remains unsorted)|
 | `Span`       | `(a -> bool) -> [a] -> ([a], [a])`|  ✓    |   ✓    |    ✓   | Returns a tuple of all elements until the first one that does not match the predicate, followed by the remaining elements. |
+| `SplitAt`    | `Int -> [a] -> ([a], [a])`       |   ✓    |   ✓    |    ✓   | Returns a tuple with all elements up until the specified index, followed by the elements after the index. |
 | `Sum`        | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | The sum of elements in the slice|
 | `Tail`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the first|
 | `Tails`      | `[a] -> [[a]]`                   |   ✓    |   ✓    |    ✓   | Returns all final segments of the slice, longest first. |

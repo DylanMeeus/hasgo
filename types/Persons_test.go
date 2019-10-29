@@ -529,6 +529,56 @@ var (
 			},
 		},
 	}
+
+	structSplitAtTests = []struct {
+		input  persons
+		i      int
+		before persons
+		after  persons
+	}{
+		{
+			nil,
+			5,
+			persons{},
+			persons{},
+		},
+		{
+			persons{},
+			5,
+			persons{},
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			0,
+			persons{},
+			persons{dylan, ana, sean, tom, chris},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			-1,
+			persons{},
+			persons{dylan, ana, sean, tom, chris},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			10,
+			persons{dylan, ana, sean, tom, chris},
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			5,
+			persons{dylan, ana, sean, tom, chris},
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean, tom, chris},
+			3,
+			persons{dylan, ana, sean},
+			persons{tom, chris},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -843,6 +893,16 @@ func Test_structTails(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_structSplitAt(t *testing.T) {
+	for _, test := range structSplitAtTests {
+		t.Run("", func(t *testing.T) {
+			if before, after := test.input.SplitAt(test.i); !test.before.Equals(before) || !test.after.Equals(after) {
+				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
 			}
 		})
 	}

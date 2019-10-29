@@ -56,6 +56,7 @@ var (
 		"reverse.go":     {ForNumbers, ForStrings, ForStructs},
 		"sort.go":        {ForNumbers, ForStrings},
 		"span.go":        {ForNumbers, ForStrings, ForStructs},
+		"splitat.go":     {ForNumbers, ForStrings, ForStructs},
 		"sum.go":         {ForNumbers, ForStrings},
 		"tail.go":        {ForNumbers, ForStrings, ForStructs},
 		"tails.go":       {ForNumbers, ForStrings, ForStructs},
