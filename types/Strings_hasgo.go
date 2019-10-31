@@ -436,6 +436,20 @@ func (s Strings) Tail() (out Strings) {
 	return slicecopy[1:]
 }
 
+// =============== tails.go =================
+
+// Tails returns all tails of a sequence, in order of large to small, as if it were called recursively.
+// Can be generated for any type.
+func (s Strings) Tails() (out [][]string) {
+	slicecopy := append([]string(nil), s...)
+	for range s {
+		out = append(out, slicecopy)
+		slicecopy = slicecopy[1:]
+	}
+	out = append(out, make(Strings, 0))
+	return
+}
+
 // =============== take.go =================
 
 // Take takes the first n elements of the slice, or the entire slice if n > len(slice).

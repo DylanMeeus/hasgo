@@ -478,6 +478,19 @@ func (s SliceType) Tail() (out SliceType) {
 	return slicecopy[1:]
 }
 `,
+	"tails.go": `
+// Tails returns all tails of a sequence, in order of large to small, as if it were called recursively.
+// Can be generated for any type.
+func (s SliceType) Tails() (out SliceSliceType) {
+	slicecopy := append([]ElementType(nil), s...)
+	for range s {
+		out = append(out, slicecopy)
+		slicecopy = slicecopy[1:]
+	}
+	out = append(out, make(SliceType, 0))
+	return
+}
+`,
 	"take.go": `
 // Take takes the first n elements of the slice, or the entire slice if n > len(slice).
 // Can be generated for any type.
@@ -592,6 +605,7 @@ var funcDomains = map[string][]string{
 	"splitat.go":     {ForNumbers, ForStrings, ForStructs},
 	"sum.go":         {ForNumbers, ForStrings},
 	"tail.go":        {ForNumbers, ForStrings, ForStructs},
+	"tails.go":       {ForNumbers, ForStrings, ForStructs},
 	"take.go":        {ForNumbers, ForStrings, ForStructs},
 	"takewhile.go":   {ForNumbers, ForStrings, ForStructs},
 	"uncons.go":      {ForNumbers, ForStrings, ForStructs},

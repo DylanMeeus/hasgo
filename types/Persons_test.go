@@ -509,6 +509,27 @@ var (
 		},
 	}
 
+	structTailsTests = []struct {
+		input  persons
+		output []persons
+	}{
+		{
+			nil,
+			[]persons{},
+		},
+		{
+			persons{sean, dylan, tom, chris, ana},
+			[]persons{
+				{sean, dylan, tom, chris, ana},
+				{dylan, tom, chris, ana},
+				{tom, chris, ana},
+				{chris, ana},
+				{ana},
+				{},
+			},
+		},
+	}
+
 	structSplitAtTests = []struct {
 		input  persons
 		i      int
@@ -855,6 +876,19 @@ func Test_structInits(t *testing.T) {
 	for _, test := range structInitsTests {
 		t.Run("", func(t *testing.T) {
 			res := test.input.Inits()
+			for i, v := range test.output {
+				if !v.EqualsOrdered(res[i]) {
+					t.Errorf("expected %v but got %v", v, res[i])
+				}
+			}
+		})
+	}
+}
+
+func Test_structTails(t *testing.T) {
+	for _, test := range structTailsTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.Tails()
 			for i, v := range test.output {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])

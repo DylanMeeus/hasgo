@@ -604,6 +604,7 @@ var (
 			Strings{"abcde"},
 		},
 	}
+
 	stringsInitsTests = []struct {
 		input  Strings
 		output []Strings
@@ -619,6 +620,25 @@ var (
 				{"aaa"},
 				{"aaa", "bbb"},
 				{"aaa", "bbb", "ccc"},
+			},
+		},
+	}
+
+	stringsTailsTests = []struct {
+		input  Strings
+		output []Strings
+	}{
+		{
+			nil,
+			[]Strings{},
+		},
+		{
+			Strings{"aaa", "bbb", "ccc"},
+			[]Strings{
+				{"aaa", "bbb", "ccc"},
+				{"bbb", "ccc"},
+				{"ccc"},
+				{},
 			},
 		},
 	}
@@ -1030,6 +1050,19 @@ func Test_StringsInits(t *testing.T) {
 	for _, test := range stringsInitsTests {
 		t.Run("", func(t *testing.T) {
 			res := test.input.Inits()
+			for i, v := range test.output {
+				if !v.EqualsOrdered(res[i]) {
+					t.Errorf("expected %v but got %v", v, res[i])
+				}
+			}
+		})
+	}
+}
+
+func Test_StringsTails(t *testing.T) {
+	for _, test := range stringsTailsTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.Tails()
 			for i, v := range test.output {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
