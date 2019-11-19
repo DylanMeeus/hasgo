@@ -166,6 +166,25 @@ func (s persons) Foldl1(f func(e1, e2 person) person) (out person) {
 	return
 }
 
+// =============== group.go =================
+
+// Group returns a list of lists where each list contains only equal elements and the concatenation of the
+// result is equal to the argument.
+// Can be generated for any type.
+func (s persons) Group() (out [][]person) {
+	current := persons{}
+
+	for i, v := range s {
+		current = append(current, v)
+		if i == len(s)-1 || v != s[i+1] {
+			out = append(out, current)
+			current = persons{}
+		}
+	}
+
+	return
+}
+
 // =============== head.go =================
 
 // Head returns the first element in the slice.

@@ -793,6 +793,28 @@ var (
 			Ints{4, 5},
 		},
 	}
+
+	intsGroupTests = []struct {
+		input  Ints
+		output []Ints
+	}{
+		{
+			nil,
+			[]Ints{},
+		},
+		{
+			Ints{},
+			[]Ints{},
+		},
+		{
+			Ints{1, 2, 3},
+			[]Ints{{1}, {2}, {3}},
+		},
+		{
+			Ints{1, 2, 2, 2, 3, 3, 4, 5, 5},
+			[]Ints{{1}, {2, 2, 2}, {3, 3}, {4}, {5, 5}},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -1198,6 +1220,19 @@ func Test_IntsSplitAt(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if before, after := test.input.SplitAt(test.i); !test.before.Equals(before) || !test.after.Equals(after) {
 				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
+			}
+		})
+	}
+}
+
+func Test_IntsGroup(t *testing.T) {
+	for _, test := range intsGroupTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.Group()
+			for i, v := range test.output {
+				if !v.EqualsOrdered(res[i]) {
+					t.Errorf("expected %v but got %v", v, res[i])
+				}
 			}
 		})
 	}

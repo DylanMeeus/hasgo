@@ -692,6 +692,28 @@ var (
 			Strings{"ddd", "eee"},
 		},
 	}
+
+	stringsGroupTests = []struct {
+		input  Strings
+		output []Strings
+	}{
+		{
+			nil,
+			[]Strings{},
+		},
+		{
+			Strings{},
+			[]Strings{},
+		},
+		{
+			Strings{"a", "b", "c"},
+			[]Strings{{"a"}, {"b"}, {"c"}},
+		},
+		{
+			Strings{"a", "a", "b", "c", "c", "c", "d"},
+			[]Strings{{"a", "a"}, {"b"}, {"c", "c", "c"}, {"d"}},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -1077,6 +1099,19 @@ func Test_StringsSplitAt(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if before, after := test.input.SplitAt(test.i); !test.before.Equals(before) || !test.after.Equals(after) {
 				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
+			}
+		})
+	}
+}
+
+func Test_StringsGroup(t *testing.T) {
+	for _, test := range stringsGroupTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.Group()
+			for i, v := range test.output {
+				if !v.EqualsOrdered(res[i]) {
+					t.Errorf("expected %v but got %v", v, res[i])
+				}
 			}
 		})
 	}
