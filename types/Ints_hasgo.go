@@ -203,9 +203,9 @@ func (s Ints) Group() (out [][]int64) {
 	current := Ints{}
 	last := len(s) - 1
 
-	for k, v := range s {
+	for i, v := range s {
 		current = append(current, v)
-		if k == last || v != s[k+1] {
+		if i == last || v != s[i+1] {
 			out = append(out, current)
 			current = Ints{}
 		}
