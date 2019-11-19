@@ -201,11 +201,10 @@ func (s Ints) Foldl1(f func(e1, e2 int64) int64) (out int64) {
 // Can be generated for any type.
 func (s Ints) Group() (out [][]int64) {
 	current := Ints{}
-	last := len(s) - 1
 
 	for i, v := range s {
 		current = append(current, v)
-		if i == last || v != s[i+1] {
+		if i == len(s)-1 || v != s[i+1] {
 			out = append(out, current)
 			current = Ints{}
 		}

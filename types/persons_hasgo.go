@@ -173,11 +173,10 @@ func (s persons) Foldl1(f func(e1, e2 person) person) (out person) {
 // Can be generated for any type.
 func (s persons) Group() (out [][]person) {
 	current := persons{}
-	last := len(s) - 1
 
 	for i, v := range s {
 		current = append(current, v)
-		if i == last || v != s[i+1] {
+		if i == len(s)-1 || v != s[i+1] {
 			out = append(out, current)
 			current = persons{}
 		}

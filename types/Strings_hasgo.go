@@ -174,11 +174,10 @@ func (s Strings) Foldl1(f func(e1, e2 string) string) (out string) {
 // Can be generated for any type.
 func (s Strings) Group() (out [][]string) {
 	current := Strings{}
-	last := len(s) - 1
 
 	for i, v := range s {
 		current = append(current, v)
-		if i == last || v != s[i+1] {
+		if i == len(s)-1 || v != s[i+1] {
 			out = append(out, current)
 			current = Strings{}
 		}

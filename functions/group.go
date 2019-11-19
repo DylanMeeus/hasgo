@@ -5,11 +5,10 @@ package functions
 // Can be generated for any type.
 func (s SliceType) Group() (out SliceSliceType) {
 	current := SliceType{}
-	last := len(s) - 1
 
 	for i, v := range s {
 		current = append(current, v)
-		if i == last || v != s[i+1] {
+		if i == len(s)-1 || v != s[i+1] {
 			out = append(out, current)
 			current = SliceType{}
 		}
