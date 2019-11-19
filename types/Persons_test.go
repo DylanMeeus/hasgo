@@ -579,6 +579,28 @@ var (
 			persons{tom, chris},
 		},
 	}
+
+	structGroupTests = []struct {
+		input  persons
+		output []persons
+	}{
+		{
+			nil,
+			[]persons{},
+		},
+		{
+			persons{},
+			[]persons{},
+		},
+		{
+			persons{dylan, ana, sean},
+			[]persons{{dylan}, {ana}, {sean}},
+		},
+		{
+			persons{dylan, dylan, ana, ana, chris, sean, sean, sean},
+			[]persons{{dylan, dylan}, {ana, ana}, {chris}, {sean, sean, sean}},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -903,6 +925,19 @@ func Test_structSplitAt(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if before, after := test.input.SplitAt(test.i); !test.before.Equals(before) || !test.after.Equals(after) {
 				t.Errorf("expected %v, %v but got %v, %v", test.before, test.after, before, after)
+			}
+		})
+	}
+}
+
+func Test_structGroup(t *testing.T) {
+	for _, test := range structGroupTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.Group()
+			for i, v := range test.output {
+				if !v.EqualsOrdered(res[i]) {
+					t.Errorf("expected %v but got %v", v, res[i])
+				}
 			}
 		})
 	}

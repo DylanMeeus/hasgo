@@ -181,6 +181,25 @@ func (s SliceType) Foldl1(f func(e1, e2 ElementType) ElementType) (out ElementTy
 	return
 }
 `,
+	"group.go": `
+// Group returns a list of lists where each list contains only equal elements and the concatenation of the
+// result is equal to the argument.
+// Can be generated for any type.
+func (s SliceType) Group() (out SliceSliceType) {
+	current := SliceType{}
+	last := len(s) - 1
+
+	for k, v := range s {
+		current = append(current, v)
+		if k == last || v != s[k+1] {
+			out = append(out, current)
+			current = SliceType{}
+		}
+	}
+
+	return
+}
+`,
 	"head.go": `
 // Head returns the first element in the slice.
 // If no element is found, returns the zero-value of the type.
@@ -584,6 +603,7 @@ var funcDomains = map[string][]string{
 	"filter.go":      {ForNumbers, ForStrings, ForStructs},
 	"foldl.go":       {ForNumbers, ForStrings, ForStructs},
 	"foldl1.go":      {ForNumbers, ForStrings, ForStructs},
+	"group.go":       {ForNumbers, ForStrings, ForStructs},
 	"head.go":        {ForNumbers, ForStrings, ForStructs},
 	"init.go":        {ForNumbers, ForStrings, ForStructs},
 	"inits.go":       {ForNumbers, ForStrings, ForStructs},

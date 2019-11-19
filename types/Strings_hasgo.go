@@ -167,6 +167,26 @@ func (s Strings) Foldl1(f func(e1, e2 string) string) (out string) {
 	return
 }
 
+// =============== group.go =================
+
+// Group returns a list of lists where each list contains only equal elements and the concatenation of the
+// result is equal to the argument.
+// Can be generated for any type.
+func (s Strings) Group() (out [][]string) {
+	current := Strings{}
+	last := len(s) - 1
+
+	for k, v := range s {
+		current = append(current, v)
+		if k == last || v != s[k+1] {
+			out = append(out, current)
+			current = Strings{}
+		}
+	}
+
+	return
+}
+
 // =============== head.go =================
 
 // Head returns the first element in the slice.

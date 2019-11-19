@@ -194,6 +194,26 @@ func (s Ints) Foldl1(f func(e1, e2 int64) int64) (out int64) {
 	return
 }
 
+// =============== group.go =================
+
+// Group returns a list of lists where each list contains only equal elements and the concatenation of the
+// result is equal to the argument.
+// Can be generated for any type.
+func (s Ints) Group() (out [][]int64) {
+	current := Ints{}
+	last := len(s) - 1
+
+	for k, v := range s {
+		current = append(current, v)
+		if k == last || v != s[k+1] {
+			out = append(out, current)
+			current = Ints{}
+		}
+	}
+
+	return
+}
+
 // =============== head.go =================
 
 // Head returns the first element in the slice.
