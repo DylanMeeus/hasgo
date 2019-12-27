@@ -145,11 +145,11 @@ func (s persons) Foldl(z person, f func(e1, e2 person) person) (out person) {
 	if len(s) == 0 {
 		return
 	}
-	out = s[0]
+	out = f(z, s[0])
 	for _, v := range s[1:] {
 		out = f(out, v)
 	}
-	return f(out, z)
+	return
 }
 
 // =============== foldl1.go =================
