@@ -95,6 +95,7 @@ These functions can be generated for every type.
 | `Null`       | `[a] -> bool`                    |   ✓    |   ✓    |    ✓   | Returns true if the slice is empty, false otherwise|
 | `Product`    | `[a] -> a`                       |   ✓    |        |        | Returns the product of all elements in the slice.|
 | `Reverse`    | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns a slice with the elements reversed|
+| `Scanl`      | `[a] -> b -> (a -> b -> a) -> [b]`|  ✓    |   ✓    |    ✓   | Left fold over the slice to reduce it to one element with a starting value and return every iteration in a slice. |
 | `Sort`       | `[a] -> [a]`                     |   ✓    |   ✓    |        | Returns a sorted slice (original remains unsorted)|
 | `Span`       | `(a -> bool) -> [a] -> ([a], [a])`|  ✓    |   ✓    |    ✓   | Returns a tuple of all elements until the first one that does not match the predicate, followed by the remaining elements. |
 | `SplitAt`    | `Int -> [a] -> ([a], [a])`       |   ✓    |   ✓    |    ✓   | Returns a tuple with all elements up until the specified index, followed by the elements after the index. |

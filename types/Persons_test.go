@@ -607,6 +607,26 @@ var (
 			[]persons{{dylan, dylan}, {ana, ana}, {chris}, {sean, sean, sean}},
 		},
 	}
+
+	structScanTests = []struct {
+		input    persons
+		init     person
+		scanfunc func(person, person) person
+		scanl    persons
+	}{
+		{
+			nil,
+			person{},
+			func(p1, p2 person) person { return p1 },
+			persons{},
+		},
+		{
+			persons{dylan, ana, sean},
+			chris,
+			func(p1, p2 person) person { return p1 },
+			persons{chris, dylan, ana, sean},
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -964,6 +984,16 @@ func Test_structGroup(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_structScan1(t *testing.T) {
+	for _, test := range structScanTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Scanl(test.init, test.scanfunc); !test.scanl.Equals(res) {
+				t.Errorf("expected %v but got %v", test.scanl, res)
 			}
 		})
 	}

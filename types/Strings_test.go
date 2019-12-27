@@ -724,6 +724,32 @@ var (
 			[]Strings{{"a", "a"}, {"b"}, {"c", "c", "c"}, {"d"}},
 		},
 	}
+
+	stringsScanTests = []struct {
+		input    Strings
+		init     string
+		scanfunc func(string, string) string
+		scanl    Strings
+	}{
+		{
+			nil,
+			"",
+			func(s1, s2 string) string { return s1 + " " + s2 },
+			Strings{},
+		},
+		{
+			Strings{"World"},
+			"Hello",
+			func(s1, s2 string) string { return s1 + " " + s2 },
+			Strings{"Hello", "Hello World"},
+		},
+		{
+			Strings{"Hello", "World", "Goodbye"},
+			"Thing",
+			func(s1, s2 string) string { return s1 + " " + s2 },
+			Strings{"Thing", "Thing Hello", "Thing Hello World", "Thing Hello World Goodbye"},
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -1142,6 +1168,16 @@ func Test_StringsGroup(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_StringsScanl(t *testing.T) {
+	for _, test := range stringsScanTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Scanl(test.init, test.scanfunc); !test.scanl.Equals(res) {
+				t.Errorf("expected %v but got %v", test.scanl, res)
 			}
 		})
 	}
