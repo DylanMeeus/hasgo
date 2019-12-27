@@ -520,11 +520,13 @@ var (
 		foldfunc func(int64, int64) int64
 		foldl    int64
 		foldl1   int64
+		foldr    int64
 	}{
 		{
 			nil,
 			0,
 			func(i1, i2 int64) int64 { return i1 + i2 },
+			0,
 			0,
 			0,
 		},
@@ -534,6 +536,7 @@ var (
 			func(i1, i2 int64) int64 { return i1 + i2 },
 			2,
 			1,
+			2,
 		},
 		{
 			Ints{1, 2, 3, 4, 5},
@@ -541,6 +544,7 @@ var (
 			func(i1, i2 int64) int64 { return i1 - i2 },
 			-13,
 			-13,
+			3,
 		},
 	}
 
@@ -1132,6 +1136,16 @@ func Test_IntsFoldl1(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Foldl1(test.foldfunc); res != test.foldl1 {
 				t.Errorf("expected %v but got %v", test.foldl1, res)
+			}
+		})
+	}
+}
+
+func Test_IntsFoldr(t *testing.T) {
+	for _, test := range intsFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldr(test.init, test.foldfunc); res != test.foldr {
+				t.Errorf("expected #{test.foldr} but got #{res}")
 			}
 		})
 	}
