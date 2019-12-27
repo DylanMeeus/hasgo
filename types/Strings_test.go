@@ -431,7 +431,7 @@ var (
 			func(s1, s2 string) string {
 				return s1 + " " + s2
 			},
-			"one zero",
+			"zero one",
 			"one",
 		},
 		{
