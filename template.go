@@ -181,6 +181,23 @@ func (s SliceType) Foldl1(f func(e1, e2 ElementType) ElementType) (out ElementTy
 	return
 }
 `,
+	"foldr.go": `
+// Foldr reduces a list by iteratively applying f from right -> left. Thus, for an empty slice, the result is the default zero-value.
+func (s SliceType) Foldr(e ElementType, f func(e1, e2 ElementType) ElementType) (out ElementType) {
+	if len(s) == 0 {
+		return
+	}
+
+	end := len(s) - 1
+	out = f(s[end], e)
+
+	for i := end - 1; i >= 0; i-- {
+		out = f(s[i], out)
+	}
+
+	return
+}
+`,
 	"group.go": `
 // Group returns a list of lists where each list contains only equal elements and the concatenation of the
 // result is equal to the argument.
@@ -602,6 +619,7 @@ var funcDomains = map[string][]string{
 	"filter.go":      {ForNumbers, ForStrings, ForStructs},
 	"foldl.go":       {ForNumbers, ForStrings, ForStructs},
 	"foldl1.go":      {ForNumbers, ForStrings, ForStructs},
+	"foldr.go":       {ForNumbers, ForStrings, ForStructs},
 	"group.go":       {ForNumbers, ForStrings, ForStructs},
 	"head.go":        {ForNumbers, ForStrings, ForStructs},
 	"init.go":        {ForNumbers, ForStrings, ForStructs},

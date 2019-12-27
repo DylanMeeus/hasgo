@@ -405,11 +405,12 @@ var (
 	}
 
 	stringsFoldTests = []struct {
-		input     Strings
-		init      string
-		foldlfunc func(s1, s2 string) string
-		foldl     string
-		foldl1    string
+		input    Strings
+		init     string
+		foldfunc func(s1, s2 string) string
+		foldl    string
+		foldl1   string
+		foldr    string
 	}{
 		{
 			nil,
@@ -417,11 +418,13 @@ var (
 			func(s1, s2 string) string { return s1 },
 			"",
 			"",
+			"",
 		},
 		{
 			Strings{},
 			"",
 			func(s1, s2 string) string { return s1 },
+			"",
 			"",
 			"",
 		},
@@ -433,6 +436,7 @@ var (
 			},
 			"zero one",
 			"one",
+			"one zero",
 		},
 		{
 			Strings{"one", "two", "three", "ten"},
@@ -443,6 +447,7 @@ var (
 				}
 				return s2
 			},
+			"three",
 			"three",
 			"three",
 		},
@@ -979,7 +984,7 @@ func Test_StringsWords(t *testing.T) {
 func Test_StringsFoldl1(t *testing.T) {
 	for _, test := range stringsFoldTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Foldl1(test.foldlfunc); res != test.foldl1 {
+			if res := test.input.Foldl1(test.foldfunc); res != test.foldl1 {
 				t.Errorf("expected %v but got %v", test.foldl1, res)
 			}
 		})
@@ -989,8 +994,18 @@ func Test_StringsFoldl1(t *testing.T) {
 func Test_StringsFoldl(t *testing.T) {
 	for _, test := range stringsFoldTests {
 		t.Run("", func(t *testing.T) {
-			if res := test.input.Foldl(test.init, test.foldlfunc); res != test.foldl {
+			if res := test.input.Foldl(test.init, test.foldfunc); res != test.foldl {
 				t.Errorf("expected %v but got %v", test.foldl, res)
+			}
+		})
+	}
+}
+
+func Test_StringsFoldr(t *testing.T) {
+	for _, test := range stringsFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldr(test.init, test.foldfunc); res != test.foldr {
+				t.Errorf("expected %v but got %v", test.foldr, res)
 			}
 		})
 	}
