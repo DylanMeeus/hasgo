@@ -77,6 +77,7 @@ These functions can be generated for every type.
 | `Foldl`      | `[a] -> a -> (a -> a -> a) -> a` |   ✓    |   ✓    |    ✓   | Left fold over the slice to reduce it to one element with starting value.|
 | `Foldl1`     | `[a] -> (a -> a -> a) -> a`      |   ✓    |   ✓    |    ✓   | Left fold over the slice to reduce it to one element.|
 | `Foldr`      | `[a] -> b -> (a -> b -> b) -> b` |   ✓    |   ✓    |    ✓   | Right fold over the slice to reduce it to one element with a starting value. |
+| `Foldr1`     | `[a] -> (a -> a -> a) -> a`      |   ✓    |   ✓    |    ✓   | Right fold over the slice to reduce it to one element. |
 | `Group`      | `[a] -> [[a]]`                   |   ✓    |   ✓    |    ✓   | Returns a list of lists where each list contains grouped values from the input list.|
 | `Head`       | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | Return the first element|
 | `Init`       | `[a] -> [a]`                     |   ✓    |   ✓    |    ✓   | Returns all elements minus the last|

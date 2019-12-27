@@ -411,6 +411,7 @@ var (
 		foldl    string
 		foldl1   string
 		foldr    string
+		foldr1   string
 	}{
 		{
 			nil,
@@ -419,11 +420,13 @@ var (
 			"",
 			"",
 			"",
+			"",
 		},
 		{
 			Strings{},
 			"",
 			func(s1, s2 string) string { return s1 },
+			"",
 			"",
 			"",
 			"",
@@ -437,6 +440,7 @@ var (
 			"zero one",
 			"one",
 			"one zero",
+			"one",
 		},
 		{
 			Strings{"one", "two", "three", "ten"},
@@ -447,6 +451,7 @@ var (
 				}
 				return s2
 			},
+			"three",
 			"three",
 			"three",
 			"three",
@@ -1006,6 +1011,16 @@ func Test_StringsFoldr(t *testing.T) {
 		t.Run("", func(t *testing.T) {
 			if res := test.input.Foldr(test.init, test.foldfunc); res != test.foldr {
 				t.Errorf("expected %v but got %v", test.foldr, res)
+			}
+		})
+	}
+}
+
+func Test_StringsFoldr1(t *testing.T) {
+	for _, test := range stringsFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldr1(test.foldfunc); res != test.foldr1 {
+				t.Errorf("expected %v but got %v", test.foldr1, res)
 			}
 		})
 	}

@@ -212,6 +212,24 @@ func (s Ints) Foldr(e int64, f func(e1, e2 int64) int64) (out int64) {
 	return
 }
 
+// =============== foldr1.go =================
+
+// Foldr1 reduces a list by iteratively applying f from right -> left. Thus, for an empty slice, the result is the default zero-value.
+func (s Ints) Foldr1(f func(e1, e2 int64) int64) (out int64) {
+	if len(s) == 0 {
+		return
+	}
+
+	end := len(s) - 1
+	out = s[end]
+
+	for i := end - 1; i >= 0; i-- {
+		out = f(s[i], out)
+	}
+
+	return
+}
+
 // =============== group.go =================
 
 // Group returns a list of lists where each list contains only equal elements and the concatenation of the
