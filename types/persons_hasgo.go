@@ -395,6 +395,25 @@ func (s persons) Reverse() (out persons) {
 	return
 }
 
+// =============== scanl.go =================
+
+// Scanl reduces a list by iteratively applying f from left->right and then returns each iteration in a slice.
+func (s persons) Scanl(e person, f func(e1, e2 person) person) (out persons) {
+	if len(s) == 0 {
+		return
+	}
+
+	out = append(out, e)
+	last := e
+
+	for _, v := range s {
+		last = f(last, v)
+		out = append(out, last)
+	}
+
+	return
+}
+
 // =============== span.go =================
 
 // Span returns a tuple of any elements that satisfy the predicate up until the first failure, followed by

@@ -396,6 +396,25 @@ func (s Strings) Reverse() (out Strings) {
 	return
 }
 
+// =============== scanl.go =================
+
+// Scanl reduces a list by iteratively applying f from left->right and then returns each iteration in a slice.
+func (s Strings) Scanl(e string, f func(e1, e2 string) string) (out Strings) {
+	if len(s) == 0 {
+		return
+	}
+
+	out = append(out, e)
+	last := e
+
+	for _, v := range s {
+		last = f(last, v)
+		out = append(out, last)
+	}
+
+	return
+}
+
 // =============== sort.go =================
 
 // Sort is a wrapper around go sort function.

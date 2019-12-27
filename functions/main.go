@@ -56,6 +56,7 @@ var (
 		"null.go":        {ForNumbers, ForStrings, ForStructs},
 		"product.go":     {ForNumbers},
 		"reverse.go":     {ForNumbers, ForStrings, ForStructs},
+		"scanl.go":       {ForNumbers, ForStrings, ForStructs},
 		"sort.go":        {ForNumbers, ForStrings},
 		"span.go":        {ForNumbers, ForStrings, ForStructs},
 		"splitat.go":     {ForNumbers, ForStrings, ForStructs},

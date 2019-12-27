@@ -819,6 +819,32 @@ var (
 			[]Ints{{1}, {2, 2, 2}, {3, 3}, {4}, {5, 5}},
 		},
 	}
+
+	intsScanTests = []struct {
+		input    Ints
+		init     int64
+		scanfunc func(int64, int64) int64
+		scanl    Ints
+	}{
+		{
+			nil,
+			0,
+			func(i1, i2 int64) int64 { return i1 + i2 },
+			Ints{},
+		},
+		{
+			Ints{1},
+			1,
+			func(i1, i2 int64) int64 { return i1 + i2 },
+			Ints{1, 2},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			5,
+			func(i1, i2 int64) int64 { return i1 + i2 },
+			Ints{5, 6, 8, 11, 15, 20},
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -1247,6 +1273,16 @@ func Test_IntsGroup(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_IntsScanl(t *testing.T) {
+	for _, test := range intsScanTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Scanl(test.init, test.scanfunc); !test.scanl.Equals(res) {
+				t.Errorf("expected #{test.scanl} but got #{res}")
 			}
 		})
 	}

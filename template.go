@@ -437,6 +437,24 @@ func (s SliceType) Reverse() (out SliceType) {
 	return
 }
 `,
+	"scanl.go": `
+// Scanl reduces a list by iteratively applying f from left->right and then returns each iteration in a slice.
+func (s SliceType) Scanl(e ElementType, f func(e1, e2 ElementType) ElementType) (out SliceType) {
+	if len(s) == 0 {
+		return
+	}
+
+	out = append(out, e)
+	last := e
+
+	for _, v := range s {
+		last = f(last, v)
+		out = append(out, last)
+	}
+
+	return
+}
+`,
 	"sort.go": `
 import (
 	"sort"
@@ -637,6 +655,7 @@ var funcDomains = map[string][]string{
 	"null.go":        {ForNumbers, ForStrings, ForStructs},
 	"product.go":     {ForNumbers},
 	"reverse.go":     {ForNumbers, ForStrings, ForStructs},
+	"scanl.go":       {ForNumbers, ForStrings, ForStructs},
 	"sort.go":        {ForNumbers, ForStrings},
 	"span.go":        {ForNumbers, ForStrings, ForStructs},
 	"splitat.go":     {ForNumbers, ForStrings, ForStructs},
