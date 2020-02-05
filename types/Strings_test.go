@@ -411,6 +411,7 @@ var (
 		foldl    string
 		foldl1   string
 		foldr    string
+		foldr1   string
 	}{
 		{
 			nil,
@@ -419,11 +420,13 @@ var (
 			"",
 			"",
 			"",
+			"",
 		},
 		{
 			Strings{},
 			"",
 			func(s1, s2 string) string { return s1 },
+			"",
 			"",
 			"",
 			"",
@@ -437,6 +440,7 @@ var (
 			"zero one",
 			"one",
 			"one zero",
+			"one",
 		},
 		{
 			Strings{"one", "two", "three", "ten"},
@@ -447,6 +451,7 @@ var (
 				}
 				return s2
 			},
+			"three",
 			"three",
 			"three",
 			"three",
@@ -717,6 +722,32 @@ var (
 		{
 			Strings{"a", "a", "b", "c", "c", "c", "d"},
 			[]Strings{{"a", "a"}, {"b"}, {"c", "c", "c"}, {"d"}},
+		},
+	}
+
+	stringsScanTests = []struct {
+		input    Strings
+		init     string
+		scanfunc func(string, string) string
+		scanl    Strings
+	}{
+		{
+			nil,
+			"",
+			func(s1, s2 string) string { return s1 + " " + s2 },
+			Strings{},
+		},
+		{
+			Strings{"World"},
+			"Hello",
+			func(s1, s2 string) string { return s1 + " " + s2 },
+			Strings{"Hello", "Hello World"},
+		},
+		{
+			Strings{"Hello", "World", "Goodbye"},
+			"Thing",
+			func(s1, s2 string) string { return s1 + " " + s2 },
+			Strings{"Thing", "Thing Hello", "Thing Hello World", "Thing Hello World Goodbye"},
 		},
 	}
 
@@ -1048,6 +1079,16 @@ func Test_StringsFoldr(t *testing.T) {
 	}
 }
 
+func Test_StringsFoldr1(t *testing.T) {
+	for _, test := range stringsFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldr1(test.foldfunc); res != test.foldr1 {
+				t.Errorf("expected %v but got %v", test.foldr1, res)
+			}
+		})
+	}
+}
+
 func Test_StringsLines(t *testing.T) {
 	for _, test := range stringsLinesTests {
 		t.Run("", func(t *testing.T) {
@@ -1164,6 +1205,16 @@ func Test_StringsGroup(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_StringsScanl(t *testing.T) {
+	for _, test := range stringsScanTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Scanl(test.init, test.scanfunc); !test.scanl.Equals(res) {
+				t.Errorf("expected %v but got %v", test.scanl, res)
 			}
 		})
 	}

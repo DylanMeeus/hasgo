@@ -198,6 +198,23 @@ func (s SliceType) Foldr(e ElementType, f func(e1, e2 ElementType) ElementType) 
 	return
 }
 `,
+	"foldr1.go": `
+// Foldr1 reduces a list by iteratively applying f from right -> left. Thus, for an empty slice, the result is the default zero-value.
+func (s SliceType) Foldr1(f func(e1, e2 ElementType) ElementType) (out ElementType) {
+	if len(s) == 0 {
+		return
+	}
+
+	end := len(s) - 1
+	out = s[end]
+
+	for i := end - 1; i >= 0; i-- {
+		out = f(s[i], out)
+	}
+
+	return
+}
+`,
 	"group.go": `
 // Group returns a list of lists where each list contains only equal elements and the concatenation of the
 // result is equal to the argument.
@@ -452,6 +469,24 @@ func (s SliceType) Reverse() (out SliceType) {
 	return
 }
 `,
+	"scanl.go": `
+// Scanl reduces a list by iteratively applying f from left->right and then returns each iteration in a slice.
+func (s SliceType) Scanl(e ElementType, f func(e1, e2 ElementType) ElementType) (out SliceType) {
+	if len(s) == 0 {
+		return
+	}
+
+	out = append(out, e)
+	last := e
+
+	for _, v := range s {
+		last = f(last, v)
+		out = append(out, last)
+	}
+
+	return
+}
+`,
 	"sort.go": `
 import (
 	"sort"
@@ -635,6 +670,7 @@ var funcDomains = map[string][]string{
 	"foldl.go":       {ForNumbers, ForStrings, ForStructs},
 	"foldl1.go":      {ForNumbers, ForStrings, ForStructs},
 	"foldr.go":       {ForNumbers, ForStrings, ForStructs},
+	"foldr1.go":      {ForNumbers, ForStrings, ForStructs},
 	"group.go":       {ForNumbers, ForStrings, ForStructs},
 	"head.go":        {ForNumbers, ForStrings, ForStructs},
 	"init.go":        {ForNumbers, ForStrings, ForStructs},
@@ -653,6 +689,7 @@ var funcDomains = map[string][]string{
 	"null.go":        {ForNumbers, ForStrings, ForStructs},
 	"product.go":     {ForNumbers},
 	"reverse.go":     {ForNumbers, ForStrings, ForStructs},
+	"scanl.go":       {ForNumbers, ForStrings, ForStructs},
 	"sort.go":        {ForNumbers, ForStrings},
 	"span.go":        {ForNumbers, ForStrings, ForStructs},
 	"splitat.go":     {ForNumbers, ForStrings, ForStructs},

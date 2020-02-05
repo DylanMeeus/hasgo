@@ -521,11 +521,13 @@ var (
 		foldl    int64
 		foldl1   int64
 		foldr    int64
+		foldr1   int64
 	}{
 		{
 			nil,
 			0,
 			func(i1, i2 int64) int64 { return i1 + i2 },
+			0,
 			0,
 			0,
 			0,
@@ -537,6 +539,7 @@ var (
 			2,
 			1,
 			2,
+			1,
 		},
 		{
 			Ints{1, 2, 3, 4, 5},
@@ -544,6 +547,7 @@ var (
 			func(i1, i2 int64) int64 { return i1 - i2 },
 			-15,
 			-13,
+			3,
 			3,
 		},
 	}
@@ -817,6 +821,32 @@ var (
 		{
 			Ints{1, 2, 2, 2, 3, 3, 4, 5, 5},
 			[]Ints{{1}, {2, 2, 2}, {3, 3}, {4}, {5, 5}},
+		},
+	}
+
+	intsScanTests = []struct {
+		input    Ints
+		init     int64
+		scanfunc func(int64, int64) int64
+		scanl    Ints
+	}{
+		{
+			nil,
+			0,
+			func(i1, i2 int64) int64 { return i1 + i2 },
+			Ints{},
+		},
+		{
+			Ints{1},
+			1,
+			func(i1, i2 int64) int64 { return i1 + i2 },
+			Ints{1, 2},
+		},
+		{
+			Ints{1, 2, 3, 4, 5},
+			5,
+			func(i1, i2 int64) int64 { return i1 + i2 },
+			Ints{5, 6, 8, 11, 15, 20},
 		},
 	}
 
@@ -1193,6 +1223,16 @@ func Test_IntsFoldr(t *testing.T) {
 	}
 }
 
+func Test_IntsFoldr1(t *testing.T) {
+	for _, test := range intsFoldTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Foldr1(test.foldfunc); res != test.foldr1 {
+				t.Errorf("expected %v but got %v", test.foldr1, res)
+			}
+		})
+	}
+}
+
 func Test_IntsElem(t *testing.T) {
 	for _, test := range intsElemTests {
 		t.Run("", func(t *testing.T) {
@@ -1300,6 +1340,16 @@ func Test_IntsIsPrefixOf(t *testing.T) {
 			res := test.input.IsPrefixOf(test.param1)
 			if res != test.output {
 				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_IntsScanl(t *testing.T) {
+	for _, test := range intsScanTests {
+		t.Run("", func(t *testing.T) {
+			if res := test.input.Scanl(test.init, test.scanfunc); !test.scanl.Equals(res) {
+				t.Errorf("expected #{test.scanl} but got #{res}")
 			}
 		})
 	}
