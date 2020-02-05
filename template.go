@@ -285,6 +285,21 @@ func (s SliceType) Intersperse(value ElementType) (out SliceType) {
 	return
 }
 `,
+	"isprefixof.go": `
+// IsPrefixOf returns true if the current sliceType is a prefix of the passed one.
+// Can be generated for any time.
+func (s SliceType) IsPrefixOf(in SliceType) bool {
+	if len(s) > len(in) {
+		return false
+	}
+	for i, v := range s {
+		if in[i] != v {
+			return false
+		}
+	}
+	return true
+}
+`,
 	"last.go": `
 // Last returns the last element in the slice
 // If no element is found, returns the zero-value of the type
@@ -626,6 +641,7 @@ var funcDomains = map[string][]string{
 	"inits.go":       {ForNumbers, ForStrings, ForStructs},
 	"intercalate.go": {ForNumbers, ForStrings, ForStructs},
 	"intersperse.go": {ForNumbers, ForStrings, ForStructs},
+	"isprefixof.go":  {ForNumbers, ForStrings, ForStructs},
 	"last.go":        {ForNumbers, ForStrings, ForStructs},
 	"length.go":      {ForNumbers, ForStrings, ForStructs},
 	"map.go":         {ForNumbers, ForStrings, ForStructs},

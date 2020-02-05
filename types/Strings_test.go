@@ -719,6 +719,43 @@ var (
 			[]Strings{{"a", "a"}, {"b"}, {"c", "c", "c"}, {"d"}},
 		},
 	}
+
+	stringsIsPrefixOfTests = []struct {
+		input  Strings
+		param1 Strings
+		output bool
+	}{
+		{
+			nil,
+			Strings{},
+			true,
+		},
+		{
+			Strings{},
+			Strings{},
+			true,
+		},
+		{
+			Strings{"a", "b", "cd"},
+			Strings{"a", "b"},
+			false,
+		},
+		{
+			Strings{"a", "b"},
+			Strings{"a", "b", "cd"},
+			true,
+		},
+		{
+			Strings{"a", "b"},
+			Strings{"a", "b"},
+			true,
+		},
+		{
+			nil,
+			Strings{"a", "b"},
+			true,
+		},
+	}
 )
 
 func Test_StringsSum(t *testing.T) {
@@ -1127,6 +1164,17 @@ func Test_StringsGroup(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_StringsIsPrefixOf(t *testing.T) {
+	for _, test := range stringsIsPrefixOfTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.IsPrefixOf(test.param1)
+			if res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

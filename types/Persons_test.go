@@ -604,6 +604,48 @@ var (
 			[]persons{{dylan, dylan}, {ana, ana}, {chris}, {sean, sean, sean}},
 		},
 	}
+
+	structIsPrefixOfTests = []struct {
+		input  persons
+		param1 persons
+		output bool
+	}{
+		{
+			persons{},
+			persons{},
+			true,
+		},
+		{
+			nil,
+			persons{},
+			true,
+		},
+		{
+			persons{dylan, ana, sean},
+			persons{dylan},
+			false,
+		},
+		{
+			persons{},
+			persons{dylan},
+			true,
+		},
+		{
+			persons{dylan},
+			persons{dylan, ana},
+			true,
+		},
+		{
+			persons{dylan},
+			persons{dylan},
+			true,
+		},
+		{
+			persons{dylan},
+			persons{ana},
+			false,
+		},
+	}
 )
 
 func Test_StructFilter(t *testing.T) {
@@ -951,6 +993,17 @@ func Test_structGroup(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_structIsPrefixOf(t *testing.T) {
+	for _, test := range structIsPrefixOfTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.IsPrefixOf(test.param1)
+			if res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

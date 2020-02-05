@@ -819,6 +819,48 @@ var (
 			[]Ints{{1}, {2, 2, 2}, {3, 3}, {4}, {5, 5}},
 		},
 	}
+
+	intsIsPrefixTests = []struct {
+		input  Ints
+		param1 Ints
+		output bool
+	}{
+		{
+			nil,
+			Ints{},
+			true,
+		},
+		{
+			Ints{},
+			Ints{},
+			true,
+		},
+		{
+			Ints{1, 2, 3},
+			Ints{1, 2},
+			false,
+		},
+		{
+			Ints{1, 2, 3},
+			Ints{1, 2, 3},
+			true,
+		},
+		{
+			Ints{1, 2, 3},
+			Ints{1, 2, 3, 4, 5},
+			true,
+		},
+		{
+			Ints{1, 2, 3},
+			Ints{1, 2, 4},
+			false,
+		},
+		{
+			Ints{1, 2, 3},
+			Ints{1, 2, 2, 2},
+			false,
+		},
+	}
 )
 
 func Test_IntsSum(t *testing.T) {
@@ -1247,6 +1289,17 @@ func Test_IntsGroup(t *testing.T) {
 				if !v.EqualsOrdered(res[i]) {
 					t.Errorf("expected %v but got %v", v, res[i])
 				}
+			}
+		})
+	}
+}
+
+func Test_IntsIsPrefixOf(t *testing.T) {
+	for _, test := range intsIsPrefixTests {
+		t.Run("", func(t *testing.T) {
+			res := test.input.IsPrefixOf(test.param1)
+			if res != test.output {
+				t.Errorf("expected %v but got %v", test.output, res)
 			}
 		})
 	}

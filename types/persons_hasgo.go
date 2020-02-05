@@ -277,6 +277,22 @@ func (s persons) Intersperse(value person) (out persons) {
 	return
 }
 
+// =============== isprefixof.go =================
+
+// IsPrefixOf returns true if the current sliceType is a prefix of the passed one.
+// Can be generated for any time.
+func (s persons) IsPrefixOf(in persons) bool {
+	if len(s) > len(in) {
+		return false
+	}
+	for i, v := range s {
+		if in[i] != v {
+			return false
+		}
+	}
+	return true
+}
+
 // =============== last.go =================
 
 // Last returns the last element in the slice

@@ -45,6 +45,7 @@ var (
 		"inits.go":       {ForNumbers, ForStrings, ForStructs},
 		"intercalate.go": {ForNumbers, ForStrings, ForStructs},
 		"intersperse.go": {ForNumbers, ForStrings, ForStructs},
+		"isprefixof.go":  {ForNumbers, ForStrings, ForStructs},
 		"last.go":        {ForNumbers, ForStrings, ForStructs},
 		"length.go":      {ForNumbers, ForStrings, ForStructs},
 		"map.go":         {ForNumbers, ForStrings, ForStructs},
