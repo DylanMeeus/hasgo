@@ -84,6 +84,7 @@ These functions can be generated for every type.
 | `Inits`      | `[a] -> [[a]]`                   |   ✓    |   ✓    |    ✓   | Returns all initial segments of the slice, shortest first. |
 | `Intercalate`| `[a] -> [[a]] -> [a]`            |   ✓    |   ✓    |    ✓   | Intersperses the slice in between the provided 2d-slice |
 | `Intersperse`| `[a] -> a -> [a]`                |   ✓    |   ✓    |    ✓   | Intersperses the value in between all elements of the provided slice|  
+| `IsPrefixOf` | `[a] -> [a] -> bool`             |   ✓    |   ✓    |    ✓   | Returns true if the current slice is a prefix of the provided slice|  
 | `Last`       | `[a] -> a`                       |   ✓    |   ✓    |    ✓   | Returns the last element|
 | `Length`     | `[a] -> int`                     |   ✓    |   ✓    |    ✓   | Returns the length of the slice|
 | `Map`        | `[a] -> (a -> a) -> [a]`         |   ✓    |   ✓    |    ✓   | Returns a slice with the function applied to each element of the input|
