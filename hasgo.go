@@ -22,6 +22,7 @@ var (
 	unitType    = flag.String("T", "", "Type for which to generate data")
 	sliceType   = flag.String("S", "", "Corresponding Slice Type for T")
 	packag      = flag.String("P", "types", "Package for which to generate")
+	ofilename   = flag.String("N", "", "name for the generated file (_hasgo.go will be appended)")
 	numberTypes = map[string]struct{}{
 		"int":     {},
 		"int32":   {},
@@ -74,7 +75,11 @@ func main() {
 	// stringer prints everything in one file. This might be bad.
 	// but let's roll with it for now :-)
 	g.generate(sym)
-	err := ioutil.WriteFile(fmt.Sprintf("%v_hasgo.go", *sliceType), g.format(), 0644)
+	filename := fmt.Sprintf("%v_hasgo.go", *sliceType)
+	if ofilename != nil && *ofilename != "" {
+		filename = fmt.Sprintf("%v_hasgo.go", *ofilename)
+	}
+	err := ioutil.WriteFile(filename, g.format(), 0644)
 	if err != nil {
 		panic(err)
 	}
