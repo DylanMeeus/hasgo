@@ -13,7 +13,7 @@ We want to focus on being:
 
 ## Pie
 
-The inspiration for Hasgo, as well as some ideas around implementation come from the lovely [Pie
+The inspiration for Hasgo, as well as some ideas around implementation come from the [Pie
 library](https://github.com/elliotchance/pie), made by [Elliot Chance](https://github.com/elliotchance). 
 It's safe to say that Hasgo would not exist without Pie. However, the way Pie and Hasgo work is not
 the same and neither is the focus of the project. If you don't find a function in Hasgo, check out
