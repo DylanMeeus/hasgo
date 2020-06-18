@@ -11,6 +11,7 @@ We want to focus on being:
 * Strongly-Typed (no `interface{}`)
 * Nil-safe
 
+
 ## Pie
 
 The inspiration for Hasgo, as well as some ideas around implementation come from the lovely [Pie
@@ -157,4 +158,8 @@ not in Haskell, and there _will_ be functions in Haskell that you won't find her
 The inspiration mainly shows in the naming of functions. If the functions were named after Java
 lambdas, it'd be called "Jago". Sorry if you expected more Haskell goodness (I'm open to suggestions
 of how more haskell in Hasgo!)
+
+## Real Generics?
+
+Currently I have an experimental implementation of hasgo [here as hasgo2](https://www.github.com/DylanMeeus/hasgo2). It does require a development version of Go installed from source to function correctly at this stage. 
 
