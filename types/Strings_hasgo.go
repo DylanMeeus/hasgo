@@ -11,7 +11,7 @@ import (
 // All returns true if all elements of the slice satisfy the predicate.
 // Can be generated for any type.
 func (s Strings) All(f func(string) bool) bool {
-	if f == nil {
+	if len(s) == 0 {
 		return false
 	}
 	for _, v := range s {
