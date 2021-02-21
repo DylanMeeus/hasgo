@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-// unit testing the Ints
+// unit testing the Strings
 var (
 	stringsSumTests = []struct {
 		input  Strings
@@ -13,6 +13,10 @@ var (
 	}{
 		{
 			nil,
+			"",
+		},
+		{
+			Strings{},
 			"",
 		},
 		{
@@ -31,6 +35,16 @@ var (
 		output Strings
 	}{
 		{
+			nil,
+			func(s string) bool { return s == "b" },
+			Strings{},
+		},
+		{
+			Strings{},
+			func(s string) bool { return s == "b" },
+			Strings{},
+		},
+		{
 			Strings{"a", "b", "c"},
 			func(s string) bool { return s == "b" },
 			Strings{"b"},
@@ -43,6 +57,18 @@ var (
 		any       bool
 		all       bool
 	}{
+		{
+			nil,
+			func(s string) bool { return s == "b" },
+			false,
+			false,
+		},
+		{
+			Strings{},
+			func(s string) bool { return s == "b" },
+			false,
+			false,
+		},
 		{
 			Strings{"a", "b", "c"},
 			func(s string) bool { return s == "b" },
@@ -114,6 +140,14 @@ var (
 		output Strings
 	}{
 		{
+			nil,
+			Strings{},
+		},
+		{
+			Strings{},
+			Strings{},
+		},
+		{
 			Strings{"a", "b", "c"},
 			Strings{"c", "b", "a"},
 		},
@@ -133,6 +167,16 @@ var (
 		tail  Strings
 	}{
 		{
+			nil,
+			"",
+			Strings{},
+		},
+		{
+			Strings{},
+			"",
+			Strings{},
+		},
+		{
 			Strings{"a", "b", "c"},
 			"a",
 			Strings{"b", "c"},
@@ -145,6 +189,16 @@ var (
 		output  Strings
 	}{
 		{
+			nil,
+			func(s string) string { return strings.ToUpper(s) },
+			Strings{},
+		},
+		{
+			Strings{},
+			func(s string) string { return strings.ToUpper(s) },
+			Strings{},
+		},
+		{
 			Strings{"a", "b", "c"},
 			func(s string) string { return strings.ToUpper(s) },
 			Strings{"A", "B", "C"},
@@ -155,6 +209,14 @@ var (
 		input  Strings
 		output Strings
 	}{
+		{
+			nil,
+			Strings{},
+		},
+		{
+			Strings{},
+			Strings{},
+		},
 		{
 			Strings{"d", "a", "b", "b"},
 			Strings{"a", "b", "b", "d"},
@@ -225,6 +287,22 @@ var (
 		output      Strings
 	}{
 		{
+			nil,
+			[][]string{
+				{"dylan", "meeus"},
+				{"ana", "esparza"},
+			},
+			Strings{"dylan", "meeus", "ana", "esparza"},
+		},
+		{
+			Strings{},
+			[][]string{
+				{"dylan", "meeus"},
+				{"ana", "esparza"},
+			},
+			Strings{"dylan", "meeus", "ana", "esparza"},
+		},
+		{
 			Strings{", "},
 			[][]string{
 				{"dylan", "meeus"},
@@ -247,6 +325,10 @@ var (
 		input  Strings
 		output Strings
 	}{
+		{
+			nil,
+			Strings{},
+		},
 		{
 			Strings{},
 			Strings{},
@@ -349,7 +431,6 @@ var (
 		input  string
 		output Strings
 	}{
-
 		{
 			"",
 			Strings{},
@@ -389,6 +470,11 @@ var (
 	}{
 		{
 			nil,
+			func(s1, s2 string) string { return "" },
+			"",
+		},
+		{
+			Strings{},
 			func(s1, s2 string) string { return "" },
 			"",
 		},
@@ -496,6 +582,11 @@ var (
 			Strings{},
 		},
 		{
+			Strings{},
+			0,
+			Strings{},
+		},
+		{
 			Strings{"Chris", "Evans", "Dylan", "Meeus"},
 			5,
 			Strings{},
@@ -520,6 +611,12 @@ var (
 	}{
 		{
 			nil,
+			func(s string) bool { return len(s) < 3 },
+			Strings{},
+			Strings{},
+		},
+		{
+			Strings{},
 			func(s string) bool { return len(s) < 3 },
 			Strings{},
 			Strings{},
@@ -561,6 +658,11 @@ var (
 			Strings{},
 		},
 		{
+			Strings{},
+			func(s string) bool { return len(s) < 4 },
+			Strings{},
+		},
+		{
 			Strings{"abc", "abcd", "abcdef", "abcdefg"},
 			nil,
 			Strings{"abc", "abcd", "abcdef", "abcdefg"},
@@ -585,6 +687,12 @@ var (
 	}{
 		{
 			nil,
+			func(s string) bool { return len(s) < 3 },
+			Strings{},
+			Strings{},
+		},
+		{
+			Strings{},
 			func(s string) bool { return len(s) < 3 },
 			Strings{},
 			Strings{},
@@ -624,6 +732,10 @@ var (
 			[]Strings{},
 		},
 		{
+			Strings{},
+			[]Strings{},
+		},
+		{
 			Strings{"aaa", "bbb", "ccc"},
 			[]Strings{
 				{},
@@ -640,6 +752,10 @@ var (
 	}{
 		{
 			nil,
+			[]Strings{},
+		},
+		{
+			Strings{},
 			[]Strings{},
 		},
 		{
@@ -733,6 +849,12 @@ var (
 	}{
 		{
 			nil,
+			"",
+			func(s1, s2 string) string { return s1 + " " + s2 },
+			Strings{},
+		},
+		{
+			Strings{},
 			"",
 			func(s1, s2 string) string { return s1 + " " + s2 },
 			Strings{},
@@ -912,7 +1034,7 @@ func Test_StringsMap(t *testing.T) {
 func Test_StringsMapOriginalUnchanged(t *testing.T) {
 	for _, test := range stringsMapTests {
 		t.Run("", func(t *testing.T) {
-			if test.input.Map(test.mapfunc); test.input.EqualsOrdered(test.output) {
+			if test.input.Map(test.mapfunc); len(test.input) > 0 && test.input.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.input, test.output)
 			}
 		})
@@ -922,7 +1044,17 @@ func Test_StringsMapOriginalUnchanged(t *testing.T) {
 func Test_StringsSort(t *testing.T) {
 	for _, test := range stringsSortTests {
 		t.Run("", func(t *testing.T) {
-			if test.input.Sort(); test.input.EqualsOrdered(test.output) {
+			if res := test.input.Sort(); !res.EqualsOrdered(test.output) {
+				t.Errorf("expected %v but got %v", test.output, res)
+			}
+		})
+	}
+}
+
+func Test_StringsSortOriginalUnchanged(t *testing.T) {
+	for _, test := range stringsSortTests {
+		t.Run("", func(t *testing.T) {
+			if test.input.Sort(); len(test.input) > 0 && test.input.EqualsOrdered(test.output) {
 				t.Errorf("expected %v but got %v", test.input, test.output)
 			}
 		})

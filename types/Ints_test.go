@@ -19,6 +19,12 @@ var (
 			0,
 		},
 		{
+			Ints{},
+			0,
+			0,
+			0,
+		},
+		{
 			Ints([]int64{}),
 			0,
 			0,
@@ -236,6 +242,11 @@ var (
 	}{
 		{
 			nil,
+			func(i1, i2 int64) int64 { return i1 },
+			0,
+		},
+		{
+			Ints{},
 			func(i1, i2 int64) int64 { return i1 },
 			0,
 		},
@@ -533,6 +544,15 @@ var (
 			0,
 		},
 		{
+			Ints{},
+			0,
+			func(i1, i2 int64) int64 { return i1 + i2 },
+			0,
+			0,
+			0,
+			0,
+		},
+		{
 			Ints{1},
 			1,
 			func(i1, i2 int64) int64 { return i1 + i2 },
@@ -590,6 +610,11 @@ var (
 			Ints{},
 		},
 		{
+			Ints{},
+			0,
+			Ints{},
+		},
+		{
 			Ints{1, 2, 3, 4},
 			5,
 			Ints{},
@@ -614,6 +639,12 @@ var (
 	}{
 		{
 			nil,
+			func(i int64) bool { return i < 3 },
+			Ints{},
+			Ints{},
+		},
+		{
+			Ints{},
 			func(i int64) bool { return i < 3 },
 			Ints{},
 			Ints{},
@@ -655,6 +686,11 @@ var (
 			Ints{},
 		},
 		{
+			Ints{},
+			func(i int64) bool { return i < 3 },
+			Ints{},
+		},
+		{
 			Ints{1, 2, 3, 4, 5},
 			nil,
 			Ints{1, 2, 3, 4, 5},
@@ -684,6 +720,12 @@ var (
 	}{
 		{
 			nil,
+			func(i int64) bool { return i < 3 },
+			Ints{},
+			Ints{},
+		},
+		{
+			Ints{},
 			func(i int64) bool { return i < 3 },
 			Ints{},
 			Ints{},
@@ -723,6 +765,10 @@ var (
 			[]Ints{},
 		},
 		{
+			Ints{},
+			[]Ints{},
+		},
+		{
 			Ints{1, 2, 3},
 			[]Ints{
 				{},
@@ -739,6 +785,10 @@ var (
 	}{
 		{
 			nil,
+			[]Ints{},
+		},
+		{
+			Ints{},
 			[]Ints{},
 		},
 		{
@@ -832,6 +882,12 @@ var (
 	}{
 		{
 			nil,
+			0,
+			func(i1, i2 int64) int64 { return i1 + i2 },
+			Ints{},
+		},
+		{
+			Ints{},
 			0,
 			func(i1, i2 int64) int64 { return i1 + i2 },
 			Ints{},

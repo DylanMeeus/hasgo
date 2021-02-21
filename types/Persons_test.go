@@ -17,6 +17,16 @@ var (
 		output persons
 	}{
 		{
+			nil,
+			func(p person) bool { return p.age == 26 },
+			persons{},
+		},
+		{
+			persons{},
+			func(p person) bool { return p.age == 26 },
+			persons{},
+		},
+		{
 			persons{dylan, ana, sean, tom},
 			func(p person) bool { return p.age == 26 },
 			persons{tom, dylan},
@@ -29,6 +39,18 @@ var (
 		any       bool
 		all       bool
 	}{
+		{
+			nil,
+			func(p person) bool { return p.age == 26 },
+			false,
+			false,
+		},
+		{
+			persons{},
+			func(p person) bool { return p.age == 26 },
+			false,
+			false,
+		},
 		{
 			persons{dylan, chris},
 			func(p person) bool { return p.age == 26 },
@@ -61,6 +83,28 @@ var (
 		whileOutput persons
 	}{
 		{
+			nil,
+			2,
+			persons{},
+			persons{},
+			persons{},
+			person{},
+			person{},
+			func(p person) bool { return p.age < 30 },
+			persons{},
+		},
+		{
+			persons{},
+			2,
+			persons{},
+			persons{},
+			persons{},
+			person{},
+			person{},
+			func(p person) bool { return p.age < 30 },
+			persons{},
+		},
+		{
 			persons{dylan, ana, sean, tom},
 			2,
 			persons{dylan, ana},
@@ -78,6 +122,14 @@ var (
 		output persons
 	}{
 		{
+			nil,
+			persons{},
+		},
+		{
+			persons{},
+			persons{},
+		},
+		{
 			persons{dylan, ana, sean, tom},
 			persons{tom, sean, ana, dylan},
 		},
@@ -88,6 +140,16 @@ var (
 		head  person
 		tail  persons
 	}{
+		{
+			nil,
+			person{},
+			persons{},
+		},
+		{
+			persons{},
+			person{},
+			persons{},
+		},
 		{
 			persons{dylan, ana, sean, tom},
 			dylan,
@@ -100,6 +162,16 @@ var (
 		mapfunc func(person) person
 		output  persons
 	}{
+		{
+			nil,
+			func(p person) person { return dylan },
+			persons{},
+		},
+		{
+			persons{},
+			func(p person) person { return dylan },
+			persons{},
+		},
 		{
 			persons{dylan, ana, sean},
 			func(p person) person { return dylan },
@@ -154,6 +226,11 @@ var (
 			persons{},
 		},
 		{
+			persons{},
+			dylan,
+			persons{},
+		},
+		{
 			persons{ana, dylan, sean},
 			chris,
 			persons{ana, chris, dylan, chris, sean},
@@ -170,6 +247,22 @@ var (
 		intercalate [][]person
 		output      persons
 	}{
+		{
+			nil,
+			[][]person{
+				{ana, sean},
+				{tom},
+			},
+			persons{ana, sean, tom},
+		},
+		{
+			persons{},
+			[][]person{
+				{ana, sean},
+				{tom},
+			},
+			persons{ana, sean, tom},
+		},
 		{
 			persons{dylan},
 			[][]person{
@@ -193,6 +286,10 @@ var (
 		input  persons
 		output persons
 	}{
+		{
+			nil,
+			persons{},
+		},
 		{
 			persons{},
 			persons{},
@@ -292,6 +389,11 @@ var (
 			person{},
 		},
 		{
+			persons{},
+			func(p1, p2 person) person { return p1 },
+			person{},
+		},
+		{
 			persons{dylan, ana, sean},
 			func(p1, p2 person) person {
 				if p1.age > p2.age {
@@ -314,6 +416,15 @@ var (
 	}{
 		{
 			nil,
+			person{},
+			func(p1, p2 person) person { return p1 },
+			person{},
+			person{},
+			person{},
+			person{},
+		},
+		{
+			persons{},
 			person{},
 			func(p1, p2 person) person { return p1 },
 			person{},
@@ -375,6 +486,11 @@ var (
 			persons{},
 		},
 		{
+			persons{},
+			0,
+			persons{},
+		},
+		{
 			persons{dylan, ana, sean, chris},
 			5,
 			persons{},
@@ -399,6 +515,12 @@ var (
 	}{
 		{
 			nil,
+			func(p person) bool { return p.age < 27 },
+			persons{},
+			persons{},
+		},
+		{
+			persons{},
 			func(p person) bool { return p.age < 27 },
 			persons{},
 			persons{},
@@ -440,6 +562,11 @@ var (
 			persons{},
 		},
 		{
+			persons{},
+			func(p person) bool { return p.age < 27 },
+			persons{},
+		},
+		{
 			persons{dylan, ana, sean, tom, chris},
 			nil,
 			persons{dylan, ana, sean, tom, chris},
@@ -464,6 +591,12 @@ var (
 	}{
 		{
 			nil,
+			func(p person) bool { return p.age < 27 },
+			persons{},
+			persons{},
+		},
+		{
+			persons{},
 			func(p person) bool { return p.age < 27 },
 			persons{},
 			persons{},
@@ -503,6 +636,10 @@ var (
 			[]persons{},
 		},
 		{
+			persons{},
+			[]persons{},
+		},
+		{
 			persons{sean, dylan, tom, chris, ana},
 			[]persons{
 				{},
@@ -521,6 +658,10 @@ var (
 	}{
 		{
 			nil,
+			[]persons{},
+		},
+		{
+			persons{},
 			[]persons{},
 		},
 		{
@@ -616,6 +757,12 @@ var (
 	}{
 		{
 			nil,
+			person{},
+			func(p1, p2 person) person { return p1 },
+			persons{},
+		},
+		{
+			persons{},
 			person{},
 			func(p1, p2 person) person { return p1 },
 			persons{},
