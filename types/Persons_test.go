@@ -43,13 +43,13 @@ var (
 			nil,
 			func(p person) bool { return p.age == 26 },
 			false,
-			false,
+			true,
 		},
 		{
 			persons{},
 			func(p person) bool { return p.age == 26 },
 			false,
-			false,
+			true,
 		},
 		{
 			persons{dylan, chris},

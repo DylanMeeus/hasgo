@@ -10,7 +10,7 @@ import (
 // All returns true if all elements of the slice satisfy the predicate.
 // Can be generated for any type.
 func (s persons) All(f func(person) bool) bool {
-	if len(s) == 0 || f == nil {
+	if f == nil {
 		return false
 	}
 	for _, v := range s {

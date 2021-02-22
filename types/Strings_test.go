@@ -61,13 +61,13 @@ var (
 			nil,
 			func(s string) bool { return s == "b" },
 			false,
-			false,
+			true,
 		},
 		{
 			Strings{},
 			func(s string) bool { return s == "b" },
 			false,
-			false,
+			true,
 		},
 		{
 			Strings{"a", "b", "c"},
